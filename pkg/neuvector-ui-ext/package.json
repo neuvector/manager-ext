@@ -3,7 +3,7 @@
   "description": "NeuVector extension for Rancher Manager",
   "version": "1.0.0",
   "private": false,
-  "icon": "https://avatars2.githubusercontent.com/u/19367275?s=200&v=4",
+  "icon": "https://raw.githubusercontent.com/neuvector/manager-ext/main/pkg/neuvector-ui-ext/nv-icon.svg",
   "rancher": {
     "annotations": {
       "catalog.cattle.io/rancher-version": ">= v2.7.9",
