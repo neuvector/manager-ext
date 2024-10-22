@@ -1,5 +1,5 @@
 <script>
-import { EOS_LAUNCH_FILLED } from 'eos-icons-vue2';
+import { EOS_LAUNCH_FILLED } from 'eos-icons-vue3';
 import { capitalize, getSSOUrl } from '../../../../utils/common';
 import dayjs from 'dayjs';
 
@@ -174,7 +174,7 @@ export default {
                     </div>
                     <div v-for="(value, key) in host.interfaces"
                         class="row pl"
-                        style="width: 380px">
+                        style="width: 380px" :key="key">
                         <div class="col-sm-2 text-right pr-0 text-muted">
                             {{ key }}
                         </div>

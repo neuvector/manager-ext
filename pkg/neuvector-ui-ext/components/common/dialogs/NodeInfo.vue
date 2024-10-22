@@ -190,13 +190,13 @@
                                 <div
                                 v-for="(value, name) in host.interfaces"
                                 class="row pl"
-                                style="width: 380px">
+                                style="width: 380px" :key="name">
                                     <div class="col-sm-2 text-right pr-0 text-muted">
                                         {{ name }}
                                     </div>
                                 <div class="col-sm-1"></div>
                                     <div class="col-sm-9 pl0">
-                                        <div v-for="net in value">
+                                        <div v-for="net in value" :key="net">
                                             <div class="col-sm-12">
                                                 <div class="col-sm-6 text-muted">
                                                     IP:{{ net.ip }}/{{ net.ip_prefix }}

@@ -137,7 +137,7 @@
                     :type="key" :content="value" 
                     :name="selectedCompliance.name"
                     @openRegulation="openRegulation"    
-                ></RegulationItem>
+                :key="key"></RegulationItem>
             </div>
             <RegulationModal 
                 v-if="showRegulationModal"

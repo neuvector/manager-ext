@@ -54,7 +54,7 @@ export default {
       </div>
     </div>
     <table class="margin-top-s pull-left">
-      <tr v-for="factor in riskFactor.factors">
+      <tr v-for="factor in riskFactor.factors" :key="factor">
         <td>{{factor.category}}</td>
         <td style="text-align: left;">
           {{factor.amount}}

@@ -3,7 +3,7 @@
     import { getPackets, getHost, getWorkload } from '../../../../plugins/security-events-class';
     import { nvVariables, NV_MAP } from '../../../../types/neuvector';
     import FlagIpFqdn from '../../../common/contents/FlagIpFqdn';
-    import { EOS_CLOUD_FILLED, EOS_NAMESPACE_FILLED, EOS_SYSTEM_GROUP_FILLED, EOS_CLUSTER_FILLED, EOS_POD_FILLED } from "eos-icons-vue2";
+    import { EOS_CLOUD_FILLED, EOS_NAMESPACE_FILLED, EOS_SYSTEM_GROUP_FILLED, EOS_CLUSTER_FILLED, EOS_POD_FILLED } from "eos-icons-vue3";
     export default {
         components: {
             Packet,

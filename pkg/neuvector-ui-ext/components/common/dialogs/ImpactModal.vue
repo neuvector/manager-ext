@@ -3,7 +3,7 @@
     import Checkbox from '@components/Form/Checkbox/Checkbox';
     import ImpactModalWorkloadBrief from './components/ImpactModalWorkloadBrief.vue';
     import ImpactModalNodeBrief from './components/ImpactModalNodeBrief.vue';
-    import { EOS_CHECK_BOX_BLANK_FILLED, EOS_STORAGE_FILLED } from 'eos-icons-vue2';
+    import { EOS_CHECK_BOX_BLANK_FILLED, EOS_STORAGE_FILLED } from 'eos-icons-vue3';
 
     export default {
         components: {

@@ -9,7 +9,7 @@
     import TimeSparklingChart from './timeSlider/TimeSparklingChart';
     import TimeSlider from './timeSlider/TimeSlider';
     import { prepareContext4TwoWayInfinityScroll, filterSecEvents } from '../../utils/security-events';
-    import { VTooltip, VPopover, VClosePopover } from 'v-tooltip';
+    import { vTooltip } from 'floating-vue';
     // import { library } from '@fortawesome/fontawesome';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     // import { faSomeIcon } from '@fortawesome/fontawesome-free-regular'; 
@@ -30,7 +30,6 @@
             QuickFilter,
             TimeSparklingChart,
             TimeSlider,
-            VPopover,
             FontAwesomeIcon,
             BriefInfo,
             Details,
@@ -193,8 +192,7 @@
                     };
                 }
             },
-            'close-popover': VClosePopover,
-            'tooltip': VTooltip
+            'tooltip': vTooltip
         }
     };
 </script>

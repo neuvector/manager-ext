@@ -5,7 +5,7 @@ import { Card } from "@components/Card";
 import Checkbox from "@components/Form/Checkbox/Checkbox";
 import AsyncButton from '@shell/components/AsyncButton';
 import Select from '@shell/components/form/Select';
-import DatePicker from 'vue2-datepicker';
+import DatePicker from 'vue-datepicker-next';
 
 
 const SCOPE_OPTION = {
@@ -184,7 +184,7 @@ export default {
                         <div class="col-9">
                             <div class="row align-items-center">
                                 <div class="col-4">
-                                    <Select v-model="exportReportCriteria.selectedScope" :options='scopeOptions' />
+                                    <Select v-model:value="exportReportCriteria.selectedScope" :options='scopeOptions' />
                                 </div>
                                 <div class="col-8"></div>
                             </div>
@@ -198,14 +198,14 @@ export default {
                             <div class="row align-items-center">
                                 <div class="col-4">
                                     <Select 
-                                        v-model="exportReportCriteria.selectedLastModifyPeriod"
+                                        v-model:value="exportReportCriteria.selectedLastModifyPeriod"
                                         :options='lastModifiedPeriodOptions' 
                                     />
                                 </div>
                                 <div class="col-3">
                                     <date-picker 
                                         v-if="isCustomDatePickerDisplay"
-                                        v-model="exportReportCriteria.selectedLastModifyDate"
+                                        v-model:value="exportReportCriteria.selectedLastModifyDate"
                                         valueType="timestamp"
                                     ></date-picker>
                                 </div>

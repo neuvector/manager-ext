@@ -99,7 +99,7 @@ function getCacheUserPermission(store: Store<any>) {
   return userPermission;
 }
 
-export function getRowBasedPermission(domain: string, neededPermission: Permission) {
+export function getRowBasedPermission(domain: string, neededPermission: string) {
   let gPermissions = nvVariables.user.global_permissions;
   let rgPermissions = nvVariables.user.remote_global_permissions;
   let dPermissions = nvVariables.user.domain_permissions;

@@ -15,7 +15,7 @@
     import { nvVariables } from '../../../types';
     import 'ag-grid-community/styles/ag-grid.css';
     import 'ag-grid-community/styles/ag-theme-balham.min.css';
-    import { AgGridVue } from 'ag-grid-vue';
+    import { AgGridVue } from 'ag-grid-vue3';
     import { arrayToCsv } from '../../../utils/common';
     import { complianceImpactComparator, getCsvData } from '../../../utils/compliance';
     import ComplianceCategoryCellComponent from './components/ComplianceCategoryCellComponent.vue';

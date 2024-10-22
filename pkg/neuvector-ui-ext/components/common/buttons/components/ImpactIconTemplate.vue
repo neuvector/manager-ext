@@ -1,5 +1,5 @@
 <script>
-import { EOS_APARTMENT_FILLED, EOS_CHECK_BOX_BLANK_FILLED, EOS_STORAGE_FILLED, EOS_SYSTEM_IMAGE_FILLED } from 'eos-icons-vue2';
+import { EOS_APARTMENT_FILLED, EOS_CHECK_BOX_BLANK_FILLED, EOS_STORAGE_FILLED, EOS_SYSTEM_IMAGE_FILLED } from 'eos-icons-vue3';
 
 export default {
     props: {

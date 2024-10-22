@@ -1,9 +1,9 @@
 {
   "name": "manager-ext",
-  "version": "1.1.0",
+  "version": "2.0.0-rc.1",
   "private": false,
   "engines": {
-    "node": ">=16"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "dev": "NODE_ENV=dev ./node_modules/.bin/vue-cli-service serve",
@@ -19,42 +19,35 @@
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.6",
-    "@rancher/components": "^0.2.1-alpha.0",
-    "@rancher/shell": "^1.2.3",
+    "@rancher/components": "^0.3.0-alpha.1",
+    "@rancher/shell": "3.0.0-rc.9",
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "4.14.184",
     "@types/uuid": "^8.3.4",
     "ag-grid-community": "^31.0.1",
-    "ag-grid-vue": "^31.0.1",
+    "ag-grid-vue3": "^32.3.0",
     "axios": "^1.6.8",
     "chart.js": "3.8.0",
-    "core-js": "3.21.1",
+    "core-js": "3.25.3",
     "css-loader": "6.7.3",
-    "eos-icons-vue2": "^1.1.0",
+    "eos-icons-vue3": "^1.1.0",
     "file-saver": "^2.0.5",
+    "floating-vue": "^5.2.2",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "multi-range-slider-vue": "^1.1.4",
     "pako": "^2.1.0",
     "uuid": "^8.3.2",
-    "v-tooltip": "^2.1.3",
     "vue-chartjs": "4.0.0",
-    "vue-class-component": "^7.2.6",
     "vue-concise-slider": "3.3.6",
-    "vue-gauge": "1.0.3",
-    "vue-property-decorator": "^9.1.2",
-    "vue-simple-range-slider": "^1.1.0",
-    "vue-speedometer": "1.8.0",
-    "vue2-datepicker": "^3.11.1"
+    "vue-datepicker-next": "^1.0.3",
+    "vue-gauge": "1.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
-    "@babel/preset-env": "^7.23.6"
+    "@babel/preset-env": "^7.24.7"
   },
   "resolutions": {
-    "**/webpack": "4",
-    "@types/node": "^16",
-    "**/d3-color": "^3.1.0"
+    "@types/node": "~20.10.0"
   }
 }

@@ -1,5 +1,5 @@
 <script>
-    import { EOS_PIE_CHART_FILLED } from 'eos-icons-vue2';
+    import { EOS_PIE_CHART_FILLED } from 'eos-icons-vue3';
 
     export default {
         components: {

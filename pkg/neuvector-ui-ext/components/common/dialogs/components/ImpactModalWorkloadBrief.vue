@@ -1,5 +1,5 @@
 <script>
-import { EOS_LAUNCH_FILLED } from 'eos-icons-vue2';
+import { EOS_LAUNCH_FILLED } from 'eos-icons-vue3';
 import { shortenString, getSSOUrl } from '../../../../utils/common';
 import dayjs from 'dayjs';
 
@@ -61,7 +61,7 @@ export default {
                         </span>
                     </div>
                     <div class="ml pod-item-value">
-                        <div v-for="child in workload.children" class="row">
+                        <div v-for="child in workload.children" class="row" :key="child">
                             <div v-if="child" class="auto-hide" style="margin-top: 2px; width: 620px">
                                 <span class="font-weight-bold pl-lg" style="display: inline-block">
                                     <em class="fa fa-square-o mr-sm"></em>
@@ -88,7 +88,7 @@ export default {
                         </span>
                     </div>
                     <div class="ml pod-item-value">
-                        <div v-for="image in workload.images">
+                        <div v-for="image in workload.images" :key="image">
                             <span class="d-block">
                                 {{ image }}
                             </span>
@@ -274,13 +274,13 @@ export default {
                     </div>
                     <div v-for="(value, key) in workload.interfaces"
                         class="row ml"
-                        style="width: 380px">
+                        style="width: 380px" :key="key">
                         <div class="col-sm-2 text-left pr0">
                             <span>{{ key }}</span>
                         </div>
                         <div class="col-sm-1"></div>
                         <div class="col-sm-9 pl-0">
-                            <div v-for="net in value">
+                            <div v-for="net in value" :key="net">
                                 <div class="col-sm-12">
                                     <div class="col-sm-6">IP:{{ net.ip }}/{{ net.ip_prefix }}</div>
                                     <div v-if="net.gateway" class="col-sm-6">

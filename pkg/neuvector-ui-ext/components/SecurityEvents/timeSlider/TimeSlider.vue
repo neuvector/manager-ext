@@ -62,7 +62,7 @@
             :maxValue="barMaxValue"
             :min-caption="dateMinCaption"
             :max-caption="dateMaxCaption"
-            @input="UpdateValues"
+            @update:value="UpdateValues"
         />
     </div>
 </template>

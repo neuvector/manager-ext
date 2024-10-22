@@ -8,7 +8,7 @@
     import Applications from './cells/Applications';
     import UpdateAt from './cells/UpdateAt';
     import Id from './cells/Id';
-    import ActionMenu from '@shell/components/ActionMenu';
+    // import ActionMenu from '@shell/components/ActionMenu';
     import AddEditRuleModal from '../dialogs/AddEditRuleModal';
     import { UpdateType } from '../../../types/network-rules';
     import Confirmation from '../../common/dialogs/Confirmation';
@@ -24,7 +24,7 @@
             Applications,
             UpdateAt,
             Id,
-            ActionMenu,
+            // ActionMenu,
             AddEditRuleModal,
             Confirmation,
         },
@@ -262,18 +262,7 @@
 
       </ResourceTable>
     </div>
-    <ActionMenu
-        :custom-actions="menuActions"
-        :open="menuOpen"
-        :use-custom-target-element="true"
-        :custom-target-element="actionMenuTargetElement"
-        :custom-target-event="actionMenuTargetEvent"
-        @close="setActionMenuState(false)"
-        @addRule="addRuleBelow"
-        @editRule="editRule"
-        @deleteRule="deleteSelectedRule"
-        @undeleteRule="undeleteSelectedRule"
-    />
+
     <AddEditRuleModal
       ref="addEditRule"
       :isLightTheme="isLightTheme"

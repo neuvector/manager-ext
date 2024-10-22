@@ -1,5 +1,5 @@
 <script>
-    import { EOS_BUG_REPORT_FILLED, EOS_DO_NOT_DISTURB_FILLED, EOS_WARNING_FILLED } from "eos-icons-vue2";
+    import { EOS_BUG_REPORT_FILLED, EOS_DO_NOT_DISTURB_FILLED, EOS_WARNING_FILLED } from "eos-icons-vue3";
     import { NV_CONST } from '../../../../types/neuvector';
     export default {
         components: {
@@ -47,7 +47,7 @@
             <span
                 class="severity-label label-primary"
                 v-for="label in secEvent.details.labels"
-            >{{
+            :key="label">{{
                 t('securityEvent.label.' + label.toUpperCase())
             }}
             </span>

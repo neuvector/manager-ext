@@ -7,8 +7,8 @@
     import { LabeledInput } from '@components/Form/LabeledInput';
     import { RadioGroup } from '@components/Form/Radio';
     import MultiRangeSlider from 'multi-range-slider-vue';
-    import DatePicker from 'vue2-datepicker';
-    import 'vue2-datepicker/index.css';
+    import DatePicker from 'vue-datepicker-next';
+    import 'vue-datepicker-next/index.css';
 
     export default {
         components: {
@@ -209,38 +209,38 @@
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('scan.LAST_MODIFIED') }}</div>
             <div class="col-9">
-              <date-picker v-model="advFilter.last_modified_timestamp" :shortcuts="lastModifiedDateShortcuts" valueType="timestamp"></date-picker>
+              <date-picker v-model:value="advFilter.last_modified_timestamp" :shortcuts="lastModifiedDateShortcuts" valueType="timestamp"></date-picker>
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('scan.PUBLISHED') }}</div>
             <div class="col-3">
               <Select
-                v-model="advFilter.publishedType"
+                v-model:value="advFilter.publishedType"
                 :options="publishedOptions"
               />
             </div>
             <div class="col-6">
-              <date-picker v-model="advFilter.publishedTime" valueType="timestamp"></date-picker>
+              <date-picker v-model:value="advFilter.publishedTime" valueType="timestamp"></date-picker>
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('cis.report.gridHeader.SCORED') }}</div>
             <div class="col-9">
-              <RadioGroup v-model="advFilter.packageType" name="score_filter" :options="scoredOptions" :row="true" class="vul-radio-group" />
+              <RadioGroup v-model:value="advFilter.packageType" name="score_filter" :options="scoredOptions" :row="true" class="vul-radio-group" />
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('profile.TITLE') }}</div>
             <div class="col-9">
-              <RadioGroup v-model="advFilter.severityType" name="severity_filter" :options="severityOptions" :row="true" class="vul-radio-group" />
+              <RadioGroup v-model:value="advFilter.severityType" name="severity_filter" :options="severityOptions" :row="true" class="vul-radio-group" />
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('scan.report.gridHeader.SCORE') }}</div>
             <div class="col-3">
               <Select
-                v-model="advFilter.scoreType"
+                v-model:value="advFilter.scoreType"
                 :options="scoreOptions"
               ></Select>
             </div>
@@ -256,7 +256,7 @@
                 :ruler="false"
                 :minValue="advFilter.scoreV2[0]"
                 :maxValue="advFilter.scoreV2[1]"
-                @input="updateScoreV2"
+                @update:value="updateScoreV2"
               />
               <MultiRangeSlider v-else
                 id="slider-v3"
@@ -269,7 +269,7 @@
                 :ruler="false"
                 :minValue="advFilter.scoreV3[0]"
                 :maxValue="advFilter.scoreV3[1]"
-                @input="updateScoreV3"
+                @update:value="updateScoreV3"
               />
             </div>
           </div>
@@ -277,13 +277,13 @@
             <div class="col-3 text-bold">{{ t('ldap.gridHeader.DOMAINS') }}</div>
             <div class="col-3">
               <Select
-                v-model="advFilter.matchTypeNs"
+                v-model:value="advFilter.matchTypeNs"
                 :options="matchTypes"
               />
             </div>
             <div class="col-6">
               <LabeledSelect
-                v-model="advFilter.selectedDomains"
+                v-model:value="advFilter.selectedDomains"
                 :taggable="true"
                 :options="domains"
                 :searchable="true"
@@ -304,12 +304,12 @@
             </div>
             <div class="col-3">
               <Select
-                v-model="advFilter[selectedImpact.value.matchType]"
+                v-model:value="advFilter[selectedImpact.value.matchType]"
                 :options="matchTypes"
               />
             </div>
             <div class="col-6">
-              <LabeledInput v-model="advFilter[selectedImpact.value.name]" />
+              <LabeledInput v-model:value="advFilter[selectedImpact.value.name]" />
             </div>
           </div>
           <div class="mt-15">
@@ -360,13 +360,13 @@
             <span v-if="advFilter.scoreV2[1] < 10 || advFilter.scoreV2[0] > 0"
               class="badge badge-secondary mb-1 mr-5 d-inline-flex justify-content-center align-items-center">
               <template v-if="advFilter.scoreV2[1] < 10">
-                V2 < {{ advFilter.scoreV2[1] }}
+                V2 &lt; {{ advFilter.scoreV2[1] }}
               </template>
               <template v-if="advFilter.scoreV2[1] < 10 && advFilter.scoreV2[0] > 0">
                 &nbsp; &&nbsp;
               </template>
               <template v-if="advFilter.scoreV2[0] > 0">
-                V2 > {{ advFilter.scoreV2[0] }}
+                V2 &gt; {{ advFilter.scoreV2[0] }}
               </template>
               <button
                 id="remove-container"
@@ -378,13 +378,13 @@
             <span v-if="advFilter.scoreV3[1] < 10 || advFilter.scoreV3[0] > 0"
               class="badge badge-secondary mb-1 mr-5 d-inline-flex justify-content-center align-items-center">
               <template v-if="advFilter.scoreV3[1] < 10">
-                V3 < {{ advFilter.scoreV3[1] }}
+                V3 &lt; {{ advFilter.scoreV3[1] }}
               </template>
               <template v-if="advFilter.scoreV3[1] < 10 && advFilter.scoreV3[0] > 0">
                 &nbsp; &&nbsp;
               </template>
               <template v-if="advFilter.scoreV3[0] > 0">
-                V3 > {{ advFilter.scoreV3[0] }}
+                V3 &gt; {{ advFilter.scoreV3[0] }}
               </template>
               <button
                 id="remove-container"
@@ -426,11 +426,11 @@
       z-index: 1000 !important;
   }
 
-  .vul-radio-group ::v-deep(.row > *) {
+  .vul-radio-group :deep(.row > *) {
     width: auto;
   }
 
-  ::v-deep(.btn-sm) {
+  :deep(.btn-sm) {
     padding: 0 7px 0 0;
   }
 

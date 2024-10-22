@@ -147,35 +147,35 @@
         <div class="row mt-2">
             <div class="text-bold">{{ t('securityEvent.SEVERITY') }}</div>
             <div class="mt-2">
-              <Checkbox v-model="filters.severity.error" :label="t('enum.ERROR')" @input="update"/>
-              <Checkbox v-model="filters.severity.critical" :label="t('enum.CRITICAL')" @input="update"/>
-              <Checkbox v-model="filters.severity.warning" :label="t('enum.WARNING')" @input="update"/>
-              <Checkbox v-model="filters.severity.info" :label="t('enum.INFO')" @input="update"/>
+              <Checkbox v-model:value="filters.severity.error" :label="t('enum.ERROR')" @update:value="update"/>
+              <Checkbox v-model:value="filters.severity.critical" :label="t('enum.CRITICAL')" @update:value="update"/>
+              <Checkbox v-model:value="filters.severity.warning" :label="t('enum.WARNING')" @update:value="update"/>
+              <Checkbox v-model:value="filters.severity.info" :label="t('enum.INFO')" @update:value="update"/>
             </div>
           </div>
           <div class="row mt-2">
             <div class="text-bold">{{ t('securityEvent.LOCATION') }}</div>
             <div class="mt-2">
-              <Checkbox v-model="filters.location.host" :label="t('securityEvent.label.HOST')" @input="update"/>
-              <Checkbox v-model="filters.location.container" :label="t('securityEvent.label.CONTAINER')" @input="update"/>
+              <Checkbox v-model:value="filters.location.host" :label="t('securityEvent.label.HOST')" @update:value="update"/>
+              <Checkbox v-model:value="filters.location.container" :label="t('securityEvent.label.CONTAINER')" @update:value="update"/>
             </div>
           </div>
           <div class="row mt-2">
             <div class="text-bold">{{ t('event.gridHeader.CATEGORY') }}</div>
             <div class="mt-2">
-              <Checkbox v-model="filters.category.network" :label="t('securityEvent.label.NETWORK')" @input="update"/>
-              <Checkbox v-model="filters.category.package" :label="t('securityEvent.label.PACKAGE')" @input="update"/>
-              <Checkbox v-model="filters.category.file" :label="t('securityEvent.label.FILE')" @input="update"/>
-              <Checkbox v-model="filters.category.tunnel" :label="t('securityEvent.label.TUNNEL')" @input="update"/>
-              <Checkbox v-model="filters.category.process" :label="t('securityEvent.label.PROCESS')" @input="update"/>
-              <Checkbox v-model="filters.category.priviledge" :label="t('securityEvent.label.PRIVILEDGE')" @input="update"/>
-              <Checkbox v-model="filters.other" :label="t('securityEvent.label.OTHER')" @input="update"/>
+              <Checkbox v-model:value="filters.category.network" :label="t('securityEvent.label.NETWORK')" @update:value="update"/>
+              <Checkbox v-model:value="filters.category.package" :label="t('securityEvent.label.PACKAGE')" @update:value="update"/>
+              <Checkbox v-model:value="filters.category.file" :label="t('securityEvent.label.FILE')" @update:value="update"/>
+              <Checkbox v-model:value="filters.category.tunnel" :label="t('securityEvent.label.TUNNEL')" @update:value="update"/>
+              <Checkbox v-model:value="filters.category.process" :label="t('securityEvent.label.PROCESS')" @update:value="update"/>
+              <Checkbox v-model:value="filters.category.priviledge" :label="t('securityEvent.label.PRIVILEDGE')" @update:value="update"/>
+              <Checkbox v-model:value="filters.other" :label="t('securityEvent.label.OTHER')" @update:value="update"/>
             </div>
           </div>
           <hr />
           <div class="mt-2">
             <LabeledSelect
-              v-model="filters.host"
+              v-model:value="filters.host"
               :taggable="false"
               :searchable="true"
               :push-tags="true"
@@ -185,12 +185,12 @@
               :label="t('securityEvent.HOST')"
               :options="autoCompleteData.host"
               :disabled="mode==='view'"
-              @input="update"
+              @update:value="update"
             />
           </div>
           <div class="mt-2">
             <LabeledSelect
-              v-model="filters.source"
+              v-model:value="filters.source"
               :taggable="false"
               :searchable="true"
               :push-tags="true"
@@ -200,12 +200,12 @@
               :label="t('securityEvent.SOURCE')"
               :options="autoCompleteData.source"
               :disabled="mode==='view'"
-              @input="update"
+              @update:value="update"
             />
           </div>
           <div class="mt-2">
             <LabeledSelect
-              v-model="filters.destination"
+              v-model:value="filters.destination"
               :taggable="false"
               :searchable="true"
               :push-tags="true"
@@ -215,12 +215,12 @@
               :label="t('securityEvent.DESTINATION')"
               :options="autoCompleteData.destination"
               :disabled="mode==='view'"
-              @input="update"
+              @update:value="update"
             />
           </div>
           <div class="mt-2">
             <LabeledSelect
-              v-model="filters.domains"
+              v-model:value="filters.domains"
               :taggable="true"
               :searchable="true"
               :push-tags="true"
@@ -230,25 +230,25 @@
               :label="t('securityEvent.DOMAIN')"
               :options="autoCompleteData.domain"
               :disabled="mode==='view'"
-              @input="update"
+              @update:value="update"
             />
           </div>
           <div class="mt-2">
             <LabeledInput
               class="nv-labal-input"
-              v-model="filters.includedKeyword"
+              v-model:value="filters.includedKeyword"
               :label="t('securityEvent.OTHER_KEYWORD')"
               :mode="mode"
-              @input="update"
+              @update:value="update"
             />
           </div>
           <div class="mt-2">
             <LabeledInput
               class="nv-labal-input"
-              v-model="filters.excludedKeyword"
+              v-model:value="filters.excludedKeyword"
               :label="t('securityEvent.EXCLUDED_KEYWORD')"
               :mode="mode"
-              @input="update"
+              @update:value="update"
             />
           </div>
           <div class="mt-3" style="text-align: right">
@@ -288,7 +288,7 @@
       text-align: left;
     }
 
-    ::v-deep(.btn-sm) {
+    :deep(.btn-sm) {
       padding: 0 7px 0 0;
     }
 

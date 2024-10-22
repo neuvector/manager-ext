@@ -5,7 +5,7 @@
   <div v-else>
     {{ t('dashboard.heading.guideline.AUTO_SCAN_OFF') }}
     <div class="toggle-switch mt-10">
-      <ToggleSwitch @input="toggleAutoScan" :value="autoScan" :offLabel="'Auto Scan'" />
+      <ToggleSwitch @update:value="toggleAutoScan" :value="autoScan" :offLabel="'Auto Scan'" />
     </div>
   </div>
 </template>

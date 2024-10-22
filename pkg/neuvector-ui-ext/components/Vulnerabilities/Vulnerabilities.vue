@@ -139,12 +139,12 @@
                             </h1>
                             <LabeledSelect
                                 class="view-select ml-15"
-                                v-model="selectedView"
+                                v-model:value="selectedView"
                                 :close-on-select="true"
                                 :multiple="false"
                                 :label="t('scan.report.view.TITLE')"
                                 :options="vulnerabilityViewsOptions"
-                                @input="changeView"
+                                @update:value="changeView"
                             />
                         </div>
                         <div class="search row">

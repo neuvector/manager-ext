@@ -149,25 +149,25 @@ export default {
         <div class="mt-2" v-if="opType === UpdateType.Edit">
           <LabeledInput
             class="nv-labal-input"
-            v-model="rule.id"
+            v-model:value="rule.id"
             :disabled="true"
             :label="t('policy.editPolicy.POLICY_ID')"
             :mode="mode"
-            @input="update"
+            @update:value="update"
           />
         </div>
         <div class="mt-2">
           <LabeledInput
             class="nv-labal-input"
-            v-model="rule.comment"
+            v-model:value="rule.comment"
             :label="t('policy.addPolicy.COMMENT')"
             :mode="mode"
-            @input="update"
+            @update:value="update"
           />
         </div>
         <div class="mt-2">
           <LabeledSelect
-            v-model="rule.from"
+            v-model:value="rule.from"
             :taggable="false"
             :searchable="true"
             :push-tags="true"
@@ -177,12 +177,12 @@ export default {
             :label="t('policy.addPolicy.FROM')"
             :options="autoCompleteData.endpointOptions"
             :disabled="mode==='view'"
-            @input="update"
+            @update:value="update"
           />
         </div>
         <div class="mt-2">
           <LabeledSelect
-            v-model="rule.to"
+            v-model:value="rule.to"
             :taggable="false"
             :searchable="true"
             :push-tags="true"
@@ -192,12 +192,12 @@ export default {
             :label="t('policy.addPolicy.TO')"
             :options="autoCompleteData.endpointOptions"
             :disabled="mode==='view'"
-            @input="update"
+            @update:value="update"
           />
         </div>
         <div class="mt-2">
           <LabeledSelect
-            v-model="rule.applications"
+            v-model:value="rule.applications"
             :taggable="true"
             :searchable="true"
             :push-tags="true"
@@ -207,22 +207,22 @@ export default {
             :label="t('policy.addPolicy.APP')"
             :options="autoCompleteData.applicationOptions"
             :disabled="mode==='view'"
-            @input="update"
+            @update:value="update"
           />
         </div>
         
         <div class="mt-2">
           <LabeledInput
             class="nv-labal-input"
-            v-model="rule.ports"
+            v-model:value="rule.ports"
             :label="t('policy.editPolicy.PORT')"
             :mode="mode"
-            @input="update"
+            @update:value="update"
           />
         </div>
         <div class="mt-2">
           <ToggleSwitch
-            v-model="rule.isAllow"
+            v-model:value="rule.isAllow"
             name="label-system-toggle"
             :off-label="t('policy.action.DENY')"
             :on-label="t('policy.action.ALLOW')"
@@ -230,7 +230,7 @@ export default {
         </div>
         <div class="mt-2">
           <ToggleSwitch
-            v-model="rule.disable"
+            v-model:value="rule.disable"
             name="label-system-toggle"
             :off-value="true"
             :off-label="t('policy.status.DISABLED')"
@@ -267,7 +267,7 @@ export default {
   text-align: left;
 }
 
-::v-deep(.btn-sm) {
+:deep(.btn-sm) {
   padding: 0 7px 0 0;
 }
 

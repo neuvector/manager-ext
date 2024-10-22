@@ -82,13 +82,11 @@ export function parseDatetimeStr(datetimeObj: any, pattern?: string) {
 export function getDateByInterval(
   base: string,
   interval: number,
-  intervalUnit: string,
+  intervalUnit: dayjs.ManipulateType,
   pattern = "YYYYMMDDHHmmss"
 ) {
-  //base format: "YYYYMMDDHHmmss"
-  return dayjs(base)
-    .add(interval, intervalUnit as dayjs.OpUnitType)
-    .format(pattern);
+  // base format: "YYYYMMDDHHmmss"
+  return dayjs(base).add(interval, intervalUnit).format(pattern);
 }
 
 export function getDuration(date1: string, date2: string) {

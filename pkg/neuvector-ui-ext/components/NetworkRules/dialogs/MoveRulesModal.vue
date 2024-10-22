@@ -58,13 +58,13 @@
                     <div class="flex">
                         <RadioButton
                             :label="t('policy.toolBar.BEFORE_ROWS')"
-                            v-model="moveType"
+                            v-model:value="moveType"
                             :val="UpdateType.MoveBefore"
                             :value="true"
                         />
                         <RadioButton
                             :label="t('policy.toolBar.AFTER_ROWS')"
-                            v-model="moveType"
+                            v-model:value="moveType"
                             :val="UpdateType.MoveAfter"
                             :value="false"
                         />
@@ -72,7 +72,7 @@
                     <LabeledInput
                         class="nv-labal-input"
                         style="width: 100px;"
-                        v-model="selectedId"
+                        v-model:value="selectedId"
                         label="ID"
                         :mode="mode"
                     />

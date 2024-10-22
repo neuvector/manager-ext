@@ -31,7 +31,7 @@
                     </h5>
                 </template>
                 <template v-slot:body>
-                    <div class="col-sm-2" v-for="port in ports.split(',')">
+                    <div class="col-sm-2" v-for="port in ports.split(',')" :key="port">
                         {{port}}
                     </div>
                 </template>

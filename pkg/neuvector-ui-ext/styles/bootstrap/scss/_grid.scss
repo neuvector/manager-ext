@@ -8,16 +8,6 @@
   }
 }
 
-@if $enable-grid-classes {
-  .row {
-    @include make-row();
-
-    > * {
-      @include make-col-ready();
-    }
-  }
-}
-
 @if $enable-cssgrid {
   .grid {
     display: grid;

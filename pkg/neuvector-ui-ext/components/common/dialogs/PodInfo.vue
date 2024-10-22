@@ -71,7 +71,7 @@
                                     </span>
                                 </div>
                                 <div class="ml pod-item-value">
-                                    <div v-for="child in workload.children" class="row">
+                                    <div v-for="child in workload.children" class="row" :key="child">
                                         <div
                                             v-if="child"
                                             class="auto-hide"
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="ml pod-item-value">
                                     <div v-if="workload.images">
-                                        <div v-for="image in workload.images">
+                                        <div v-for="image in workload.images" :key="image">
                                             <span class="d-block">
                                                 {{ image }}
                                             </span>
@@ -315,7 +315,7 @@
                                 <div
                                     v-for="(value, name) in workload.interfaces"
                                     class="row ml"
-                                    style="width: 380px">
+                                    style="width: 380px" :key="name">
                                     <div class="col-sm-2 text-left pr0">
                                         <span>{{ name }}</span>
                                     </div>

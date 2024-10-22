@@ -27,7 +27,7 @@ export default {
     <span class="icon"><i class="icon-info" style="font-size: 15px;" @mouseover="showInstruction($event)"></i></span>
     
     <div :id="instructionId" class="dropdown-content">
-      <div v-for="instruction in instructions.textLines">{{ instruction }}</div>
+      <div v-for="instruction in instructions.textLines" :key="instruction">{{ instruction }}</div>
     </div>
   </div>
 </template>

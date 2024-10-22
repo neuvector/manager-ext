@@ -90,14 +90,14 @@
                 <template v-slot:body>
                     <div class="packetContent">
                         <div class="view view-offset">
-                            <b v-for="pos in positions">{{ pos }}</b>
+                            <b v-for="pos in positions" :key="pos">{{ pos }}</b>
                         </div>
                         <div class="view view-hex">
                             <span
                                 v-for="(hex, index) in hexItems"  :data-index="index"
                                 :class="{current: current == index + offset}"
                                 @click="setCurrent(index + offset)"
-                                >{{ hex }}
+                                :key="index">{{ hex }}
                             </span>
                         </div>
                         <div class="view view-char mr-sm" ng-show="!packetErr">

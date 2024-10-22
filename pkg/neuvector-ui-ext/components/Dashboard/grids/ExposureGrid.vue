@@ -15,22 +15,14 @@
   
 <script>
   import ExposureModal from '../panels/ExposureModal';
-  import Vue from 'vue';
+  import { createApp } from 'vue';
+const vueApp = createApp({});
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-balham.min.css";
-  import { AgGridVue } from "ag-grid-vue";
+  import { AgGridVue } from "ag-grid-vue3";
   import { NV_MAP } from '../../../types/neuvector';
   // import ExposedServicePodGridServicePodCellComponent from './components/ExposedServicePodGridServicePodCellComponent';
   
-  const ExposedServicePodGridServicePodCellComponent = Vue.extend(
-    {template: '<span>{{ valueCubed() }}</span>',
-   methods: {
-       valueCubed() {
-           return 'test'+this.params.value;
-       }
-   }}
-  )
-
   export default {
     name: "App",
     props: {

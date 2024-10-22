@@ -7,8 +7,8 @@
     import { LabeledInput } from '@components/Form/LabeledInput';
     import { RadioGroup } from '@components/Form/Radio';
     import MultiRangeSlider from 'multi-range-slider-vue';
-    import DatePicker from 'vue2-datepicker';
-    import 'vue2-datepicker/index.css';
+    import DatePicker from 'vue-datepicker-next';
+    import 'vue-datepicker-next/index.css';
 
     export default {
         components: {
@@ -161,41 +161,41 @@
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('nodes.gridHeader.CATEGORY') }}</div>
             <div class="col-9">
-                <Checkbox v-model="advFilter.category.docker" label="Docker"/>
-                <Checkbox v-model="advFilter.category.kubernetes" label="Kubernetes"/>
-                <Checkbox v-model="advFilter.category.custom" label="Custom"/>
-                <Checkbox v-model="advFilter.category.image" label="Image"/>
+                <Checkbox v-model:value="advFilter.category.docker" label="Docker"/>
+                <Checkbox v-model:value="advFilter.category.kubernetes" label="Kubernetes"/>
+                <Checkbox v-model:value="advFilter.category.custom" label="Custom"/>
+                <Checkbox v-model:value="advFilter.category.image" label="Image"/>
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('cis.profile.REGULATIONS') }}</div>
             <div class="col-9">
-                <Checkbox v-for="(_, key) in advFilter.tags" v-model="advFilter.tags[key]" :label="key"/>
+                <Checkbox v-for="(_, key) in advFilter.tags" v-model:value="advFilter.tags[key]" :label="key" :key="key" />
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('cis.report.gridHeader.SCORED') }}</div>
             <div class="col-9">
-              <RadioGroup v-model="advFilter.scoredType" name="score_filter" :options="scoredOptions" :row="true" class="vul-radio-group" />
+              <RadioGroup v-model:value="advFilter.scoredType" name="score_filter" :options="scoredOptions" :row="true" class="vul-radio-group" />
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('profile.TITLE') }}</div>
             <div class="col-9">
-              <RadioGroup v-model="advFilter.profileType" name="severity_filter" :options="profileOptions" :row="true" class="vul-radio-group" />
+              <RadioGroup v-model:value="advFilter.profileType" name="severity_filter" :options="profileOptions" :row="true" class="vul-radio-group" />
             </div>
           </div>
           <div class="row align-items-center mt-2">
             <div class="col-3 text-bold">{{ t('ldap.gridHeader.DOMAINS') }}</div>
             <div class="col-3">
               <Select
-                v-model="advFilter.matchType4Ns"
+                v-model:value="advFilter.matchType4Ns"
                 :options="matchTypes"
               />
             </div>
             <div class="col-6">
               <LabeledSelect
-                v-model="advFilter.selectedDomains"
+                v-model:value="advFilter.selectedDomains"
                 :taggable="true"
                 :options="domains"
                 :searchable="true"
@@ -216,12 +216,12 @@
             </div>
             <div class="col-3">
               <Select
-                v-model="advFilter.matchTypes[selectedImpact.value.matchType]"
+                v-model:value="advFilter.matchTypes[selectedImpact.value.matchType]"
                 :options="matchTypes"
               />
             </div>
             <div class="col-6">
-              <LabeledInput v-model="advFilter[selectedImpact.value.name]" />
+              <LabeledInput v-model:value="advFilter[selectedImpact.value.name]" />
             </div>
           </div>
           <div class="mt-15">
@@ -302,11 +302,11 @@
       z-index: 1000 !important;
   }
 
-  .vul-radio-group ::v-deep(.row > *) {
+  .vul-radio-group :deep(.row > *) {
     width: auto;
   }
 
-  ::v-deep(.btn-sm) {
+  :deep(.btn-sm) {
     padding: 0 7px 0 0;
   }
 

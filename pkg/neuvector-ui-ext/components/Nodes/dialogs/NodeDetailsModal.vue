@@ -83,7 +83,7 @@
       text-align: left;
     }
 
-    ::v-deep(.btn-sm) {
+    :deep(.btn-sm) {
       padding: 0 7px 0 0;
     }
 

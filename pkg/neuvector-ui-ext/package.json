@@ -8,7 +8,8 @@
     "annotations": {
       "catalog.cattle.io/kube-version": ">= v1.16.0-0",
       "catalog.cattle.io/display-name": "NeuVector UI Extension",
-      "catalog.cattle.io/rancher-version": ">= 2.7.0-0 < 2.11.0-0"
+      "catalog.cattle.io/rancher-version": ">= 2.10.0-0",
+      "catalog.cattle.io/ui-extension-version": ">= 3.0.0"
     }
   },
   "scripts": {
@@ -16,10 +17,9 @@
     "nuxt": "./node_modules/.bin/nuxt"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=20.0.0"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vue/cli-plugin-babel": "5.0.8",
     "@vue/cli-plugin-typescript": "5.0.8",

@@ -3,7 +3,7 @@
     import Packet from '../../dialogs/Packet';
     import { getPackets, getHost, getWorkload } from '../../../../plugins/security-events-class';
     import { nvVariables } from '../../../../types/neuvector';
-    import { EOS_CLOUD_FILLED, EOS_NAMESPACE_FILLED, EOS_SYSTEM_GROUP_FILLED, EOS_POD_FILLED } from "eos-icons-vue2";
+    import { EOS_CLOUD_FILLED, EOS_NAMESPACE_FILLED, EOS_SYSTEM_GROUP_FILLED, EOS_POD_FILLED } from "eos-icons-vue3";
     export default {
         components: {
             Packet,
