@@ -64,8 +64,7 @@ general:
   PROCESSING: Processing
   PDF_TBL_ROW_LIMIT: "(Showing the latest {max} records)"
   PDF_SUMMARY_RANGE: "(Analyzed {rangedCount} records from {from} to {to})"
-  PDF_SUMMARY_RANGE_FILTERED:
-    "(Analyzed {filteredCount} filtered records out of
+  PDF_SUMMARY_RANGE_FILTERED: "(Analyzed {filteredCount} filtered records out of
     {rangedCount} from {from} to {to})"
   PDF_SUMMARY_RANGE_2: "(Analyzed {rangedCount} records)"
   FILTER_MATCH_ALL: Match All of the Following Rules
@@ -216,7 +215,7 @@ enum:
   FILTER: Filter
   MATCH: Match
   MANUAL: Manual
-  UNUSED: Unused Asset
+  UNUSED: Static or unused Asset
   PROTECTED: Protected Asset
   UNPROTECTED: Unprotected Asset
   ASSET_TYPE: Asset Type
@@ -1384,8 +1383,7 @@ scan:
       CONTAINER_INS:
         "Containers (Vulnerable Workloads (No Vulnerabilities): { safeRate4Containers
         } ({ containerCnt } Workload(s)))"
-      HOST_INS:
-        "Hosts (Vulnerable Hosts (NoVulnerabilities): { safeRate4Hosts }
+      HOST_INS: "Hosts (Vulnerable Hosts (NoVulnerabilities): { safeRate4Hosts }
         ({ hostCnt } host(s)))"
       PLATFORM_INS: Platforms
       IMAGE_INS:
@@ -1749,8 +1747,7 @@ securityEvent:
   CONTAINER_PRIVILEGE_ESCALATION_NO_PROC_CMD:
     The privilege by some commands in container
     "{container}" was escalated
-  HOST_SUSPICIOUS_PROCESS_NO_PROC_NAME:
-    Suspicious process on host "{host_name}"
+  HOST_SUSPICIOUS_PROCESS_NO_PROC_NAME: Suspicious process on host "{host_name}"
     was found
   CONTAINER_SUSPICIOUS_PROCESS_NO_PROC_NAME:
     Suspicious process in container "{container}"

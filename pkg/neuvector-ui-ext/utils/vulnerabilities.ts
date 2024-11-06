@@ -267,6 +267,24 @@ export function prepareEntryData(cve: any, reportType: string) {
   return cve;
 }
 
+export function extractPodImage(vulnerabilities: any) {
+  return vulnerabilities.map((vulnerability: any) => {
+    let imageMap = new Map();
+    vulnerability.workloads?.forEach((workload: any) => {
+      imageMap.set(workload.image, {
+        display_name: workload.image,
+        policy_mode: workload.policy_mode,
+      });
+    });
+    if (vulnerability.images) {
+      vulnerability.images.push(...Array.from(imageMap.values()));
+    } else {
+      vulnerability.images = Array.from(imageMap.values());
+    }
+    return vulnerability;
+  });
+}
+
 export function initVulQuery() {
   return JSON.parse(JSON.stringify(NV_MAP.INIT_VUL_ADV_FILTER));
 }
