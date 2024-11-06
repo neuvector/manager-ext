@@ -1,6 +1,7 @@
 <script>
 import { getVulnerabilitiesQuery, patchAssetsViewData } from '../../../plugins/vulnerabilities-class';
 import { downloadAssetsViewCsv, downloadCsv } from '../../../plugins/vulnerabilities-csv-class';
+import { extractPodImage } from '../../../utils/vulnerabilities';
 import { Card } from "@components/Card";
 import Checkbox from "@components/Form/Checkbox/Checkbox";
 import AsyncButton from '@shell/components/AsyncButton';
@@ -77,24 +78,10 @@ export default {
                 };
 
                 const data = (await getVulnerabilitiesQuery(params)).data;
-                downloadCsv(this.extractPodImage(data.vulnerabilities));
+                downloadCsv(extractPodImage(data.vulnerabilities));
             } catch (e) {
                 console.error(e);
             }
-        },
-        extractPodImage(vulnerabilities) {
-            return vulnerabilities.map(vulnerability => {
-                let imageMap = new Map();
-                vulnerability.workloads?.forEach(workload => {
-                    imageMap.set(workload.image, { display_name: workload.image });
-                });
-                if (vulnerability.images) {
-                    vulnerability.images.push(...Array.from(imageMap.values()));
-                } else {
-                    vulnerability.images = Array.from(imageMap.values());
-                }
-                return vulnerability;
-            });
         },
         getLastModifiedDate() {
             const today = new Date();
