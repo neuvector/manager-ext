@@ -149,7 +149,7 @@
                         </div>
                         <div class="search row">
                             <div class="d-flex align-items-center">
-                                <button @click="openFileExportDialog()" class="mr-10 btn role-primary">
+                                <button @click="openFileExportDialog()" class="mr-10 btn role-secondary">
                                     <i class="icon icon-lg icon-file"></i>
                                     <span>{{ t('scan.EXPORT') }}</span>
                                 </button>
@@ -233,6 +233,7 @@
 
 <style lang="scss" scoped>
     @import '../../styles/vulnerabilities.scss';
+    @import '../../styles/neuvector.scss';
 
     @media print {
         @page {

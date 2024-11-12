@@ -12,7 +12,7 @@
     <div>
         <a
             @click="openAdvancedFilterDialog()"
-            class="btn role-primary"
+            class="btn role-secondary"
         >
             {{ t('general.ADV_FILTER') }}
         </a>

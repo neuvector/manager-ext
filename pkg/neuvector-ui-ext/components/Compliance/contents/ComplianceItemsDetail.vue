@@ -152,4 +152,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import '../../../styles/neuvector.scss';
+.badge {
+    border-radius: 4px;
+}
 </style>

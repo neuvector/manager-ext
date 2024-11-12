@@ -21,8 +21,8 @@
 
 <template>
     <div class="mr-10">
-        <button @click="togglePieChart()" class="btn role-primary">
-            <EOS_PIE_CHART_FILLED size="m" color="white"></EOS_PIE_CHART_FILLED>
+        <button @click="togglePieChart()" class="btn role-secondary">
+            <EOS_PIE_CHART_FILLED size="m" color="blue"></EOS_PIE_CHART_FILLED>
         </button>
     </div>
 </template>

@@ -73,7 +73,7 @@
             cellRenderer: params => {
               if (params.data) {
                 return `<span ng-class='{\'policy-remove\': data.remove}'
-                      class='action-label px-1 ${
+                      class='nv-action-label px-1 ${
                         NV_MAP.colourMap[params.data.policy_action.toLowerCase()]
                       }'>
                       ${this.t(`dashboard.body.panel_title.${params.data.policy_action.toUpperCase()}`)}
@@ -123,3 +123,34 @@
       }
     };
     </script>
+
+    <style lang="scss">
+    .nv-action-label {
+      @media print {
+        height: 15px;
+        line-height: 15px;
+        font-size: 10px;
+      }
+      @media screen {
+        height: 20px;
+        line-height: 20px;
+        font-size: 11px;
+        font-weight: bold;
+      }
+      min-width: 50px;
+      border-radius: 4px;
+      text-align: center;
+      display: inline-block;
+      color: #fff;
+
+      &.deny {
+        background-color: #EF5350;
+        -webkit-print-color-adjust: exact;
+      }
+
+      &.allow {
+        background-color: #8BC34A;
+        -webkit-print-color-adjust: exact;
+      }
+    }
+    </style>

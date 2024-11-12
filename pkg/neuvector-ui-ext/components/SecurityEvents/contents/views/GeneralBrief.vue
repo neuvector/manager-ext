@@ -69,7 +69,7 @@
     
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     @import '../../../../styles/security-events.scss';
     @import '../../../../styles/neuvector.scss';
 </style>

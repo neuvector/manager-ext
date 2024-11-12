@@ -108,8 +108,14 @@
     <div v-if="vulnerabilities.length > 0" class="download-btn">
       <DownloadVulnerabilititesCSV class="pull-left" :csvFileName="csvFileName" :vulnerabilities="vulnerabilities"></DownloadVulnerabilititesCSV>
       <div class="pull-left" style="margin-top: -3px;">
-        <div class="vul-cnt text-right"><span class="pl-2 pr-2 badge badge-danger">High</span><span>{{ vulnerbilityCount.high }}</span></div>
-        <div class="vul-cnt text-right"><span class="pl-2 pr-2 badge badge-warning">Medium</span><span>{{ vulnerbilityCount.medium }}</span></div>
+        <div class="vul-cnt row">
+          <span class="pl-2 pr-2 col-6 badge badge-danger">High</span>
+          <span class="col-6">{{ vulnerbilityCount.high }}</span>
+        </div>
+        <div class="vul-cnt row">
+          <span class="pl-2 pr-2 col-6 badge badge-warning">Medium</span>
+          <span class="col-6">{{ vulnerbilityCount.medium }}</span>
+        </div>
       </div>
     </div>
     <VulnerabilityInfoModal v-if="showInfoModal" :vulnerability="selectedVulnerability" :isLightTheme="isLightTheme" @close="closeInfo"></VulnerabilityInfoModal>
@@ -181,7 +187,7 @@
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
     @import '../../../styles/neuvector.scss';
     #nv-vul-sortable-table table thead tr {
         background-color: var(--sortable-table-header-bg) !important;
@@ -201,13 +207,11 @@
 
     .badge {
       border-radius: 4px;
+      width: 60px;
     }
 
     .vul-cnt {
       display: block;
       margin: 3px 5px;
-      span {
-        margin: 0 5px;
-      }
     }
 </style>

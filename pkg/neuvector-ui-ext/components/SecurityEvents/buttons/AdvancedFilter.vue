@@ -27,12 +27,12 @@
 
 <template>
     <div>
-        <a
+        <button
             @click="openAdvancedFilterDialog()"
-            class="btn role-primary"
+            class="btn role-secondary"
         >
             {{ t('general.ADV_FILTER') }}
-        </a>
+        </button>
         <AdvancedFilterModal ref="advFilter" :isLightTheme="isLightTheme" :autoCompleteData="autoCompleteData" @close="closeModal"></AdvancedFilterModal>
     </div>
 </template>

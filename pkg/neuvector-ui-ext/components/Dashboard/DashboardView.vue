@@ -591,4 +591,3 @@ A {
   }
 }
 </style>
-../../plugins/dashboard-class

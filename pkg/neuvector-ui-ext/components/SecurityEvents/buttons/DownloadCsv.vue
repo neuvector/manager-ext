@@ -82,13 +82,13 @@
 
 <template>
     <div>
-        <a
+        <button
             mat-button
-            class="btn role-primary"
+            class="btn role-secondary"
             aria-label="Export secutiry events reports CSV"
             type="button"
             @click="exportCSV()">
             CSV
-        </a>
+        </button>
     </div>
 </template>

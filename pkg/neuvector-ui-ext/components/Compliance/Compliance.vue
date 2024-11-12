@@ -184,8 +184,9 @@
                         </div>
                         <div class="search row">
                             <div class="d-flex align-items-center justify-content-end">
-                                <button @click="downloadCsv()" class="btn role-primary mr-10">
-                                    CSV
+                                <button @click="downloadCsv()" class="btn role-secondary mr-10">
+                                    <i class="icon icon-lg icon-file"></i>
+                                    <span>{{ t('scan.EXPORT') }}</span>
                                 </button>
                                 <AsyncButton
                                     ref="refresh"
@@ -250,6 +251,7 @@
 
 <style lang="scss" scoped>
     @import '../../styles/compliance.scss';
+    @import '../../styles/neuvector.scss';
 
     @media print {
         @page {

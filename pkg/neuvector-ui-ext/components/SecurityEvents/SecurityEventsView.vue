@@ -208,7 +208,7 @@
                     <h1 class="m-0">{{ t('sidebar.nav.SECURITY_EVENT') }}</h1>
                 </div>
                 <div class="actions-container">
-                    <div class="pull-right">
+                    <div class="pull-right" style="margin-left: 8px;">
                         <Refresh :reloadData="loadData"/>
                     </div>
                     <div class="pull-right"
