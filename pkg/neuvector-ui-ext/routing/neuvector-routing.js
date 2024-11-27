@@ -1,7 +1,6 @@
 import Dashboard from '../pages/c/_cluster/neuvector/index.vue';
 import SecurityEvents from '../components/SecurityEvents/SecurityEventsView.vue';
 import Vulnerabilities from '../components/Vulnerabilities/Vulnerabilities.vue';
-import NetworkRules from '../components/NetworkRules/NetworkRules.vue';
 import Compliance from '../components/Compliance/Compliance.vue';
 
 const NEUVECTOR = 'neuvector';
@@ -27,11 +26,6 @@ const routes = [
     path: `/c/:cluster/${ NEUVECTOR }/bench`,
     component: Compliance,
   },
-  {
-    name: `c-cluster-${ NEUVECTOR }-policy`,
-    path: `/c/:cluster/${ NEUVECTOR }/policy`,
-    component: NetworkRules,
-  }
 ];
 
 export default routes;
