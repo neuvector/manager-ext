@@ -1,98 +1,64 @@
 <template>
-    <Bar
-      v-if="!isEmptyData"
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
-    <div class="message-content" v-else>
-      <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_VULNERABLE_NODE')"/>
-    </div>
-  </template>
+  <div class="chart-container">
+      <BarChart
+          v-if="!isEmptyData"
+          :chartData="chartData"
+          :options="chartOptions"
+          :width="width"
+          :height="height"
+      />
+      <div class="message-content" v-else>
+        <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_VULNERABLE_NODE')"/>
+      </div>
+  </div>
   
-  <script>
-  import { Bar } from 'vue-chartjs/legacy';
+</template>
+
+<script>
+  import { BarChart } from 'vue-chart-3';
+  import { Chart, registerables } from 'chart.js';
+  import { ref, defineComponent } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
-  
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    BarElement,
-    CategoryScale,
-    LinearScale
-  } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-  
-  export default {
-    name: 'BarChart',
-    components: {
-      Bar,
-      EmptyDataMessage
-    },
-    props: {
-      chartId: {
-        type: String,
-        default: 'bar-chart'
+
+  Chart.register(...registerables);
+
+  export default defineComponent({
+      name: 'BarChart4TopVulnerableHosts',
+      components: { BarChart },
+      data() {
+        return {
+          isEmptyData: false,
+        };
       },
-      datasetIdKey: {
-        type: String,
-        default: 'label'
+      props: {
+          width: { type: Number, default: 400 },
+          height: { type: Number, default: 300 },
+          topVulHosts: Object,
+          parentContext: Object,
       },
-      width: {
-        type: Number,
-        default: 400
-      },
-      height: {
-        type: Number,
-        default: 200
-      },
-      cssClasses: {
-        default: '',
-        type: String
-      },
-      styles: {
-        type: Object,
-        default: () => {}
-      },
-      plugins: {
-        type: Array,
-        default: () => {}
-      },
-      topVulHosts: Object
-    },
-    computed: {
-      chartData: function() {
+      setup(props) {
         let topVulnerableAssetsLabel = new Array(5);
         let topHighVulnerableAssetsData = new Array(5);
         let topMediumVulnerableAssetsData = new Array(5);
         topVulnerableAssetsLabel.fill('');
         topHighVulnerableAssetsData.fill(0);
         topMediumVulnerableAssetsData.fill(0);
-        if (this.topVulHosts.top5Nodes.length === 0) {
-          this.isEmptyData = true;
+        if (props.topVulHosts.top5Nodes.length === 0) {
+          props.isEmptyData = true;
         } else {
-          this.isEmptyData = false;
-          this.topVulHosts.top5Nodes.forEach((asset, index) => {
+          props.isEmptyData = false;
+          props.topVulHosts.top5Nodes.forEach((asset, index) => {
             topVulnerableAssetsLabel[index] = asset.name;
             topHighVulnerableAssetsData[index] = asset.scan_summary.high;
             topMediumVulnerableAssetsData[index] = asset.scan_summary.medium;
           });
         }
-        return {
+        const chartData = ref({
           labels: topVulnerableAssetsLabel,
           datasets: [
             {
               data: topHighVulnerableAssetsData,
-              label: this.t('enum.HIGH'),
+              label: props.parentContext.t('enum.HIGH'),
               backgroundColor: 'rgba(239, 83, 80, 0.3)',
               borderColor: '#ef5350',
               hoverBackgroundColor: 'rgba(239, 83, 80, 0.3)',
@@ -102,7 +68,7 @@
             },
             {
               data: topMediumVulnerableAssetsData,
-              label: this.t('enum.MEDIUM'),
+              label: props.parentContext.t('enum.MEDIUM'),
               backgroundColor: 'rgba(255, 152, 0, 0.3)',
               borderColor: '#ff9800',
               hoverBackgroundColor: 'rgba(255, 152, 0, 0.3)',
@@ -111,12 +77,9 @@
               borderWidth: 2,
             },
           ],
-        };
-      }
-    },
-    data() {
-      return {
-        chartOptions: {
+        });
+
+        const chartOptions = ref({
           animation: false,
           indexAxis: 'y',
           scales: {
@@ -141,20 +104,18 @@
             }
           },
           maintainAspectRatio: false
-        },
-        isEmptyData: false
-      }
-    }
-  }
+        });
+
+        return { chartData, chartOptions };
+      },
+  });
 </script>
 
-<style lang="scss">
-.message-content {
-    height: 100%;
-    align-content: center;
-    display: grid;
-    text-align: center;
-}
+<style scoped>
+  .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+  }
 </style>
-  
-  

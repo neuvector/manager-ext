@@ -1,142 +1,145 @@
 <script>
-import { Doughnut } from 'vue-chartjs';
+import { DoughnutChart } from 'vue-chart-3';
+import { Chart, registerables } from 'chart.js';
+import { ref, defineComponent } from 'vue';
 
-export default {
+Chart.register(...registerables);
+
+export default  defineComponent({
     props: {
-        complianceDist: Object
+        complianceDist: Object,
+        parentContext: Object,
     },
     components: {
-        Doughnut,
+        DoughnutChart, 
     },
-    computed: {
-        targetDistChartData() {
-            return {
-                options: {
-                    cutout: 60,
-                    elements: {
-                        arc: {
-                            borderWidth: 0,
-                        },
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                        tooltip: {
-                            mode: 'point',
-                        },
-                        title: {
-                            display: true,
-                            text: this.t('cis.report.others.SEVERITY_DIS'),
-                        },
-                        legend: {
-                            display: true,
-                            labels: {
-                                boxWidth: 12,
-                            },
-                        },
+    setup(props) {
+        const targetDistChartData = ref({
+            labels: [
+                ['Error'],
+                ['High'],
+                ['Warning'],
+                ['Note'],
+                ['Info'],
+                ['Pass'],
+            ],
+            datasets: [
+                {
+                    hoverBackgroundColor: [
+                        '#f22d3a',
+                        '#ef5350',
+                        '#ff9800',
+                        '#ffb661',
+                        '#36A2EB',
+                        '#6A8E6D',
+                    ],
+                    backgroundColor: [
+                        '#f22d3a',
+                        '#ef5350',
+                        '#ff9800',
+                        '#ffb661',
+                        '#36A2EB',
+                        '#6A8E6D',
+                    ],
+                    data: [
+                        props.complianceDist.error,
+                        props.complianceDist.high,
+                        props.complianceDist.warning,
+                        props.complianceDist.note,
+                        props.complianceDist.info,
+                        props.complianceDist.pass,
+                    ],
+                },
+            ],
+        });
+        const targetDistChartOptions = ref({
+            cutout: 60,
+            elements: {
+                arc: {
+                    borderWidth: 0,
+                },
+            },
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    mode: 'point',
+                },
+                title: {
+                    display: true,
+                    text: props.parentContext.t('cis.report.others.SEVERITY_DIS'),
+                },
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 12,
                     },
                 },
-                data: {
-                    labels: [
-                        ['Error'],
-                        ['High'],
-                        ['Warning'],
-                        ['Note'],
-                        ['Info'],
-                        ['Pass'],
+            },
+        });
+        const severityDistChartData = ref({
+            labels: [['Platform'], ['Image'], ['Node'], ['Container']],
+            datasets: [
+                {
+                    hoverBackgroundColor: ['#f22d3a', '#86aec2', '#4D5360', '#36A2EB'],
+                    backgroundColor: ['#f22d3a', '#86aec2', '#4D5360', '#36A2EB'],
+                    data: [
+                        props.complianceDist.platform,
+                        props.complianceDist.image,
+                        props.complianceDist.node,
+                        props.complianceDist.container,
                     ],
-                    datasets: [
-                        {
-                            hoverBackgroundColor: [
-                                '#f22d3a',
-                                '#ef5350',
-                                '#ff9800',
-                                '#ffb661',
-                                '#36A2EB',
-                                '#6A8E6D',
-                            ],
-                            backgroundColor: [
-                                '#f22d3a',
-                                '#ef5350',
-                                '#ff9800',
-                                '#ffb661',
-                                '#36A2EB',
-                                '#6A8E6D',
-                            ],
-                            data: [
-                                this.complianceDist.error,
-                                this.complianceDist.high,
-                                this.complianceDist.warning,
-                                this.complianceDist.note,
-                                this.complianceDist.info,
-                                this.complianceDist.pass,
-                            ],
-                        },
-                    ],
-                }
-            };
-        },
-        severityDistChartData() {
-            return {
-                options: {
-                    cutout: 60,
-                    elements: {
-                        arc: {
-                            borderWidth: 0,
-                        },
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                        tooltip: {
-                            mode: 'point',
-                        },
-                        title: {
-                            display: true,
-                            text: this.t('cis.report.others.TARGET_DIS'),
-                        },
-                        legend: {
-                            display: true,
-                            labels: {
-                                boxWidth: 12,
-                            },
-                        },
+                },
+            ],
+        });
+        const severityDistChartOption = ref({
+            cutout: 60,
+            elements: {
+                arc: {
+                    borderWidth: 0,
+                },
+            },
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    mode: 'point',
+                },
+                title: {
+                    display: true,
+                    text: props.parentContext.t('cis.report.others.TARGET_DIS'),
+                },
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 12,
                     },
                 },
-                data: {
-                    labels: [['Platform'], ['Image'], ['Node'], ['Container']],
-                    datasets: [
-                        {
-                            hoverBackgroundColor: ['#f22d3a', '#86aec2', '#4D5360', '#36A2EB'],
-                            backgroundColor: ['#f22d3a', '#86aec2', '#4D5360', '#36A2EB'],
-                            data: [
-                                this.complianceDist.platform,
-                                this.complianceDist.image,
-                                this.complianceDist.node,
-                                this.complianceDist.container,
-                            ],
-                        },
-                    ],
-                }
-            };
-        }
-    },
-}
+            },
+        });
+        return {
+            targetDistChartData,
+            severityDistChartData,
+            targetDistChartOptions,
+            severityDistChartOption,
+        };
+    },  
+})
 </script>
 
 <template>
     <div style="height: 400px">
         <div class="h-50" style="position: relative">
-            <Doughnut
+            <DoughnutChart
                 style="height: 200px"
-                :chartData="severityDistChartData.data"
-                :chartOptions="severityDistChartData.options">
-            </Doughnut>
+                :chartData="severityDistChartData"
+                :options="severityDistChartOption">
+            </DoughnutChart>
         </div>
         <div class="h-50" style="position: relative">
-            <Doughnut
+            <DoughnutChart
                 style="height: 200px"
-                :chartData="targetDistChartData.data"
-                :chartOptions="targetDistChartData.options">
-            </Doughnut>
+                :chartData="targetDistChartData"
+                :options="targetDistChartOptions">
+            </DoughnutChart>
         </div>
     </div>
 </template>

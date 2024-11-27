@@ -43,7 +43,7 @@
             'dashboard.body.policy_evaluation.GOOD'
           );
           gaugeLabelColor = NV_CONST.SCORE_COLOR.GOOD;
-        } else if (value <= NV_CONST.SCORE_LEVEL.POOR) {
+        } else if (value <= NV_CONST.SCORE_LEVEL.FAIR) {
           gaugeLabel = this.t(
             'dashboard.body.policy_evaluation.FAIR'
           );
@@ -67,7 +67,7 @@
           needleValue: this.scoreInfo.score.securityRiskScore,
           needleColor: this.rancherTheme === RANCHER_CONST.THEME.LIGHT ? 'black' : 'white',
           arcDelimiters: [20, 50],
-          arcColors: ["rgb(255,84,84)", "rgb(239,214,19)", "rgb(61,204,91)"],
+          arcColors: ["rgb(61,204,91)", "rgb(239,214,19)", "rgb(255,84,84)"],
           rangeLabel: ["", ""],
           rangeLabelFontSize: 14,
         },

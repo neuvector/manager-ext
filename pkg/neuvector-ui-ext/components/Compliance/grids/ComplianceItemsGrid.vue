@@ -115,7 +115,7 @@
                         compliance.filteredWorkloads = compliance.workloads;
                         return compliance;
                     });
-                    this.gridApi.setRowData(this.complianceData.compliances);
+                    this.gridApi.applyTransaction({add: this.complianceData.compliances});
                     setTimeout(() => {
                         this.gridApi.sizeColumnsToFit();
                     }, 300);
@@ -338,7 +338,7 @@
                     compliance.filteredWorkloads = compliance.workloads;
                     return compliance;
                 });
-                if (this.gridApi) this.gridApi.setRowData(this.complianceData.compliances);
+                if (this.gridApi) this.gridApi.applyTransaction({add: this.complianceData.compliances});
             },
             filterText(newFilter, oldFilter) {
                 this.gridApi.setQuickFilter(newFilter);

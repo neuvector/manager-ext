@@ -198,7 +198,7 @@ export default {
 
 <template>
     <div class="get-started" v-if="hierarchicalIngressList && hierarchicalEgressList">
-        <BarChart4Exposures :hierarchicalIngressList="hierarchicalIngressList" :hierarchicalEgressList="hierarchicalEgressList"/>
+        <BarChart4Exposures :parentContext="this" :hierarchicalIngressList="hierarchicalIngressList" :hierarchicalEgressList="hierarchicalEgressList"/>
         <Tabbed defaultTab="" class="exposure-grid-group">
             <Tab name="ingress" :label="t('dashboard.body.panel_title.INGRESS')">
                 <ExposureGrid :exposureInfo="hierarchicalIngressList" exposureType="ingress" :rancherTheme="rancherTheme"/>

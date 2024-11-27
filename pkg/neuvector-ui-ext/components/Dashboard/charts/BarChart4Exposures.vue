@@ -1,77 +1,61 @@
 <template>
-    <Bar
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
-  </template>
+  <div class="chart-container">
+      <BarChart
+          v-if="!isEmptyData"
+          :chartData="chartData"
+          :options="chartOptions"
+          :width="width"
+          :height="height"
+      />
+  </div>
   
-  <script>
-  import { Bar } from 'vue-chartjs/legacy';
+</template>
+
+<script>
+  import { BarChart } from 'vue-chart-3';
+  import { Chart, registerables } from 'chart.js';
+  import { ref, defineComponent } from 'vue';
   import { NV_CONST } from '../../../types/neuvector';
-  
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    BarElement,
-    CategoryScale,
-    LinearScale
-  } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-  
-  export default {
-    name: 'BarChart',
-    components: {
-      Bar
-    },
-    props: {
-      chartId: {
-        type: String,
-        default: 'bar-chart'
+
+  Chart.register(...registerables);
+
+  export default defineComponent({
+      name: 'BarChart4TopSecurityEventsBySource',
+      components: { BarChart },
+      props: {
+          width: { type: Number, default: 400 },
+          height: { type: Number, default: 300 },
+          hierarchicalIngressList: Array,
+          hierarchicalEgressList: Array,
+          parentContext: Object,
       },
-      datasetIdKey: {
-        type: String,
-        default: 'label'
+      methods: {
+        accumulateData: function(exposedContainers, chartNumbers, direction) {
+          exposedContainers.forEach(exposedContainer => {
+            if (exposedContainer.severity) {
+              chartNumbers[direction].set(NV_CONST.POLICY_ACTION.THREAT, chartNumbers[direction].get(NV_CONST.POLICY_ACTION.THREAT) + 1);
+            } else {
+              let policyAction = exposedContainer.policy_action.toLowerCase();
+              chartNumbers[direction].set(policyAction, chartNumbers[direction].get(policyAction) + 1);
+            }
+          });
+        }
       },
-      width: {
-        type: Number,
-        default: 300
-      },
-      height: {
-        type: Number,
-        default: 200
-      },
-      cssClasses: {
-        default: '',
-        type: String
-      },
-      styles: {
-        type: Object,
-        default: () => {}
-      },
-      plugins: {
-        type: Array,
-        default: () => {}
-      },
-      hierarchicalIngressList: Array,
-      hierarchicalEgressList: Array
-    },
-    computed: {
-      chartData: function() {
-        console.log("this.hierarchicalEgressList", this.hierarchicalEgressList, this.hierarchicalIngressList)
-        let egressContainers = this.hierarchicalEgressList.flatMap(service => {
+      setup(props) {
+        const accumulateData = function(exposedContainers, chartNumbers, direction) {
+          exposedContainers.forEach(exposedContainer => {
+            if (exposedContainer.severity) {
+              chartNumbers[direction].set(NV_CONST.POLICY_ACTION.THREAT, chartNumbers[direction].get(NV_CONST.POLICY_ACTION.THREAT) + 1);
+            } else {
+              let policyAction = exposedContainer.policy_action.toLowerCase();
+              chartNumbers[direction].set(policyAction, chartNumbers[direction].get(policyAction) + 1);
+            }
+          });
+        }
+        let egressContainers = props.hierarchicalEgressList.flatMap(service => {
           return service.children;
         });
-        let ingressContainers = this.hierarchicalIngressList.flatMap(service => {
+        let ingressContainers = props.hierarchicalIngressList.flatMap(service => {
           return service.children;
         });
         let chartNumbers = {
@@ -88,19 +72,19 @@
             [NV_CONST.POLICY_ACTION.THREAT, 0]
           ])
         };
-        this.accumulateData(ingressContainers, chartNumbers, NV_CONST.INGRESS);
-        this.accumulateData(egressContainers, chartNumbers, NV_CONST.EGRESS);
-        return {
+        accumulateData(ingressContainers, chartNumbers, NV_CONST.INGRESS);
+        accumulateData(egressContainers, chartNumbers, NV_CONST.EGRESS);
+        const chartData = ref({
           labels: [
-            this.t('dashboard.body.panel_title.ALLOW'),
-            this.t('dashboard.body.panel_title.DENY'),
-            this.t('dashboard.body.panel_title.ALERT'),
-            this.t('dashboard.body.panel_title.THREAT')
+            props.parentContext.t('dashboard.body.panel_title.ALLOW'),
+            props.parentContext.t('dashboard.body.panel_title.DENY'),
+            props.parentContext.t('dashboard.body.panel_title.ALERT'),
+            props.parentContext.t('dashboard.body.panel_title.THREAT')
           ],
           datasets: [
             {
               data: Array.from(chartNumbers.ingress.values()),
-              label: this.t('dashboard.body.panel_title.INGRESS_CONTAINERS'),
+              label: props.parentContext.t('dashboard.body.panel_title.INGRESS_CONTAINERS'),
               backgroundColor: 'rgba(255, 13, 129, 0.2)',
               borderColor: '#ff0d81',
               hoverBackgroundColor: 'rgba(255, 13, 129, 0.2)',
@@ -109,7 +93,7 @@
             },
             {
               data: Array.from(chartNumbers.egress.values()),
-              label: this.t('dashboard.body.panel_title.EGRESS_CONTAINERS'),
+              label: props.parentContext.t('dashboard.body.panel_title.EGRESS_CONTAINERS'),
               backgroundColor: 'rgba(255, 113, 1, 0.2)',
               borderColor: '#ff7101',
               hoverBackgroundColor: 'rgba(255, 113, 1, 0.2)',
@@ -117,24 +101,9 @@
               borderWidth: 2,
             }
           ]
-        };
-      }
-    },
-    methods: {
-      accumulateData: function(exposedContainers, chartNumbers, direction) {
-        exposedContainers.forEach(exposedContainer => {
-          if (exposedContainer.severity) {
-            chartNumbers[direction].set(NV_CONST.POLICY_ACTION.THREAT, chartNumbers[direction].get(NV_CONST.POLICY_ACTION.THREAT) + 1);
-          } else {
-            let policyAction = exposedContainer.policy_action.toLowerCase();
-            chartNumbers[direction].set(policyAction, chartNumbers[direction].get(policyAction) + 1);
-          }
         });
-      }
-    },
-    data() {
-      return {
-        chartOptions: {
+
+        const chartOptions = ref({
           animation: false,
           indexAxis: 'x',
           scales: {
@@ -167,13 +136,22 @@
             },
             title: {
                 display: true,
-                text: this.t('dashboard.body.panel_title.EXPOSURES'),
+                text: props.parentContext.t('dashboard.body.panel_title.EXPOSURES'),
             },
           },
           maintainAspectRatio: false
-        }
-      }
-    }
+        });
+
+        return { chartData, chartOptions };
+      },
+  });
+</script>
+
+<style scoped>
+  .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
   }
-  </script>
-  
+</style>

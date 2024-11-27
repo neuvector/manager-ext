@@ -1,168 +1,124 @@
+<template>
+    <div class="chart-container">
+        <LineChart
+            :chartData="chartData"
+            :options="chartOptions"
+            :height="height"
+        />
+    </div>
+</template>
+  
 <script>
-    import { Line as LineChartGenerator } from 'vue-chartjs/legacy';
-    import {
-        Chart as ChartJS,
-        Title,
-        Tooltip,
-        Legend,
-        LineElement,
-        LinearScale,
-        CategoryScale,
-        PointElement
-    } from 'chart.js';
-    import { parseDatetimeStr, getDateByInterval, parseLocalDate, groupBy, getDuration } from '../../../utils/common';
+    import { LineChart } from 'vue-chart-3';
+    import { Chart, registerables } from 'chart.js';
+    import { ref, defineComponent } from 'vue';
+    import { groupBy, parseLocalDate, parseDatetimeStr, getDuration, getDateByInterval } from '../../../utils/common';
 
-    ChartJS.register(
-        Title,
-        Tooltip,
-        Legend,
-        LineElement,
-        LinearScale,
-        CategoryScale,
-        PointElement
-    )
+    Chart.register(...registerables);
 
-    export default {
-        name: 'lineChart',
-        components: {
-            LineChartGenerator
-        },
+    export default defineComponent({
+        name: 'SecurityTimelineLineChart',
+        components: { LineChart },
         props: {
-            chartId: {
-                type: String,
-                default: 'line-chart'
-            },
-            datasetIdKey: {
-                type: String,
-                default: 'label'
-            },
-            width: {
-                type: Number,
-                default: 100
-            },
-            height: {
-                type: Number,
-                default: 60
-            },
-            cssClasses: {
-                default: '',
-                type: String
-            },
-            styles: {
-                type: Object,
-                default: () => {}
-            },
-            plugins: {
-                type: Array,
-                default: () => {}
-            },
-            securityEventsList: Array
+            height: { type: Number, default: 70 },
+            securityEventsList: Array,
+            parentContext: Object,
         },
-        computed: {
-            chartData: function() {
-                console.log('chart data...');
-                let securityEventsLineChartData = [];
-                let secEventByReportDate = groupBy(this.securityEventsList, 'reportedOn');
-                let earliestDateStr = parseLocalDate(
-                    this.securityEventsList[
-                        this.securityEventsList.length - 1
-                    ].orgReportedAt
+        setup(props) {
+            let securityEventsLineChartData = [];
+            let secEventByReportDate = groupBy(props.securityEventsList, 'reportedOn');
+            let earliestDateStr = parseLocalDate(
+                props.securityEventsList[
+                    props.securityEventsList.length - 1
+                ].orgReportedAt
+            );
+            let nowDateObj = new Date();
+            let nowDateStr = parseDatetimeStr(nowDateObj, 'YYYYMMDD');
+            let date = earliestDateStr;
+            let startDate = date;
+            let maxTimeGap = getDuration(
+                nowDateStr,
+                earliestDateStr
+            );
+            for (
+                ;
+                date <= nowDateStr;
+                date = getDateByInterval(
+                    `${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6, 8)}`,
+                    1,
+                    "day").substring(0, 8)
+            ) {
+                securityEventsLineChartData.push(
+                    secEventByReportDate.hasOwnProperty(date)
+                    ? secEventByReportDate[date].length
+                    : 0
                 );
-                let nowDateObj = new Date();
-                let nowDateStr = parseDatetimeStr(nowDateObj, 'YYYYMMDD');
-                let date = earliestDateStr;
-                let startDate = date;
-                let maxTimeGap = getDuration(
-                    nowDateStr,
-                    earliestDateStr
+            }
+            if (maxTimeGap === 0) {
+                securityEventsLineChartData.push(
+                    secEventByReportDate.hasOwnProperty(startDate)
+                    ? secEventByReportDate[startDate].length
+                    : 0
                 );
-                for (
-                    ;
-                    date <= nowDateStr;
-                    date = getDateByInterval(
-                        `${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6, 8)}`,
-                        1,
-                        "day").substring(0, 8)
-                ) {
-                    securityEventsLineChartData.push(
-                        secEventByReportDate.hasOwnProperty(date)
-                        ? secEventByReportDate[date].length
-                        : 0
-                    );
-                }
-                if (maxTimeGap === 0) {
-                    securityEventsLineChartData.push(
-                        secEventByReportDate.hasOwnProperty(startDate)
-                        ? secEventByReportDate[startDate].length
-                        : 0
-                    );
-                }
-                console.log("securityEventsLineChartData", securityEventsLineChartData);
-                return {
+            }
+            console.log("securityEventsLineChartData", securityEventsLineChartData);
+            const chartData = ref({
                     labels: new Array(securityEventsLineChartData.length).fill(''),
                     datasets: [
                         {
                             data: securityEventsLineChartData,
                             pointRadius: 0,
-                            backgroundColor: 'rgba(rgb(61, 152, 211), 0.4)',
+                            backgroundColor: 'rgba(61, 152, 211, 0.4)',
                             borderColor: 'rgb(61, 152, 211)',
-                            hoverBackgroundColor: 'rgba(rgb(61, 152, 211), 0.4)',
+                            hoverBackgroundColor: 'rgba(61, 152, 211, 0.4)',
                             hoverBorderColor: 'rgb(61, 152, 211)',
                             fill: true,
                             tension: 0.2,
                         },
                     ]
-                }
-            }
-        },
-        data() {
-            return {
-                chartOptions: {
-                    animation: false,
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                    x: {
-                        grid: {
-                        display:false
-                        },
-                        ticks: {
-                        display: false
-                        }
+                });
+
+            const chartOptions = ref({
+                animation: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                x: {
+                    grid: {
+                    display:false
                     },
-                    y: {
-                        grid: {
-                        display:false
-                        }
+                    ticks: {
+                    display: false
                     }
-                    },
-                    layout: {
+                },
+                y: {
+                    grid: {
+                    display:false
+                    }
+                }
+                },
+                layout: {
                     autoPadding: false
-                    },
-                    plugins: {
+                },
+                plugins: {
                     title: {
                         display: false
                     },
                     legend: {
                         display: false
                     }
-                    } 
-                }
-            };
-        }
-    };
+                } 
+            });
+
+            return { chartData, chartOptions };
+        },
+    });
 </script>
 
-<template>
-     <LineChartGenerator
-        :chart-options="chartOptions"
-        :chart-data="chartData"
-        :chart-id="chartId"
-        :dataset-id-key="datasetIdKey"
-        :plugins="plugins"
-        :css-classes="cssClasses"
-        :styles="styles"
-        :width="width"
-        :height="height"
-    />
-</template>
+<style scoped>
+    .chart-container {
+        position: relative;
+        width: 100%;
+        margin: auto;
+    }
+</style>

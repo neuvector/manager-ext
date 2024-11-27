@@ -23,7 +23,7 @@ export function init($plugin: IPlugin, store: any) {
     name: "neuvector-overview",
     namespaced: false,
     route: {
-      name: `c-cluster-${NEUVECTOR}`,
+      name: `c-cluster-${NEUVECTOR}-dashboard`,
       params: { product: NEUVECTOR },
       meta: { pkg: "neuvector-ui-ext", product: NEUVECTOR },
     },

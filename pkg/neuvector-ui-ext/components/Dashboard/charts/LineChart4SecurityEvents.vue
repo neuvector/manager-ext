@@ -1,90 +1,44 @@
 <template>
-  <LineChartGenerator
-    v-if="!isEmptyData"
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
-  <div class="message-content" v-else>
-    <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_CRITICAL_SECURITY_EVENT')"/>
+  <div class="chart-container">
+      <LineChart
+          v-if="!isEmptyData"
+          :chartData="chartData"
+          :options="chartOptions"
+          :height="height"
+      />
+      <div class="message-content" v-else>
+        <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_CRITICAL_SECURITY_EVENT')"/>
+      </div>
   </div>
 </template>
-  
-  <script>
-  import { Line as LineChartGenerator } from 'vue-chartjs/legacy';
+
+<script>
+  import { LineChart } from 'vue-chart-3';
+  import { Chart, registerables } from 'chart.js';
+  import { ref, defineComponent } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
-  
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    CategoryScale,
-    PointElement
-  } from 'chart.js'
-  
-  ChartJS.register(
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    CategoryScale,
-    PointElement
-  )
-  
-  export default {
-    name: 'lineChart',
-    components: {
-      LineChartGenerator,
-      EmptyDataMessage
-    },
-    props: {
-      chartId: {
-        type: String,
-        default: 'line-chart'
+
+  Chart.register(...registerables);
+
+  export default defineComponent({
+      name: 'LineChart4SecurityEvents',
+      components: { LineChart },
+      props: {
+          height: { type: Number, default: 180 },
+          securityEventSummaryInfo: Object,
+          parentContext: Object,
       },
-      datasetIdKey: {
-        type: String,
-        default: 'label'
+      data() {
+        return {
+          isEmptyData: false,
+        };
       },
-      width: {
-        type: Number,
-        default: 400
-      },
-      height: {
-        type: Number,
-        default: 180
-      },
-      cssClasses: {
-        default: '',
-        type: String
-      },
-      styles: {
-        type: Object,
-        default: () => {}
-      },
-      plugins: {
-        type: Array,
-        default: () => {}
-      },
-      securityEventSummaryInfo: Object
-    },
-    computed: {
-      chartData: function() {
+      setup(props) {
         let securityEventsLabels = new Set();
-        this.securityEventSummaryInfo.critical.forEach((critical) => {
+        props.securityEventSummaryInfo.critical.forEach((critical) => {
           securityEventsLabels.add(critical[0]);
         });
-        this.securityEventSummaryInfo.warning.forEach((warning) => {
+        props.securityEventSummaryInfo.warning.forEach((warning) => {
           securityEventsLabels.add(warning[0]);
         });
         securityEventsLabels = Array.from(securityEventsLabels).sort((a, b) => a - b);
@@ -94,26 +48,26 @@
         let warningTotal = 0
         let criticalDataList = new Array(labelListLength);
         let warningDataList = new Array(labelListLength);
-        if (this.securityEventSummaryInfo.critical.length === 0 && this.securityEventSummaryInfo.warning.length === 0) {
-          this.isEmptyData = true;
+        if (props.securityEventSummaryInfo.critical.length === 0 && props.securityEventSummaryInfo.warning.length === 0) {
+          props.isEmptyData = true;
         } else {
-          this.isEmptyData = false;
-          this.securityEventSummaryInfo.critical.forEach((critical) => {
+          props.isEmptyData = false;
+          props.securityEventSummaryInfo.critical.forEach((critical) => {
             let index = securityEventsLabels.findIndex(label => label === critical[0]);
             criticalDataList[index] = critical[1];
             criticalTotal += critical[1];
           });
-          this.securityEventSummaryInfo.warning.forEach((warning) => {
+          props.securityEventSummaryInfo.warning.forEach((warning) => {
             let index = securityEventsLabels.findIndex(label => label === warning[0]);
             warningDataList[index] = warning[1];
             warningTotal += warning[1];
           });
         }
-        return {
+        const chartData = ref({
           labels: securityEventsLabels,
           datasets: [
             {
-                label: `${this.t('enum.CRITICAL')}: ${criticalTotal}`,
+                label: `${props.parentContext.t('enum.CRITICAL')}: ${criticalTotal}`,
                 data: criticalDataList,
                 backgroundColor: 'rgba(239, 83, 80, 0.3)',
                 borderColor: '#ef5350',
@@ -126,7 +80,7 @@
                 tension: 0.2,
             },
             {
-                label: `${this.t('enum.WARNING')}: ${warningTotal}`,
+                label: `${props.parentContext.t('enum.WARNING')}: ${warningTotal}`,
                 data: warningDataList,
                 backgroundColor: 'rgba(239, 83, 80, 0.3)',
                 borderColor: '#ff9800',
@@ -139,12 +93,9 @@
                 tension: 0.2,
             }
           ],
-        };
-      }
-    },
-    data() {
-      return {
-        chartOptions: {
+        });
+
+        const chartOptions = ref({
           animation: false,
           scales: {
             y: {
@@ -166,14 +117,21 @@
             },
             title: {
                 display: true,
-                text: this.t('dashboard.body.panel_title.SEC_EVENTS')
+                text: props.parentContext.t('dashboard.body.panel_title.SEC_EVENTS')
             }
           },
           maintainAspectRatio: false
-        },
-        isEmptyData: false
-      }
-    }
+        });
+
+        return { chartData, chartOptions };
+      },
+  });
+</script>
+
+<style scoped>
+  .chart-container {
+      position: relative;
+      width: 100%;
+      margin: auto;
   }
-  </script>
-  
+</style>

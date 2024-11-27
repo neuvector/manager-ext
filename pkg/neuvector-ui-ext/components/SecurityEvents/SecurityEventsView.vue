@@ -231,6 +231,7 @@
             </div>
             <div style="height: 95px; position: relative" class="mt-2" v-if="processedSecEvents.cachedSecurityEvents && processedSecEvents.cachedSecurityEvents.length > 0">
                 <TimeSparklingChart
+                    v-if="processedSecEvents.cachedSecurityEvents"
                     :securityEventsList="processedSecEvents.cachedSecurityEvents"
                 />
                 <TimeSlider

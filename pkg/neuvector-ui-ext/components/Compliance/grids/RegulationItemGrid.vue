@@ -6,6 +6,7 @@
         :class="isLightTheme ? 'ag-theme-balham' : 'ag-theme-balham-dark'"
         :columnDefs="columnDefs"
         :gridOptions="gridOptions"
+        :rowData="regulationData"
       >
       </ag-grid-vue>
     </div>
@@ -67,7 +68,7 @@
                 rowSelection: 'single',
                 onGridReady: params => {
                     this.gridApi = params.api;
-                    this.gridApi.setRowData(this.regulationData);
+                    // this.gridApi.applyTransaction({ add: this.regulationData});
                     setTimeout(() => {
                         this.gridApi.sizeColumnsToFit();
                     }, 300);

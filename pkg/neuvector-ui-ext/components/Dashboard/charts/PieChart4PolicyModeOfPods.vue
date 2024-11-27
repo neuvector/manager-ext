@@ -1,82 +1,48 @@
 <template>
-    <Pie
-      v-if="!isEmptyData"
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
-    <div class="message-content" v-else>
-      <EmptyDataMessage icon="icon-warning" color="#FBC02D" :message="t('dashboard.body.message.NO_MANAGED_CONTAINERS')"/>
-    </div>
-  </template>
+  <div class="chart-container">
+      <PieChart
+          v-if="!isEmptyData"
+          :chartData="chartData"
+          :options="chartOptions"
+          :width="width"
+          :height="height"
+      />
+      <div class="message-content" v-else>
+        <EmptyDataMessage icon="icon-checkmark" color="#FBC02D" :message="t('dashboard.body.message.NO_MANAGED_CONTAINERS')"/>
+      </div>
+  </div>
   
-  <script>
-  import { Pie } from 'vue-chartjs/legacy';
+</template>
+
+<script>
+  import { PieChart } from 'vue-chart-3';
+  import { Chart, registerables } from 'chart.js';
+  import { ref, defineComponent } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
   import { NV_CONST } from '../../../types/neuvector';
-  import _ from 'lodash';
-  
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    ArcElement,
-    CategoryScale
-  } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
-  
-  export default {
-    name: 'PieChart',
-    components: {
-        Pie,
-        EmptyDataMessage
-    },
-    props: {
-      chartId: {
-        type: String,
-        default: 'bar-chart'
+
+  Chart.register(...registerables);
+
+  export default defineComponent({
+      name: 'PieChart4PolicyModeOfPods',
+      components: { PieChart },
+      data() {
+        return {
+          isEmptyData: false,
+        };
       },
-      datasetIdKey: {
-        type: String,
-        default: 'label'
+      props: {
+          width: { type: Number, default: 400 },
+          height: { type: Number, default: 300 },
+          podMode: Array,
+          parentContext: Object,
       },
-      width: {
-        type: Number,
-        default: 400
-      },
-      height: {
-        type: Number,
-        default: 200
-      },
-      cssClasses: {
-        default: '',
-        type: String
-      },
-      styles: {
-        type: Object,
-        default: () => {}
-      },
-      plugins: {
-        type: Array,
-        default: () => {}
-      },
-      podMode: Array
-    },
-    computed: {
-      chartData: function() {
+      setup(props) {
         const modes = _.cloneDeep(NV_CONST.MODES).reverse().concat(['quarantined']);
         let assetsPolicyModeLabels = new Array(modes.length);
         let assetsPolicyModeData = new Array(modes.length);
         assetsPolicyModeLabels = modes.map((mode) => {
-          return this.t(`enum.${mode.toUpperCase()}`);
+          return props.parentContext.t(`enum.${mode.toUpperCase()}`);
         });
         let containerStateCount = {
           protect: 0,
@@ -84,16 +50,16 @@
           discover: 0,
           quarantined: 0
         };
-        if (this.podMode.length === 0) {
-          this.isEmptyData = true;
+        if (props.podMode.length === 0) {
+          props.isEmptyData = true;
         } else {
-          this.isEmptyData = false;
-          this.podMode.forEach(container => {
+          props.isEmptyData = false;
+          props.podMode.forEach(container => {
             containerStateCount[container.state.toLowerCase()] ++;
           });
         }
         assetsPolicyModeData = Object.values(containerStateCount);
-        return {
+        const chartData = ref({
           labels: assetsPolicyModeLabels,
           datasets: [
             {
@@ -105,17 +71,14 @@
               data: assetsPolicyModeData,
             },
           ],
-        };
-      }
-    },
-    data() {
-      return {
-        chartOptions: {
+        });
+
+        const chartOptions = ref({
           animation: false,
           plugins: {
             title: {
                 display: false,
-                text: this.t('dashboard.body.panel_title.CONTAINER_MODE'),
+                text: props.parentContext.t('dashboard.body.panel_title.CONTAINER_MODE'),
             },
             legend: {
                 display: true,
@@ -127,10 +90,17 @@
             },
           },
           maintainAspectRatio: false
-        },
-        isEmptyData: false
-      }
-    }
+        });
+        return { chartData, chartOptions };
+      },
+  });
+</script>
+
+<style scoped>
+  .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
   }
-  </script>
-  
+</style>

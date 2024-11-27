@@ -171,18 +171,20 @@
                             <div class="mb-10 chart-title" style="line-height: 15px;">
                                 <span class="mr-10">{{ t('scan.report.others.TOP_VULNERABLE_HOSTS') }}</span>
                             </div>
-                            <TopVulnerableNodesBarChart 
-                                v-if="vulQueryData?.summary?.top_nodes" 
+                            <TopVulnerableNodesBarChart
+                                 v-if="vulQueryData?.summary?.top_nodes" 
                                 :topVulHosts="vulQueryData.summary.top_nodes"
+                                :parentContext="this"
                             />
                         </div>
                         <div>
                             <div class="mb-10 chart-title" style="line-height: 15px;">
                                 <span class="mr-10">{{ t('scan.report.others.TOP_VULNERABLE_IMAGES') }}</span>
                             </div>
-                            <TopVulnerableImagesBarChart 
+                            <TopVulnerableImagesBarChart
                                 v-if="vulQueryData?.summary?.top_images"     
                                 :topVulImages="vulQueryData.summary.top_images"
+                                :parentContext="this"
                             />
                         </div>
                     </div>

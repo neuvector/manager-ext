@@ -39,10 +39,12 @@
     "multi-range-slider-vue": "^1.1.4",
     "pako": "^2.1.0",
     "uuid": "^8.3.2",
+    "vue-chart-3": "3.1.8",
     "vue-chartjs": "4.0.0",
     "vue-concise-slider": "3.3.6",
     "vue-datepicker-next": "^1.0.3",
-    "vue-gauge": "1.0.3"
+    "vue-gauge": "1.0.3",
+    "vue3-carousel": "^0.8.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.7"

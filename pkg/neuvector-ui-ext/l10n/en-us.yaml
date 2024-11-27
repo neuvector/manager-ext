@@ -1618,6 +1618,7 @@ cis:
     PDF_LINK: Compliance View
     PDF_LINK2: Assets View
     gridHeader:
+      TITLE: Title
       CATEGORY: Category
       NAME: Name
       DESC: Description

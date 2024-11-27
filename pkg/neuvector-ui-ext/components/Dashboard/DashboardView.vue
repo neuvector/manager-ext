@@ -335,7 +335,7 @@ export default {
                   instructionId="top-vul-pods"
                 />
               </div>
-              <BarChart4TopVulnerableContainers v-if="detailsInfo" :topVulContainers="detailsInfo.highPriorityVulnerabilities.containers"/>
+              <BarChart4TopVulnerableContainers v-if="detailsInfo" :parentContext="this" :topVulContainers="detailsInfo.highPriorityVulnerabilities.containers"/>
             </div>
             <div>
               <div class="mb-10" style="line-height: 15px;">
@@ -345,7 +345,7 @@ export default {
                   instructionId="top-vul-nodes"
                 />
               </div>
-              <BarChart4TopVulnerableHosts v-if="detailsInfo" :topVulHosts="detailsInfo.highPriorityVulnerabilities.nodes"/>
+              <BarChart4TopVulnerableHosts v-if="detailsInfo" :parentContext="this" :topVulHosts="detailsInfo.highPriorityVulnerabilities.nodes"/>
             </div>
           </div>
         </Tab>
@@ -357,7 +357,7 @@ export default {
                   instructionId="sec-event"
               />
             </div>
-            <LineChart4SecurityEvents v-if="notificationInfo && isRefreshed" :securityEventSummaryInfo="notificationInfo.criticalSecurityEvents.summary"/>
+            <LineChart4SecurityEvents v-if="notificationInfo && isRefreshed" :parentContext="this" :securityEventSummaryInfo="notificationInfo.criticalSecurityEvents.summary"/>
           </div>
           <div class="get-started">
             <div>
@@ -367,7 +367,7 @@ export default {
                   instructionId="top-sec-events-source"
                 />
               </div>
-              <BarChart4TopSecurityEventsBySource v-if="notificationInfo" :securityEventTop5BySource="notificationInfo.criticalSecurityEvents.top_security_events.source"/>
+              <BarChart4TopSecurityEventsBySource v-if="notificationInfo" :parentContext="this" :securityEventTop5BySource="notificationInfo.criticalSecurityEvents.top_security_events.source"/>
             </div>
             <div>
               <div>
@@ -376,7 +376,7 @@ export default {
                   instructionId="top-sec-events-destination"
                 />
               </div>
-              <BarChart4TopSecurityEventsByDestination v-if="notificationInfo" :securityEventTop5ByDestination="notificationInfo.criticalSecurityEvents.top_security_events.destination"/>
+              <BarChart4TopSecurityEventsByDestination v-if="notificationInfo" :parentContext="this" :securityEventTop5ByDestination="notificationInfo.criticalSecurityEvents.top_security_events.destination"/>
             </div>
           </div>
         </Tab>
@@ -390,7 +390,7 @@ export default {
                   instructionId="policy-mode-pods"
                 />
               </div>
-              <PieChart4PolicyModeOfPods v-if="detailsInfo" :podMode="detailsInfo.containers"/>
+              <PieChart4PolicyModeOfPods v-if="detailsInfo" :parentContext="this" :podMode="detailsInfo.containers"/>
               <PolicyModeOfPods />
             </div>
             <div>
@@ -401,7 +401,7 @@ export default {
                   instructionId="policy-mode-services"
                 />
               </div>
-              <PieChart4PolicyModeOfServices v-if="detailsInfo && scoreInfo" :serviceMode="detailsInfo.services" :groupInfo="scoreInfo.header_data.groups"/>
+              <PieChart4PolicyModeOfServices v-if="detailsInfo && scoreInfo" :serviceMode="detailsInfo.services" :parentContext="this" :groupInfo="scoreInfo.header_data.groups"/>
               <PolicyModeOfServices />
             </div>
           </div>

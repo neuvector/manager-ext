@@ -1,76 +1,42 @@
 <template>
-    <Bar
-      v-if="!isEmptyData"
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
-    <div class="message-content" v-else>
-      <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_VULNERABLE_NODE')"/>
-    </div>
-  </template>
+  <div class="chart-container">
+      <BarChart
+          v-if="!isEmptyData"
+          :chartData="chartData"
+          :options="chartOptions"
+          :width="width"
+          :height="height"
+      />
+      <div class="message-content" v-else>
+        <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_SEC_EVENTS')"/>
+      </div>
+  </div>
   
-  <script>
-  import { Bar } from 'vue-chartjs/legacy';
+</template>
+
+<script>
+  import { BarChart } from 'vue-chart-3';
+  import { Chart, registerables } from 'chart.js';
+  import { ref, defineComponent } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
-  
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    BarElement,
-    CategoryScale,
-    LinearScale
-  } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-  
-  export default {
-    name: 'BarChart',
-    components: {
-      Bar,
-      EmptyDataMessage
-    },
-    props: {
-      chartId: {
-        type: String,
-        default: 'bar-chart'
+
+  Chart.register(...registerables);
+
+  export default defineComponent({
+      name: 'BarChart4TopSecurityEventsBySource',
+      components: { BarChart },
+      data() {
+        return {
+          isEmptyData: false,
+        };
       },
-      datasetIdKey: {
-        type: String,
-        default: 'label'
+      props: {
+          width: { type: Number, default: 400 },
+          height: { type: Number, default: 300 },
+          securityEventTop5BySource: Array,
+          parentContext: Object,
       },
-      width: {
-        type: Number,
-        default: 400
-      },
-      height: {
-        type: Number,
-        default: 180
-      },
-      cssClasses: {
-        default: '',
-        type: String
-      },
-      styles: {
-        type: Object,
-        default: () => {}
-      },
-      plugins: {
-        type: Array,
-        default: () => {}
-      },
-      securityEventTop5BySource: Array
-    },
-    computed: {
-      chartData: function() {
+      setup(props) {
         let topSecurityEventsLabels = new Array(5);
         let topSecurityEventsData = new Array(5);
         let barChartColors = new Array(5);
@@ -79,20 +45,20 @@
         topSecurityEventsData.fill(0);
         barChartColors.fill('rgba(239, 83, 80, 0.3)');
         barChartBorderColors.fill('#ef5350');
-        if (this.securityEventTop5BySource.length === 0) {
-          this.isEmptyData = true;
+        if (props.securityEventTop5BySource.length === 0) {
+          props.isEmptyData = true;
         } else {
-          this.isEmptyData = false;
-          this.securityEventTop5BySource.forEach((workloadEvents, index) => {
+          props.isEmptyData = false;
+          props.securityEventTop5BySource.forEach((workloadEvents, index) => {
             topSecurityEventsLabels[index] = workloadEvents[0]['source_workload_name'];
             topSecurityEventsData[index] = workloadEvents.length;
           });
         }
-        return {
+        const chartData = ref({
           labels: topSecurityEventsLabels,
           datasets: [
             {
-            label: `${this.t('dashboard.body.panel_title.TOP_SEC_EVENTS')} - ${this.t('dashboard.body.panel_title.SOURCE')}`,
+            label: `${props.parentContext.t('dashboard.body.panel_title.TOP_SEC_EVENTS')} - ${props.parentContext.t('dashboard.body.panel_title.SOURCE')}`,
             data: topSecurityEventsData,
             backgroundColor: barChartColors,
             borderColor: barChartBorderColors,
@@ -102,12 +68,9 @@
             borderWidth: 2
             }
           ],
-        };
-      }
-    },
-    data() {
-      return {
-        chartOptions: {
+        });
+
+        const chartOptions = ref({
           animation: false,
           indexAxis: 'y',
           scales: {
@@ -132,10 +95,18 @@
             }
           },
           maintainAspectRatio: false
-        },
-        isEmptyData: false
-      }
-    }
+        });
+
+        return { chartData, chartOptions };
+      },
+  });
+</script>
+
+<style scoped>
+  .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
   }
-  </script>
-  
+</style>
