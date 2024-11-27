@@ -6,6 +6,15 @@ import {
   NAMESPACE, POD, WORKLOAD_TYPES, INGRESS, SERVICE, NODE
 } from '@shell/config/types';
 
+
+const originalConsoleWarn = console.warn;
+
+console.warn = (message, ...args) => {
+  if (!message.includes('[Vue Router warn]:')) {
+    originalConsoleWarn(message, ...args);
+  }
+};
+
 // Init the package
 export default function(plugin: IPlugin) {
   // Auto-import model, detail, edit from the folders

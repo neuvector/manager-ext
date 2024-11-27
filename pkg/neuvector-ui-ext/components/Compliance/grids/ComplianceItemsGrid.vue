@@ -107,7 +107,7 @@
                 rowHeight: 30,
                 suppressDragLeaveHidesColumns: true,
                 animateRows: true,
-                rowSelection: 'single',
+                rowSelection: { type: 'single' },
                 onGridReady: params => {
                     this.gridApi = params.api;
                     this.complianceData.compliances = this.complianceData.compliances.map(compliance => {

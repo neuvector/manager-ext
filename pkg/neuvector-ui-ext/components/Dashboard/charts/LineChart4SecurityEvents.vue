@@ -15,25 +15,29 @@
 <script>
   import { LineChart } from 'vue-chart-3';
   import { Chart, registerables } from 'chart.js';
-  import { ref, defineComponent } from 'vue';
+  import { ref, defineComponent, getCurrentInstance } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
 
   Chart.register(...registerables);
 
   export default defineComponent({
       name: 'LineChart4SecurityEvents',
-      components: { LineChart },
-      props: {
-          height: { type: Number, default: 180 },
-          securityEventSummaryInfo: Object,
-          parentContext: Object,
+      components: {
+        LineChart,
+        EmptyDataMessage,
       },
       data() {
         return {
           isEmptyData: false,
         };
       },
+      props: {
+          height: { type: Number, default: 180 },
+          securityEventSummaryInfo: Object,
+          parentContext: Object,
+      },
       setup(props) {
+        const instance = getCurrentInstance();
         let securityEventsLabels = new Set();
         props.securityEventSummaryInfo.critical.forEach((critical) => {
           securityEventsLabels.add(critical[0]);
@@ -49,9 +53,9 @@
         let criticalDataList = new Array(labelListLength);
         let warningDataList = new Array(labelListLength);
         if (props.securityEventSummaryInfo.critical.length === 0 && props.securityEventSummaryInfo.warning.length === 0) {
-          props.isEmptyData = true;
+          instance.isEmptyData = true;
         } else {
-          props.isEmptyData = false;
+          instance.isEmptyData = false;
           props.securityEventSummaryInfo.critical.forEach((critical) => {
             let index = securityEventsLabels.findIndex(label => label === critical[0]);
             criticalDataList[index] = critical[1];

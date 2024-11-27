@@ -26,6 +26,7 @@ import dayjs from 'dayjs';
 import { getAuth, getScoreInfo, getNotifications, getDashboardDetails, getSummary } from '../../plugins/dashboard-class';
 import { getSSOUrl } from '../../utils/common';
 import { nvVariables } from '../../types/neuvector';
+import { Banner } from '@components/Banner';
 
 export default {
   name: 'Dashboard',
@@ -53,6 +54,7 @@ export default {
     Tabbed,
     Tab,
     VulnerabilitiesInstruction,
+    Banner,
   },
 
   mixins: [],

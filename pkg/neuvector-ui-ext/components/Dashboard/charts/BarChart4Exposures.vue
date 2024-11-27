@@ -1,7 +1,6 @@
 <template>
   <div class="chart-container">
       <BarChart
-          v-if="!isEmptyData"
           :chartData="chartData"
           :options="chartOptions"
           :width="width"

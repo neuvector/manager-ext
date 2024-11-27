@@ -1,7 +1,6 @@
 <script>
     import SortableTable from '@shell/components/SortableTable';
     import { capitalize, parseDatetimeStr } from '../../../utils/common';
-    import { Banner } from '@components/Banner';
     import { RANCHER_CONST } from '../../../types/neuvector';
     import DownloadVulnerabilititesCSV from '../buttons/DownloadVulnerabilititesCSV';
     import VulnerabilityInfoModal from '../../Vulnerabilities/dialogs/VulnerabilityInfoModal';
@@ -9,7 +8,6 @@
     export default {
         components: {
           SortableTable,
-          Banner,
           DownloadVulnerabilititesCSV,
           VulnerabilityInfoModal,
         },

@@ -17,14 +17,17 @@
 <script>
   import { BarChart } from 'vue-chart-3';
   import { Chart, registerables } from 'chart.js';
-  import { ref, defineComponent } from 'vue';
+  import { ref, defineComponent, getCurrentInstance } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
 
   Chart.register(...registerables);
 
   export default defineComponent({
       name: 'BarChart4TopVulnerableContainers',
-      components: { BarChart },
+      components: {
+        BarChart,
+        EmptyDataMessage,
+      },
       data() {
         return {
           isEmptyData: false,
@@ -37,6 +40,7 @@
           parentContext: Object,
       },
       setup(props) {
+        const instance = getCurrentInstance();
         let topVulnerableAssetsLabel = new Array(5);
         let topHighVulnerableAssetsData = new Array(5);
         let topMediumVulnerableAssetsData = new Array(5);
@@ -44,9 +48,9 @@
         topHighVulnerableAssetsData.fill(0);
         topMediumVulnerableAssetsData.fill(0);
         if (props.topVulContainers.top5Containers.length === 0) {
-          props.isEmptyData = true;
+          instance.isEmptyData = true;
         } else {
-          props.isEmptyData = false;
+          instance.isEmptyData = false;
           props.topVulContainers.top5Containers.forEach((asset, index) => {
             topVulnerableAssetsLabel[index] = asset.display_name;
             topHighVulnerableAssetsData[index] = asset.high4Dashboard;

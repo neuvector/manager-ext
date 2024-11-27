@@ -9,7 +9,7 @@
       "catalog.cattle.io/kube-version": ">= v1.16.0-0",
       "catalog.cattle.io/display-name": "NeuVector UI Extension",
       "catalog.cattle.io/rancher-version": ">= 2.10.0-0",
-      "catalog.cattle.io/ui-extension-version": ">= 3.0.0"
+      "catalog.cattle.io/ui-extension-version": ">= 3.0.0 < 4.0.0"
     }
   },
   "scripts": {

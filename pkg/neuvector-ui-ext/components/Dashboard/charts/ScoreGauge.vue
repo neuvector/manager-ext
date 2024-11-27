@@ -1,8 +1,8 @@
 <template>
     <div>
-      <p>
+      <p class="text-center">
         <small
-          ><center><span :style="{ 'color': scoreLevel.gaugeLabelColor }">{{ scoreLevel.gaugeLabel }}</span> ({{ scoreInfo.score.securityRiskScore }})</center></small
+          ><span :style="{ 'color': scoreLevel.gaugeLabelColor }">{{ scoreLevel.gaugeLabel }}</span> ({{ scoreInfo.score.securityRiskScore }})</small
         >
       </p>
       <vue-gauge

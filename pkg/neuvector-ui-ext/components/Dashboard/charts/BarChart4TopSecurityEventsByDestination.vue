@@ -16,14 +16,17 @@
 <script>
   import { BarChart } from 'vue-chart-3';
   import { Chart, registerables } from 'chart.js';
-  import { ref, defineComponent } from 'vue';
+  import { ref, defineComponent, getCurrentInstance } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
 
   Chart.register(...registerables);
 
   export default defineComponent({
       name: 'BarChart4TopSecurityEventsByDestination',
-      components: { BarChart },
+      components: { 
+        BarChart,
+        EmptyDataMessage,
+      },
       data() {
         return {
           isEmptyData: false,
@@ -36,6 +39,7 @@
           parentContext: Object,
       },
       setup(props) {
+        const instance = getCurrentInstance();
         let topSecurityEventsLabels = new Array(5);
         let topSecurityEventsData = new Array(5);
         let barChartColors = new Array(5);
@@ -45,9 +49,9 @@
         barChartColors.fill('rgba(239, 83, 80, 0.3)');
         barChartBorderColors.fill('#ef5350');
         if (props.securityEventTop5ByDestination.length === 0) {
-          props.isEmptyData = true;
+          instance.isEmptyData = true;
         } else {
-          props.isEmptyData = false;
+          instance.isEmptyData = false;
           props.securityEventTop5ByDestination.forEach((workloadEvents, index) => {
             topSecurityEventsLabels[index] = workloadEvents[0]['destination_workload_name'];
             topSecurityEventsData[index] = workloadEvents.length;

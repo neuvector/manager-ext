@@ -24,8 +24,6 @@ export function init($plugin: IPlugin, store: any) {
     namespaced: false,
     route: {
       name: `c-cluster-${NEUVECTOR}-dashboard`,
-      params: { product: NEUVECTOR },
-      meta: { pkg: "neuvector-ui-ext", product: NEUVECTOR },
     },
   });
   virtualType({
@@ -34,8 +32,6 @@ export function init($plugin: IPlugin, store: any) {
     namespaced: false,
     route: {
       name: `c-cluster-${NEUVECTOR}-sec-events`,
-      params: { product: NEUVECTOR },
-      meta: { pkg: "neuvector-ui-ext", product: NEUVECTOR },
     },
   });
   virtualType({
@@ -44,8 +40,6 @@ export function init($plugin: IPlugin, store: any) {
     namespaced: false,
     route: {
       name: `c-cluster-${NEUVECTOR}-scan`,
-      params: { product: NEUVECTOR },
-      meta: { pkg: "neuvector-ui-ext", product: NEUVECTOR },
     },
   });
   virtualType({
@@ -54,8 +48,6 @@ export function init($plugin: IPlugin, store: any) {
     namespaced: false,
     route: {
       name: `c-cluster-${NEUVECTOR}-bench`,
-      params: { product: NEUVECTOR },
-      meta: { pkg: "neuvector-ui-ext", product: NEUVECTOR },
     },
   });
 

@@ -65,7 +65,7 @@
                 rowHeight: 30,
                 suppressDragLeaveHidesColumns: true,
                 animateRows: true,
-                rowSelection: 'single',
+                rowSelection: { type: 'single' },
                 onGridReady: params => {
                     this.gridApi = params.api;
                     // this.gridApi.applyTransaction({ add: this.regulationData});

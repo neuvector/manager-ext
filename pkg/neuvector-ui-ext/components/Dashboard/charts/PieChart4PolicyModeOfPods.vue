@@ -17,7 +17,7 @@
 <script>
   import { PieChart } from 'vue-chart-3';
   import { Chart, registerables } from 'chart.js';
-  import { ref, defineComponent } from 'vue';
+  import { ref, defineComponent, getCurrentInstance } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
   import { NV_CONST } from '../../../types/neuvector';
 
@@ -25,7 +25,10 @@
 
   export default defineComponent({
       name: 'PieChart4PolicyModeOfPods',
-      components: { PieChart },
+      components: {
+        PieChart,
+        EmptyDataMessage,
+      },
       data() {
         return {
           isEmptyData: false,
@@ -38,6 +41,7 @@
           parentContext: Object,
       },
       setup(props) {
+        const instance = getCurrentInstance();
         const modes = _.cloneDeep(NV_CONST.MODES).reverse().concat(['quarantined']);
         let assetsPolicyModeLabels = new Array(modes.length);
         let assetsPolicyModeData = new Array(modes.length);
@@ -51,9 +55,9 @@
           quarantined: 0
         };
         if (props.podMode.length === 0) {
-          props.isEmptyData = true;
+          instance.isEmptyData = true;
         } else {
-          props.isEmptyData = false;
+          instance.isEmptyData = false;
           props.podMode.forEach(container => {
             containerStateCount[container.state.toLowerCase()] ++;
           });

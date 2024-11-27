@@ -17,7 +17,7 @@
 <script>
   import { PieChart } from 'vue-chart-3';
   import { Chart, registerables } from 'chart.js';
-  import { ref, defineComponent } from 'vue';
+  import { ref, defineComponent, getCurrentInstance } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
   import { NV_CONST } from '../../../types/neuvector';
 
@@ -25,7 +25,10 @@
 
   export default defineComponent({
       name: 'PieChart4PolicyModeOfPods',
-      components: { PieChart },
+      components: {
+        PieChart,
+        EmptyDataMessage,
+      },
       data() {
         return {
           isEmptyData: false,
@@ -39,6 +42,7 @@
           parentContext: Object,
       },
       setup(props) {
+        const instance = getCurrentInstance();
         const modes = _.cloneDeep(NV_CONST.MODES).reverse();
         let assetsPolicyModeLabels = new Array(modes.length);
         let assetsPolicyModeData = new Array(modes.length);
@@ -46,9 +50,9 @@
           return props.parentContext.t(`enum.${mode.toUpperCase()}`);
         });
         if (props.groupInfo.protect_groups === 0 && props.groupInfo.monitor_groups && props.groupInfo.discover_groups) {
-          props.isEmptyData = true;
+          instance.isEmptyData = true;
         } else {
-          props.isEmptyData = false;
+          instance.isEmptyData = false;
           assetsPolicyModeData = [
             props.groupInfo.protect_groups,
             props.groupInfo.monitor_groups,
