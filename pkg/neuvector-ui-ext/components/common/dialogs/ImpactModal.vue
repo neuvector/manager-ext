@@ -63,3 +63,7 @@
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+    @import '../../../styles/neuvector.scss';
+</style>

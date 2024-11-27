@@ -421,6 +421,7 @@
 
 <style lang="scss" scoped>
   @import '../../../styles/vulnerabilities.scss';
+  @import '../../../styles/neuvector.scss';
 
   .vs__dropdown-menu {
       z-index: 1000 !important;

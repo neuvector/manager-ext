@@ -361,7 +361,8 @@
     };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../../styles/neuvector.scss';
 .flex-cell {
     display: flex;
     align-items: center;

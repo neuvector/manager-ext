@@ -47,7 +47,8 @@ export default {
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../../../styles/neuvector.scss';
 .impact-col {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 25%;

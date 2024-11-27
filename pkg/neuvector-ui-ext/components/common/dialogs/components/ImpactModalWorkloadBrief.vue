@@ -298,8 +298,10 @@ export default {
     </div>
 </template>
 
-<style lang="scss">
-.tooltip {
-  z-index: 1080;
-}
+
+<style lang="scss" scoped>
+    @import '../../../../styles/neuvector.scss';
+    .tooltip {
+    z-index: 1080;
+    }
 </style>

@@ -1,6 +1,8 @@
 <script>
+    import AsyncButton from '@shell/components/AsyncButton';
     export default {
         components: {
+            AsyncButton
         },
         props: {
             reloadData: Function
@@ -15,14 +17,15 @@
 
 <template>
     <div>
-        <a
-            mat-button
-            class="btn role-secondary mx-2"
-            aria-label="Refresh page data"
-            type="button"
+        <AsyncButton
+            ref="refresh"
+            class=" d-flex justify-content-center align-items-center"
+            :actionLabel="t('general.REFRESH')" 
+            :waitingLabel="t('general.REFRESHING')"  
+            :successLabel="t('general.REFRESH')" 
+            icon="icon-refresh" 
             @click="refresh()">
-            <i class="icon icon-lg icon-backup"></i>
             <span class="ml-1">{{ t('general.REFRESH') }}</span>
-        </a>
+        </AsyncButton>
     </div>
 </template>
