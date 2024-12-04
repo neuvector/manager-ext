@@ -50,6 +50,7 @@
 .badge {
     border-radius: 4px;
     color: white;
+    min-height: initial;
 }
 
 .badge-black {
