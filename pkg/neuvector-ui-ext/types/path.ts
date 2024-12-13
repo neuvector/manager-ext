@@ -77,9 +77,9 @@ export const PATH = {
     RESPONSE_RULE_URL: 'responseRule', //policy
     GROUP_LIST_URL: 'group-list', //policy
     AUDIT_URL: 'audit', //events
-    DASHBOARD_SCORES_URL: 'dashboard/scores2', //dashboard
+    DASHBOARD_SCORES_URL: 'dashboard/scores', //dashboard
     DASHBOARD_DETAILS_URL: 'dashboard/details', //dashboard
-    DASHBOARD_NOTIFICATIONS_URL: 'dashboard/notifications2', //dashboard
+    DASHBOARD_NOTIFICATIONS_URL: 'dashboard/notifications', //dashboard
     SECURITY_EVENTS_URL_2: 'security-events2', //events
     ADMISSION_URL: 'admission/rules', //policy
     ADMISSION_SINGLE_URL: 'admission/rule', //policy
