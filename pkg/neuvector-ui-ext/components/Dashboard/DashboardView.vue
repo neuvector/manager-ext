@@ -130,7 +130,7 @@ export default {
             comment: this.scoreInfo.metrics.groups.protect_groups_zero_drift
           },
         ],
-        subScore: 'height: 33%',
+        subScore: `height: ${95 - this.scoreInfo.security_scores.service_mode_score_by_100}%`,
         isFactorError: false,
       }
     },
@@ -151,7 +151,7 @@ export default {
             amount: this.scoreInfo.metrics.workloads.violate_ext_eps
           },
         ],
-        subScore: 'height: 81%',
+        subScore: `height: ${95 - this.scoreInfo.security_scores.exposure_score_by_100}%`,
         isFactorError: false,
       }
     },
@@ -176,7 +176,7 @@ export default {
           `${this.t('dashboard.heading.CVE_DB_VERSION')}: ${this.summaryInfo.cvedb_version}`,
           `(${dayjs(this.summaryInfo.cvedb_create_time).format('MMM DD, YYYY')})`
         ],
-        subScore: 'height: 11%',
+        subScore: `height: ${95 - this.scoreInfo.security_scores.vulnerability_score_by_100}%`,
         isFactorError: false,
       }
     },
