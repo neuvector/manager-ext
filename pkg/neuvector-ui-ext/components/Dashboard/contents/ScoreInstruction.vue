@@ -1,12 +1,12 @@
 <template>
-   <span v-if="scoreLevel === 'good'">
+   <span v-if="scoreLevel === t('dashboard.body.panel_title.policy_evaluation.GOOD')">
         <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD1') }}</span>
         <span class="text-bold text-success">{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD') }}</span>
         <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD2') }}</span>
    </span>
    <span v-else>
         <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_NOT_GOOD1') }}</span>
-        <span :class="scoreLevel === 'poor' ? 'text-bold nv-text-danger' : 'text-bold nv-text-warning'">{{ scoreLevel === 'poor' ? t('dashboard.heading.guideline.MAIN_SCORE_POOR') : t('dashboard.heading.guideline.MAIN_SCORE_FAIR')}}</span>
+        <span :class="scoreLevel === t('dashboard.body.panel_title.policy_evaluation.POOR') ? 'text-bold nv-text-danger' : 'text-bold nv-text-warning'">{{ scoreLevel === t('dashboard.body.panel_title.policy_evaluation.POOR') ? t('dashboard.heading.guideline.MAIN_SCORE_POOR') : t('dashboard.heading.guideline.MAIN_SCORE_FAIR')}}</span>
         <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_NOT_GOOD2') }}</span>
    </span>
 </template>
