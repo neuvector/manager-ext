@@ -2,7 +2,7 @@
     <div>
       <p>
         <small
-          ><center><span :style="{ 'color': scoreLevel.gaugeLabelColor }">{{ scoreLevel.gaugeLabel }}</span> ({{ scoreInfo.score.securityRiskScore }})</center></small
+          ><center><span :style="{ 'color': scoreLevel.gaugeLabelColor }">{{ scoreLevel.gaugeLabel }}</span> ({{ scoreInfo.security_scores.security_risk_score }})</center></small
         >
       </p>
       <vue-gauge
@@ -16,8 +16,8 @@
             <td>{{ t("dashboard.heading.PODS") }}</td>
         </tr>
         <tr class="text-center dashboard-summary-value">
-            <td>{{ scoreInfo.header_data.hosts }}</td>
-            <td>{{ scoreInfo.header_data.workloads.running_pods }}</td>
+            <td>{{ scoreInfo.metrics.hosts }}</td>
+            <td>{{ scoreInfo.metrics.workloads.running_pods }}</td>
         </tr>
       </table>
     </div>
@@ -35,7 +35,7 @@
     },
     computed: {
       scoreLevel: function() {
-        let value = this.scoreInfo.score.securityRiskScore;
+        let value = this.scoreInfo.security_scores.security_risk_score;
         let gaugeLabel = '';
         let gaugeLabelColor = '';
         if (value <= NV_CONST.SCORE_LEVEL.GOOD) {
@@ -64,7 +64,7 @@
       return {
         myOptions: {
           chartWidth: 150,
-          needleValue: this.scoreInfo.score.securityRiskScore,
+          needleValue: this.scoreInfo.security_scores.security_risk_score,
           needleColor: this.rancherTheme === RANCHER_CONST.THEME.LIGHT ? 'black' : 'white',
           arcDelimiters: [20, 50],
           arcColors: ["rgb(255,84,84)", "rgb(239,214,19)", "rgb(61,204,91)"],

@@ -111,21 +111,21 @@ export default {
         factors: [
           {
             category: this.t('enum.DISCOVER'),
-            amount: this.scoreInfo.header_data.groups.discover_groups,
+            amount: this.scoreInfo.metrics.groups.discover_groups,
             type: this.t('enum.ZERODRIFT_TYPE'),
-            comment: this.scoreInfo.header_data.groups.discover_groups_zero_drift
+            comment: this.scoreInfo.metrics.groups.discover_groups_zero_drift
           },
           {
             category: this.t('enum.MONITOR'),
-            amount: this.scoreInfo.header_data.groups.monitor_groups,
+            amount: this.scoreInfo.metrics.groups.monitor_groups,
             type: this.t('enum.ZERODRIFT_TYPE'),
-            comment: this.scoreInfo.header_data.groups.monitor_groups_zero_drift
+            comment: this.scoreInfo.metrics.groups.monitor_groups_zero_drift
           },
           {
             category: this.t('enum.PROTECT'),
-            amount: this.scoreInfo.header_data.groups.protect_groups,
+            amount: this.scoreInfo.metrics.groups.protect_groups,
             type: this.t('enum.ZERODRIFT_TYPE'),
-            comment: this.scoreInfo.header_data.groups.protect_groups_zero_drift
+            comment: this.scoreInfo.metrics.groups.protect_groups_zero_drift
           },
         ],
         subScore: 'height: 33%',
@@ -138,15 +138,15 @@ export default {
         factors: [
           {
             category: this.t('enum.DISCOVER'),
-            amount: this.scoreInfo.header_data.workloads.discover_ext_eps
+            amount: this.scoreInfo.metrics.workloads.discover_ext_eps
           },
           {
             category: this.t('dashboard.heading.THREATS'),
-            amount: this.scoreInfo.header_data.workloads.threat_ext_eps
+            amount: this.scoreInfo.metrics.workloads.threat_ext_eps
           },
           {
             category: this.t('dashboard.heading.VIOLATIONS'),
-            amount: this.scoreInfo.header_data.workloads.violate_ext_eps
+            amount: this.scoreInfo.metrics.workloads.violate_ext_eps
           },
         ],
         subScore: 'height: 81%',
@@ -159,15 +159,15 @@ export default {
         factors: [
           {
             category: this.t('enum.DISCOVER'),
-            amount: this.scoreInfo.header_data.cves.discover_cves
+            amount: this.scoreInfo.metrics.cves.discover_cves
           },
           {
             category: this.t('enum.MONITOR'),
-            amount: this.scoreInfo.header_data.cves.monitor_cves
+            amount: this.scoreInfo.metrics.cves.monitor_cves
           },
           {
             category: this.t('enum.PROTECT'),
-            amount: this.scoreInfo.header_data.cves.protect_cves
+            amount: this.scoreInfo.metrics.cves.protect_cves
           },
         ],
         factorComment: [
@@ -287,7 +287,7 @@ export default {
       <div v-if="scoreInfo">
         <div class="get-started" style="margin-bottom: 15px;">
           <ScoreGauge :rancherTheme="rancherTheme" :scoreInfo="scoreInfo"/>
-          <ScoreFactorCommentSlider v-if="detailsInfo && currentCluster" :rancherTheme="rancherTheme" :token="token" :ns="ns" :score="scoreInfo.score.securityRiskScore" :autoScan="detailsInfo.autoScanConfig" :currentClusterId="currentCluster.id" class="m-0"/>
+          <ScoreFactorCommentSlider v-if="detailsInfo && currentCluster" :rancherTheme="rancherTheme" :token="token" :ns="ns" :score="scoreInfo.security_scores.security_risk_score" :autoScan="detailsInfo.autoScanConfig" :currentClusterId="currentCluster.id" class="m-0"/>
           <!-- <DashboardReportSection /> -->
           <SSOMenu v-if="this.currentCluster" :ns="ns" :ssoLink="ssoLink"/>
         </div>
@@ -401,7 +401,7 @@ export default {
                   instructionId="policy-mode-services"
                 />
               </div>
-              <PieChart4PolicyModeOfServices v-if="detailsInfo && scoreInfo" :serviceMode="detailsInfo.services" :groupInfo="scoreInfo.header_data.groups"/>
+              <PieChart4PolicyModeOfServices v-if="detailsInfo && scoreInfo" :serviceMode="detailsInfo.services" :groupInfo="scoreInfo.metrics.groups"/>
               <PolicyModeOfServices />
             </div>
           </div>
