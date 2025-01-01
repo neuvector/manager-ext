@@ -209,3 +209,12 @@ export default {
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+    @import '../../../styles/neuvector.scss';
+</style>
+<style lang="scss">
+    .vs__dropdown-menu {
+        z-index: 1000 !important;
+    }
+</style>
