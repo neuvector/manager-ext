@@ -26,7 +26,7 @@ import dayjs from 'dayjs';
 import { getAuth, getScoreInfo, getNotifications, getDashboardDetails, getSummary } from '../../plugins/dashboard-class';
 import { getSSOUrl } from '../../utils/common';
 import { nvVariables } from '../../types/neuvector';
-import { Banner } from '@components/Banner';
+import Error from '../common/error/Error';
 
 export default {
   name: 'Dashboard',
@@ -54,7 +54,7 @@ export default {
     Tabbed,
     Tab,
     VulnerabilitiesInstruction,
-    Banner,
+    Error,
   },
 
   mixins: [],
@@ -82,9 +82,8 @@ export default {
       this.detailsInfo = dashboardDetailsRes.data;
       this.summaryInfo = summaryRes.data.summary;
     } catch(error) {
-      if (error.response.status === 401 || error.response.status === 408) {
-        this.isAuthErr = true;
-      }
+      console.log(error)
+      this.errorRes = error;
     }
   },
 
@@ -94,7 +93,7 @@ export default {
       notificationInfo: null,
       detailsInfo: null,
       summaryInfo: null,
-      isAuthErr: false,
+      errorRes: null,
       token: null,
       isRefreshed: false,
       currentCluster: null
@@ -263,19 +262,8 @@ export default {
 
 <template>
   <Loading v-if="$fetchState.pending" />
-  <div v-else-if="isAuthErr" :rancherTheme="rancherTheme" class="container">
-    <div class="title p-10">
-      <h1 class="mb-20" data-testid="nv-auth-error">
-        {{ t('neuvector.dashboard.error.auth') }}
-      </h1>
-      <div class="chart-route">
-        <Banner color="warning">
-          <button class="ml-10 btn role-primary" @click="$fetch">
-            {{ t('generic.reload') }}
-          </button>
-        </Banner>
-      </div>
-    </div>
+  <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+    <Error :error="errorRes"></Error>
   </div>
   <div v-else class="dashboard">
     <DashboardReport/>
