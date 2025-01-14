@@ -17,6 +17,7 @@
     import { getCsvData, preprocessCompliance } from '../../utils/compliance';
     import { saveAs } from 'file-saver';
     import dayjs from 'dayjs';
+    import Error from '../common/error/Error';
 
     export default {
         components: {
@@ -29,7 +30,8 @@
             TopImpactComplianceContainerBarChart,
             ComplianceItemsTable,
             ComplianceItemsDetail,
-            ComplianceItemsChart
+            ComplianceItemsChart,
+            Error
         },
         async fetch() {
             if ( this.$store.getters['cluster/canList'](SERVICE) ) {
@@ -70,6 +72,7 @@
                 complianceData: Object,
                 domains: Array,
                 availableFilters: null,
+                errorRes: null,
             };
         },
         methods: {
@@ -111,6 +114,7 @@
                     console.log(this.domains, this.complianceData, this.complianceDist);
                 } catch(error) {
                     console.error(error);
+                    this.errorRes = error;
                 }
             },
             makeComplianceDist(compliances) {
@@ -172,6 +176,9 @@
 
 <template>
     <Loading v-if="$fetchState.pending" />
+    <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+        <Error :error="errorRes"></Error>
+    </div>
     <div v-else class="compliance">
         <div class="screen-area">
             <div id="bench" class="padding-top-0">

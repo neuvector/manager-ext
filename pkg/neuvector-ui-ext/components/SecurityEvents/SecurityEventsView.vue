@@ -22,6 +22,7 @@
     import DownloadCsv from  './buttons/DownloadCsv';
     import Refresh from '../common/buttons/Refresh';
     import Loading from '@shell/components/Loading';
+    import Error from '../common/error/Error';
 
     // library.add(faSomeIcon);
 
@@ -41,7 +42,8 @@
             EnforcerInfo,
             DownloadCsv,
             Refresh,
-            Loading
+            Loading,
+            Error,
         },
         async fetch() {
             if ( this.$store.getters['cluster/canList'](SERVICE) ) {
@@ -72,7 +74,8 @@
                 workload: null,
                 showEnforcerInfoModal: null,
                 enforcer: null,
-                showAdvFilterModal: null
+                showAdvFilterModal: null,
+                errorRes: null,
             };
         },
         props: {
@@ -102,6 +105,7 @@
                     filterSecEvents();
                 } catch(error) {
                     console.error(error);
+                    this.errorRes = error;
                 }
             },
             getOpenedRec: function(evt, index, page) {
@@ -201,6 +205,9 @@
 
 <template>
     <Loading v-if="$fetchState.pending" />
+    <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+        <Error :error="errorRes"></Error>
+    </div>
     <div v-else class="screen-area">
         <div id="sec-event" class="padding-top-0">
             <header style="margin-bottom: 10px;" id="security-events-title">
