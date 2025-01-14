@@ -16,6 +16,7 @@
     import { refreshAuth } from '../../plugins/neuvector-class'; 
     import { initVulQuery } from '../../utils/vulnerabilities';
     import FileExportModal from './dialogs/FileExportModal.vue';
+    import Error from '../common/error/Error';
 
     export default {
         components: {
@@ -31,6 +32,7 @@
             VulnerabilityItemsDetail,
             AdvancedFilterModal,
             FileExportModal,
+            Error,
         },
         async fetch() {
             if ( this.$store.getters['cluster/canList'](SERVICE) ) {
@@ -52,6 +54,7 @@
                 console.log(this.domains, this.vulQueryData);
             } catch(error) {
                 console.error(error);
+                this.errorRes = error;
             }
         },
         props: {
@@ -75,7 +78,8 @@
                 pieChartActive: false,
                 selectedVul: null,
                 vulQueryData: Object,
-                domains: Array
+                domains: Array,
+                errorRes: null,
             };
         },
         methods: {
@@ -128,6 +132,9 @@
 
 <template>
     <Loading v-if="$fetchState.pending" />
+    <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+        <Error :error="errorRes"></Error>
+    </div>
     <div v-else class="vulnerabilities">
         <div class="screen-area">
             <div id="scan" class="padding-top-0">
