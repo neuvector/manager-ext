@@ -43,6 +43,7 @@
     "vue-chart-3": "3.1.8",
     "vue-chartjs": "4.0.0",
     "vue-concise-slider": "3.3.6",
+    "vue-country-flag-next": "^2.3.2",
     "vue-datepicker-next": "^1.0.3",
     "vue-gauge": "1.0.3",
     "vue3-carousel": "^0.8.1"

@@ -43,7 +43,9 @@
           {
             headerName: this.t('dashboard.body.panel_title.EXTERNAL_HOST'),
             field: 'ip',
-            tooltipField: 'ip',
+            tooltipValueGetter: (params) => {
+              return `${params.data.country_name}: ${params.value}`;
+            },
             cellRenderer: 'ExposureChildHostCellComponent',
             width: 280,
             minWidth: 280,
