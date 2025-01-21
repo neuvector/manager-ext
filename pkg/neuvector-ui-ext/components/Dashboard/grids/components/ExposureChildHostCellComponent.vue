@@ -1,31 +1,24 @@
 <!-- CustomCell.vue -->
 <template>
   <div>
-    <img
-        v-if="params.data.country_code !== '-'"
-        :src="imgSrc"
-        width="16px" height="12px;"
-        class="mr-2"
-        style="margin-top: -3px;" />
-    <a :href="'https://www.whois.com/whois/' + params.data.ip" target="_blank">
-      <span v-if="params.data.fqdn">
-        <span>{{ params.data.fqdn }}</span>
-      </span>
-      <span v-else>{{ params.data.ip }}</span>
-    </a>
+    <FlagIpFqdn
+      :ip="params.data.ip"
+      :countryCode="params.data.country_code"
+      :countryName="params.data.country_name"
+      :fqdn="params.data.fqdn || ''"
+      :isTooltipVisible="false"
+    >
+    </FlagIpFqdn>
   </div>
 </template>
 
 <script>
 
 
+import FlagIpFqdn from '../../../common/contents/FlagIpFqdn';
 export default {
   components: {
-  },
-  computed: {
-    imgSrc() {
-      return require('../../../../assets/img/country-flag/' + this.params.data.country_code.toLowerCase() + '.svg');
-    }
+    FlagIpFqdn,
   },
   methods: {
     refresh(params) {
