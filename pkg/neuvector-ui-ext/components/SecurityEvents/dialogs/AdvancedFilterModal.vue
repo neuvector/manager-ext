@@ -2,8 +2,7 @@
     import Checkbox from '@components/Form/Checkbox/Checkbox';
     import LabeledSelect from '@shell/components/form/LabeledSelect';
     import { LabeledInput } from '@components/Form/LabeledInput';
-    import { parseAdvFilterParam, filterSecEvents, loadFilters } from '../../../utils/security-events';
-    import { nvVariables } from '../../../types/neuvector';
+    import { parseAdvFilterParam, filterSecEvents, loadFilters, secEventVar } from '../../../utils/security-events';
 
     export default {
         components: {
@@ -29,8 +28,8 @@
           update() {},
           reset() {
             this.filters = {
-              dateFrom: nvVariables.securityEventsServiceData.filterItems.dateFrom,
-              dateTo: nvVariables.securityEventsServiceData.filterItems.dateTo,
+              dateFrom: secEventVar.securityEventsServiceData.value.filterItems.dateFrom,
+              dateTo: secEventVar.securityEventsServiceData.value.filterItems.dateTo,
               severity: {
                 error: false,
                 critical: false,
@@ -64,8 +63,8 @@
             this.showSlideIn = false;
           },
           apply() {
-            this.filters.dateFrom = nvVariables.securityEventsServiceData.filterItems.dateFrom;
-            this.filters.dateTo = nvVariables.securityEventsServiceData.filterItems.dateTo;
+            this.filters.dateFrom = secEventVar.securityEventsServiceData.value.filterItems.dateFrom;
+            this.filters.dateTo = secEventVar.securityEventsServiceData.value.filterItems.dateTo;
             let filterParam = parseAdvFilterParam(this.filters);
             loadFilters(filterParam);
             filterSecEvents();
@@ -78,30 +77,30 @@
               dateFrom: 0,
               dateTo: 0,
               severity: {
-                error: nvVariables.securityEventsServiceData.filterItems.severity.includes('error'),
-                critical: nvVariables.securityEventsServiceData.filterItems.severity.includes('critical'),
-                warning: nvVariables.securityEventsServiceData.filterItems.severity.includes('warning'),
-                info: nvVariables.securityEventsServiceData.filterItems.severity.includes('info'),
+                error: secEventVar.securityEventsServiceData.value.filterItems.severity.includes('error'),
+                critical: secEventVar.securityEventsServiceData.value.filterItems.severity.includes('critical'),
+                warning: secEventVar.securityEventsServiceData.value.filterItems.severity.includes('warning'),
+                info: secEventVar.securityEventsServiceData.value.filterItems.severity.includes('info'),
               },
               location: {
-                host: nvVariables.securityEventsServiceData.filterItems.location.includes('host'),
-                container: nvVariables.securityEventsServiceData.filterItems.location.includes('container'),
+                host: secEventVar.securityEventsServiceData.value.filterItems.location.includes('host'),
+                container: secEventVar.securityEventsServiceData.value.filterItems.location.includes('container'),
               },
               category: {
-                network: nvVariables.securityEventsServiceData.filterItems.category.includes('network'),
-                package: nvVariables.securityEventsServiceData.filterItems.category.includes('package'),
-                file: nvVariables.securityEventsServiceData.filterItems.category.includes('file'),
-                tunnel: nvVariables.securityEventsServiceData.filterItems.category.includes('tunnel'),
-                process: nvVariables.securityEventsServiceData.filterItems.category.includes('process'),
-                priviledge: nvVariables.securityEventsServiceData.filterItems.category.includes('priviledge'),
+                network: secEventVar.securityEventsServiceData.value.filterItems.category.includes('network'),
+                package: secEventVar.securityEventsServiceData.value.filterItems.category.includes('package'),
+                file: secEventVar.securityEventsServiceData.value.filterItems.category.includes('file'),
+                tunnel: secEventVar.securityEventsServiceData.value.filterItems.category.includes('tunnel'),
+                process: secEventVar.securityEventsServiceData.value.filterItems.category.includes('process'),
+                priviledge: secEventVar.securityEventsServiceData.value.filterItems.category.includes('priviledge'),
               },
-              other: nvVariables.securityEventsServiceData.filterItems.other.length > 0,
-              host: nvVariables.securityEventsServiceData.filterItems.host,
-              source: nvVariables.securityEventsServiceData.filterItems.source,
-              destination: nvVariables.securityEventsServiceData.filterItems.destination,
-              domains: nvVariables.securityEventsServiceData.filterItems.selectedDomains,
-              includedKeyword: nvVariables.securityEventsServiceData.filterItems.includedKeyword,
-              excludedKeyword: nvVariables.securityEventsServiceData.filterItems.excludedKeyword
+              other: secEventVar.securityEventsServiceData.value.filterItems.other.length > 0,
+              host: secEventVar.securityEventsServiceData.value.filterItems.host,
+              source: secEventVar.securityEventsServiceData.value.filterItems.source,
+              destination: secEventVar.securityEventsServiceData.value.filterItems.destination,
+              domains: secEventVar.securityEventsServiceData.value.filterItems.selectedDomains,
+              includedKeyword: secEventVar.securityEventsServiceData.value.filterItems.includedKeyword,
+              excludedKeyword: secEventVar.securityEventsServiceData.value.filterItems.excludedKeyword
             },
             showSlideIn: false
           }

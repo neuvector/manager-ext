@@ -2,7 +2,7 @@
     import QuickFilter from './quickFilter/QuickFilter';
     import AdvancedFilter from './buttons/AdvancedFilter.vue';
     import { getSecEvents } from '../../plugins/security-events-class';
-    import { combineSecurityEvents } from '../../utils/security-events';
+    import { combineSecurityEvents, secEventVar } from '../../utils/security-events';
     import { SERVICE } from '@shell/config/types';
     import { nvVariables, NV_CONST, RANCHER_CONST } from '../../types/neuvector';
     import { refreshAuth } from '../../plugins/neuvector-class'; 
@@ -89,7 +89,7 @@
                     this.secEvents = await getSecEvents();
                     this.processedSecEvents = await combineSecurityEvents(this.secEvents, this.$store);
                     console.log('processedSecEvents:', this.processedSecEvents);
-                    this.securityEventsDataCtx = nvVariables.dateSliderCtx;
+                    this.securityEventsDataCtx = secEventVar.dateSliderCtx.value;
                     prepareContext4TwoWayInfinityScroll(this.securityEventsDataCtx);
                     console.log('this.securityEventsDataCtx', this.securityEventsDataCtx)
                     this.showPacketModal = nvVariables.showPacketModal;

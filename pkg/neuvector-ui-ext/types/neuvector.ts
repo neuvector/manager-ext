@@ -847,38 +847,10 @@ export const nvVariables = {
   authToken: '',
   user: {} as any,
   isRemote: false,
-  dateSliderCtx: {
-    page: 0,
-    begin: 0,
-    openedIndex: 0,
-    openedPage: 0,
-    limit: 0,
-    array: [] as any[]
-  },
   complianceData: {
     workloadMap: new Map(),
     filteredCis: [] as any[],
     advFilter: null,
-  },
-  securityEventsServiceData: {
-    cachedSecurityEvents: [] as any[],
-    displayedSecurityEvents: [] as any[],
-    domainList: [] as any[],
-    autoCompleteData: {} as any,
-    filterItems: {
-      dateFrom:  0,
-      dateTo:  0,
-      severity:  [] as any[],
-      location:  [] as any[],
-      category:  [] as any[],
-      other: [] as any[],
-      host: '',
-      source: '',
-      destination: '',
-      selectedDomains: [] as any[],
-      includedKeyword: '',
-      excludedKeyword: ''
-    }
   },
   isLightTheme: true,
   showPacketModal: {
