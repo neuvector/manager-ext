@@ -1,6 +1,5 @@
 <script>
-    import { filterSecEvents } from '../../../utils/security-events';
-    import { nvVariables } from '../../../types/neuvector';
+    import { filterSecEvents, secEventVar } from '../../../utils/security-events';
     export default {
         components: {
         },
@@ -13,7 +12,7 @@
         },
         methods: {
             filterByQuickFilter: function(e, filterText) {
-                nvVariables.securityEventsServiceData.filterItems.includedKeyword = filterText;
+                secEventVar.securityEventsServiceData.value.filterItems.includedKeyword = filterText;
                 filterSecEvents();
             }
         }

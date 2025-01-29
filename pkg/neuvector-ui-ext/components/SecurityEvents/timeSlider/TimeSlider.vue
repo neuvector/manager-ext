@@ -2,8 +2,7 @@
     import MultiRangeSlider from 'multi-range-slider-vue';
     import dayjs from 'dayjs';
     import { debounced } from '../../../utils/common';
-    import { filterSecEvents } from '../../../utils/security-events';
-    import { nvVariables } from '../../../types/neuvector';
+    import { filterSecEvents, secEventVar } from '../../../utils/security-events';
 
     export default {
         components: {
@@ -24,8 +23,8 @@
         methods: {
             UpdateValues(e) {
                 const filterSecEventsByTime = () => {
-                    nvVariables.securityEventsServiceData.filterItems.dateFrom = e.minValue;
-                    nvVariables.securityEventsServiceData.filterItems.dateTo = e.maxValue;
+                    secEventVar.securityEventsServiceData.value.filterItems.dateFrom = e.minValue;
+                    secEventVar.securityEventsServiceData.value.filterItems.dateTo = e.maxValue;
                     filterSecEvents();
                 };
                 debounced(200, filterSecEventsByTime);
@@ -62,7 +61,7 @@
             :maxValue="barMaxValue"
             :min-caption="dateMinCaption"
             :max-caption="dateMaxCaption"
-            @update:value="UpdateValues"
+            @input="UpdateValues"
         />
     </div>
 </template>

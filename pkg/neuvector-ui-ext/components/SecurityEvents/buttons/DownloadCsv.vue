@@ -1,7 +1,6 @@
 <script>
-    import { nvVariables } from '../../../types/neuvector';
     import { arrayToCsv } from '../../../utils/common';
-    import { getCsvData } from '../../../utils/security-events';
+    import { getCsvData, secEventVar } from '../../../utils/security-events';
     import { saveAs } from 'file-saver';
     import dayjs from 'dayjs';
     export default {
@@ -67,9 +66,9 @@
         },
         methods: {
             exportCSV: function() {
-                console.log("raw data:", nvVariables.securityEventsServiceData.displayedSecurityEvents);
+                console.log("raw data:", secEventVar.securityEventsServiceData.value.displayedSecurityEvents);
                 let csvData = getCsvData(
-                    nvVariables.securityEventsServiceData.displayedSecurityEvents,
+                    secEventVar.securityEventsServiceData.value.displayedSecurityEvents,
                     this.metadata
                 );
                 let csv = arrayToCsv(JSON.parse(JSON.stringify(csvData)));

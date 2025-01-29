@@ -1,9 +1,10 @@
-import { NV_MAP, NV_CONST, nvVariables, FilterOptions } from '../types/neuvector';
+import { NV_MAP, NV_CONST } from '../types/neuvector';
 import { getIpInfo } from '../plugins/dashboard-class';
 import { getDisplayName, isIpV4, isIpV6, getI18Name } from '../utils/common';
 import { getRowBasedPermission } from '../utils/auth';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { ref } from 'vue';
 
 dayjs.extend(relativeTime);
 
@@ -34,6 +35,38 @@ const LABELS = {
     PACKAGE: 'package',
     OTHER: 'other'
 };
+
+export const secEventVar = {
+  securityEventsServiceData: ref({
+    cachedSecurityEvents: [] as any[],
+    displayedSecurityEvents: [] as any[],
+    domainList: [] as any[],
+    autoCompleteData: {} as any,
+    filterItems: {
+      dateFrom:  0,
+      dateTo:  0,
+      severity:  [] as any[],
+      location:  [] as any[],
+      category:  [] as any[],
+      other: [] as any[],
+      host: '',
+      source: '',
+      destination: '',
+      selectedDomains: [] as any[],
+      includedKeyword: '',
+      excludedKeyword: ''
+    }
+  }),
+  dateSliderCtx: ref({
+    page: 0,
+    begin: 0,
+    openedIndex: 0,
+    openedPage: 0,
+    limit: 0,
+    array: [] as any[]
+  }),
+};
+
 
 type FilterTypes = 'TimeFIlter' | 'QuickFilter' | 'AdvancedFIlter';
 
@@ -183,12 +216,12 @@ export async function combineSecurityEvents(securityEventsData: any, store: any,
         // this.onQuickFilterChange(this.filter.value);
         // this.isDataReady = true;
 
-        nvVariables.securityEventsServiceData.cachedSecurityEvents = cachedSecurityEvents;
-        nvVariables.securityEventsServiceData.displayedSecurityEvents = displayedSecurityEvents;
-        nvVariables.securityEventsServiceData.domainList = domainList;
-        nvVariables.securityEventsServiceData.autoCompleteData = autoCompleteData;
+        secEventVar.securityEventsServiceData.value.cachedSecurityEvents = cachedSecurityEvents;
+        secEventVar.securityEventsServiceData.value.displayedSecurityEvents = displayedSecurityEvents;
+        secEventVar.securityEventsServiceData.value.domainList = domainList;
+        secEventVar.securityEventsServiceData.value.autoCompleteData = autoCompleteData;
 
-        return nvVariables.securityEventsServiceData;
+        return secEventVar.securityEventsServiceData;
 
     } catch(error) {
         console.error(error);
@@ -1069,43 +1102,43 @@ const getReviewRulePermission = function(sourceDomain: string, destinationDomain
 };
 
 export const prepareContext4TwoWayInfinityScroll = function(context: any = null) {
-  console.log('securityEventsService.displayedSecurityEvents',  nvVariables.securityEventsServiceData.displayedSecurityEvents);
-  nvVariables.dateSliderCtx.page = context?.page || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.page;
-  nvVariables.dateSliderCtx.begin = context?.begin || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.begin;
-  nvVariables.dateSliderCtx.openedIndex = context?.openedIndex || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.openedIndex;
-  nvVariables.dateSliderCtx.openedPage = context?.openedPage || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.openedPage;
-  nvVariables.dateSliderCtx.limit = context?.limit || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.limit;
-  nvVariables.dateSliderCtx.array = nvVariables.securityEventsServiceData.displayedSecurityEvents;
-  console.log("nvVariables.dateSliderCtx", nvVariables.dateSliderCtx);
+  console.log('securityEventsService.displayedSecurityEvents',  secEventVar.securityEventsServiceData.value.displayedSecurityEvents);
+  secEventVar.dateSliderCtx.value.page = context?.page || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.page;
+  secEventVar.dateSliderCtx.value.begin = context?.begin || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.begin;
+  secEventVar.dateSliderCtx.value.openedIndex = context?.openedIndex || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.openedIndex;
+  secEventVar.dateSliderCtx.value.openedPage = context?.openedPage || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.openedPage;
+  secEventVar.dateSliderCtx.value.limit = context?.limit || NV_CONST.TWO_WAY_INFINITE_SCROLL_ARG.limit;
+  secEventVar.dateSliderCtx.value.array = secEventVar.securityEventsServiceData.value.displayedSecurityEvents;
+  console.log("secEventVar.dateSliderCtx.value", secEventVar.dateSliderCtx.value);
 };
 
 export const filterSecEvents = function(): void {
 
-  console.log('Filter', nvVariables.securityEventsServiceData.filterItems);
+  console.log('Filter', secEventVar.securityEventsServiceData.value.filterItems);
 
-  nvVariables.securityEventsServiceData.displayedSecurityEvents = nvVariables.securityEventsServiceData.cachedSecurityEvents.filter(event => {
+  secEventVar.securityEventsServiceData.value.displayedSecurityEvents = secEventVar.securityEventsServiceData.value.cachedSecurityEvents.filter(event => {
     return (
-      _dateFilter(nvVariables.securityEventsServiceData.filterItems.dateFrom, nvVariables.securityEventsServiceData.filterItems.dateTo, event.reportedTimestamp) && 
-      _severityFilter(event.details.level.name, nvVariables.securityEventsServiceData.filterItems.severity) &&
-      _locationFilter(event.details.labels, nvVariables.securityEventsServiceData.filterItems.location) &&
-      _categoryFilter(event.details.labels, nvVariables.securityEventsServiceData.filterItems.category) &&
-      _otherFilter(event.details.labels, nvVariables.securityEventsServiceData.filterItems.other) &&
+      _dateFilter(secEventVar.securityEventsServiceData.value.filterItems.dateFrom, secEventVar.securityEventsServiceData.value.filterItems.dateTo, event.reportedTimestamp) && 
+      _severityFilter(event.details.level.name, secEventVar.securityEventsServiceData.value.filterItems.severity) &&
+      _locationFilter(event.details.labels, secEventVar.securityEventsServiceData.value.filterItems.location) &&
+      _categoryFilter(event.details.labels, secEventVar.securityEventsServiceData.value.filterItems.category) &&
+      _otherFilter(event.details.labels, secEventVar.securityEventsServiceData.value.filterItems.other) &&
       _sourceFilter(
         event.endpoint.source.displayName,
-        nvVariables.securityEventsServiceData.filterItems.source
+        secEventVar.securityEventsServiceData.value.filterItems.source
       ) &&
       _destinationFilter(
         event.endpoint.destination.displayName,
-        nvVariables.securityEventsServiceData.filterItems.destination
+        secEventVar.securityEventsServiceData.value.filterItems.destination
       ) &&
-      _nodeFilter(event.host_name, nvVariables.securityEventsServiceData.filterItems.host) &&
+      _nodeFilter(event.host_name, secEventVar.securityEventsServiceData.value.filterItems.host) &&
       _domainFilter(
         event.endpoint.source.domain,
         event.endpoint.destination.domain,
-        nvVariables.securityEventsServiceData.filterItems.selectedDomains
+        secEventVar.securityEventsServiceData.value.filterItems.selectedDomains
       ) &&
-      _includeFilter(event, nvVariables.securityEventsServiceData.filterItems.includedKeyword) &&
-      _excludeFilter(event, nvVariables.securityEventsServiceData.filterItems.excludedKeyword)
+      _includeFilter(event, secEventVar.securityEventsServiceData.value.filterItems.includedKeyword) &&
+      _excludeFilter(event, secEventVar.securityEventsServiceData.value.filterItems.excludedKeyword)
     );
   });
   prepareContext4TwoWayInfinityScroll();
@@ -1134,19 +1167,19 @@ export const parseAdvFilterParam = function(filters: any) {
 };
 
 export const loadFilters = function(filters: any) {
-  nvVariables.securityEventsServiceData.filterItems.dateFrom = filters.dateFrom;
-  nvVariables.securityEventsServiceData.filterItems.dateTo = filters.dateTo;
-  nvVariables.securityEventsServiceData.filterItems.severity = filters.severity;
-  nvVariables.securityEventsServiceData.filterItems.location = filters.location;
-  nvVariables.securityEventsServiceData.filterItems.category = filters.category;
-  nvVariables.securityEventsServiceData.filterItems.other = filters.other;
-  nvVariables.securityEventsServiceData.filterItems.host = filters.host;
-  nvVariables.securityEventsServiceData.filterItems.source = filters.source;
-  nvVariables.securityEventsServiceData.filterItems.destination = filters.destination;
-  nvVariables.securityEventsServiceData.filterItems.selectedDomains = filters.selectedDomains;
-  nvVariables.securityEventsServiceData.filterItems.includedKeyword = filters.includedKeyword;
-  nvVariables.securityEventsServiceData.filterItems.excludedKeyword = filters.excludedKeyword;
-  console.log('nvVariables.securityEventsServiceData.filterItems', nvVariables.securityEventsServiceData.filterItems)
+  secEventVar.securityEventsServiceData.value.filterItems.dateFrom = filters.dateFrom;
+  secEventVar.securityEventsServiceData.value.filterItems.dateTo = filters.dateTo;
+  secEventVar.securityEventsServiceData.value.filterItems.severity = filters.severity;
+  secEventVar.securityEventsServiceData.value.filterItems.location = filters.location;
+  secEventVar.securityEventsServiceData.value.filterItems.category = filters.category;
+  secEventVar.securityEventsServiceData.value.filterItems.other = filters.other;
+  secEventVar.securityEventsServiceData.value.filterItems.host = filters.host;
+  secEventVar.securityEventsServiceData.value.filterItems.source = filters.source;
+  secEventVar.securityEventsServiceData.value.filterItems.destination = filters.destination;
+  secEventVar.securityEventsServiceData.value.filterItems.selectedDomains = filters.selectedDomains;
+  secEventVar.securityEventsServiceData.value.filterItems.includedKeyword = filters.includedKeyword;
+  secEventVar.securityEventsServiceData.value.filterItems.excludedKeyword = filters.excludedKeyword;
+  console.log('secEventVar.securityEventsServiceData.value.filterItems', secEventVar.securityEventsServiceData.value.filterItems)
 }
 
 const parseBooleanObject2TrueKeys = function(obj: any) {
