@@ -23,6 +23,7 @@
     import Refresh from '../common/buttons/Refresh';
     import Loading from '@shell/components/Loading';
     import Error from '../common/error/Error';
+    import TwoWayInfinityScroll from '../../directives/TwoWayInfinityScroll';
 
     // library.add(faSomeIcon);
 
@@ -149,53 +150,7 @@
             }
         },
         directives: {
-            'two-way-infinite-scroll': {
-                bind: function(el, binding, vnode) {
-                    console.log('binding.arg',binding.value, el, vnode);
-                    el.addEventListener('scroll', () => {
-                        scroll();
-                    });
-                    const scroll = () => {
-                        console.log('scrolling...')
-                        let a =el.scrollTop;
-                        let b =el.scrollHeight - el.clientHeight;
-
-                        let percentOfScroll = a / b;
-
-                        if (percentOfScroll > 0.9) {
-                        if (binding.value.array.length - binding.value.begin > binding.value.limit) {
-                            binding.value.begin += 9;
-                            binding.value.page++;
-                            console.log('page: ', binding.value.page)
-                            el.scrollTop -= 650;
-                            closeDetails();
-                        }
-                        } else if (percentOfScroll < 0.2 && percentOfScroll > 0) {
-                        if (binding.value.begin !== 0) {
-                            // console.log('binding.value.begin - 1');
-                            binding.value.begin -= 9;
-                            binding.value.page--;
-                            console.log('page: ', binding.value.page)
-                            el.scrollTop += 650;
-                            closeDetails();
-                        }
-                        } else if (percentOfScroll == 0) {
-                            binding.value.begin = 0;
-                        }
-                        let targetIndex =
-                            binding.value.openedIndex - 9 * (binding.value.page - binding.value.openedPage);
-                        if (targetIndex < 30 && targetIndex >= 0) {
-                            document.getElementById(`sec-${targetIndex}`)['checked'] = true;
-                        }
-                    };
-                    
-                    const closeDetails = () => {
-                        document.getElementsByName('secEvt').forEach((elem) => {
-                            elem.checked = false;
-                        });
-                    };
-                }
-            },
+            'two-way-infinity-scroll': TwoWayInfinityScroll,
             'tooltip': vTooltip
         }
     };
@@ -252,7 +207,7 @@
                 "
             :class="'timeline-nv' + (isLightTheme ? '' : '-dark') + ' normal'"
             style="margin-top: 12px"
-            v-two-way-infinite-scroll:ctx="securityEventsDataCtx"
+            v-two-way-infinity-scroll:ctx="securityEventsDataCtx"
         >
             <ul id="timeline">
                 <li
