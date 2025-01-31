@@ -17,11 +17,15 @@
                 barMinValue: this.securityEventsList[this.securityEventsList.length - 1].reportedTimestamp * 1000,
                 barMaxValue: new Date().getTime(),
                 minValue: this.securityEventsList[this.securityEventsList.length - 1].reportedTimestamp * 1000,
-                maxValue: new Date().getTime()
+                maxValue: new Date().getTime(),
+                startValue: 0,
+                endValue: 0,
             };
         },
         methods: {
             UpdateValues(e) {
+                this.startValue = e.minValue;
+                this.endValue = e.maxValue;
                 const filterSecEventsByTime = () => {
                     secEventVar.securityEventsServiceData.value.filterItems.dateFrom = e.minValue;
                     secEventVar.securityEventsServiceData.value.filterItems.dateTo = e.maxValue;
@@ -32,12 +36,21 @@
         },
         computed: {
             dateMinCaption() {
-                return Math.floor(this.barMinValue / 60000) === Math.floor(new Date().getTime() / 60000) ? this.t('general.NOW') : dayjs(this.barMinValue).format('MMM DD, YYYY');
+                return Math.floor(this.startValue / 60000) === Math.floor(new Date().getTime() / 60000) ? this.t('general.NOW') : dayjs(this.startValue).format('MMM DD, YYYY');
             },
             dateMaxCaption() {
-                return Math.floor(this.barMaxValue / 60000) === Math.floor(new Date().getTime() / 60000) ? this.t('general.NOW') : dayjs(this.barMaxValue).format('MMM DD, YYYY');
+                return Math.floor(this.endValue / 60000) === Math.floor(new Date().getTime() / 60000) ? this.t('general.NOW') : dayjs(this.endValue).format('MMM DD, YYYY');
             },
             dateLabels() {
+                // let labelSet = new Set();
+                // this.securityEventsList.forEach((event, index) => {
+                //     if (this.securityEventsList.length > index) {
+                //         labelSet.add(dayjs(event.reportedTimestamp * 1000).format('MMM DD, YYYY'));
+                //     } else {
+                //         labelSet.add(this.t('general.NOW'));
+                //     }
+                // });
+                // return Array.from(labelSet);
                 return [
                     dayjs(this.securityEventsList[this.securityEventsList.length - 1].reportedTimestamp * 1000).format('MMM DD, YYYY'),
                     this.t('general.NOW')
