@@ -62,21 +62,22 @@
                 );
             }
             console.log("securityEventsLineChartData", securityEventsLineChartData);
+            let nonZeroEventsCntList = securityEventsLineChartData.filter(eventCount => eventCount !== 0);
             const chartData = ref({
-                    labels: new Array(securityEventsLineChartData.length).fill(''),
-                    datasets: [
-                        {
-                            data: securityEventsLineChartData,
-                            pointRadius: 0,
-                            backgroundColor: 'rgba(61, 152, 211, 0.4)',
-                            borderColor: 'rgb(61, 152, 211)',
-                            hoverBackgroundColor: 'rgba(61, 152, 211, 0.4)',
-                            hoverBorderColor: 'rgb(61, 152, 211)',
-                            fill: true,
-                            tension: 0.2,
-                        },
-                    ]
-                });
+                labels: new Array(nonZeroEventsCntList.length).fill(''),
+                datasets: [
+                    {
+                        data: nonZeroEventsCntList,
+                        pointRadius: 0,
+                        backgroundColor: 'rgba(61, 152, 211, 0.4)',
+                        borderColor: 'rgb(61, 152, 211)',
+                        hoverBackgroundColor: 'rgba(61, 152, 211, 0.4)',
+                        hoverBorderColor: 'rgb(61, 152, 211)',
+                        fill: true,
+                        tension: 0.2,
+                    },
+                ]
+            });
 
             const chartOptions = ref({
                 animation: false,
