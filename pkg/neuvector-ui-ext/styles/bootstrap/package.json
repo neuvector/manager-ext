@@ -136,7 +136,7 @@
     "karma-firefox-launcher": "^2.1.2",
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^2.1.0",
-    "karma-rollup-preprocessor": "7.0.7",
+    "karma-rollup-preprocessor": "7.0.8",
     "lockfile-lint": "^4.13.1",
     "nodemon": "^3.0.3",
     "npm-run-all2": "^6.1.2",
