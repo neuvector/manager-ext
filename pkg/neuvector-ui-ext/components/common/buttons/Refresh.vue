@@ -8,8 +8,13 @@
             reloadData: Function
         },
         methods: {
-            refresh: async function() {
-                await this.reloadData();
+            refresh: async function(buttonCb) {
+                try {
+                    await this.reloadData();
+                    buttonCb(true);
+                } catch (err) {
+                    buttonCb(false);
+                }
             }
         }
     };
@@ -24,7 +29,7 @@
             :waitingLabel="t('general.REFRESHING')"  
             :successLabel="t('general.REFRESH')" 
             icon="icon-refresh" 
-            @click="refresh()">
+            @click="refresh">
             <span class="ml-1">{{ t('general.REFRESH') }}</span>
         </AsyncButton>
     </div>
