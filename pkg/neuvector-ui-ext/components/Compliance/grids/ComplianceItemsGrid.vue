@@ -338,7 +338,7 @@
                     compliance.filteredWorkloads = compliance.workloads;
                     return compliance;
                 });
-                if (this.gridApi) this.gridApi.applyTransaction({add: this.complianceData.compliances});
+                if (this.gridApi) this.gridApi.applyTransaction({update: this.complianceData.compliances});
             },
             filterText(newFilter, oldFilter) {
                 this.gridApi.setQuickFilter(newFilter);
