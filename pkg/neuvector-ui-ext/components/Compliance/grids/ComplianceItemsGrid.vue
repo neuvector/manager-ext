@@ -341,7 +341,10 @@
                 if (this.gridApi) this.gridApi.applyTransaction({update: this.complianceData.compliances});
             },
             filterText(newFilter, oldFilter) {
-                this.gridApi.setQuickFilter(newFilter);
+                this.gridApi.setGridOption(
+                    "quickFilterText",
+                    newFilter
+                );
                 const filteredCount = this.gridApi.getModel()['rootNode'].childrenAfterFilter.length;
                 this.$emit('setFilteredCount', filteredCount);
                 this.updateFiltered();
@@ -352,7 +355,7 @@
                     compliance.filteredWorkloads = compliance.workloads;
                     return compliance;
                 });
-                this.gridApi.onFilterChanged();
+                if (this.gridApi) this.gridApi.onFilterChanged();
                 const filteredCount = this.gridApi.getModel()['rootNode'].childrenAfterFilter.length;
                 this.$emit('setFilteredCount', filteredCount);
                 this.updateFiltered();
