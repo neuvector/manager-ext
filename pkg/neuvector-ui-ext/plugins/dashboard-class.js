@@ -58,7 +58,10 @@ export async function updateAutoScan(autoScan) {
     return axios({
         url: getSSOUrl(PATH.SCAN_CONFIG_URL),
         method: 'post',
-        data: {config: {auto_scan: autoScan}}
+        data: {config: {
+            enable_auto_scan_host: autoScan,
+            enable_auto_scan_workload: autoScan,
+        }}
     });
 }
 
