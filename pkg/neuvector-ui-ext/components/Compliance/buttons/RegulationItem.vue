@@ -60,7 +60,7 @@
         v-if="content.length > 0"
         @click="openRegulation(type, content, name)"
         :class="getComplianceTagClass(type)"
-        :style="getComplianceTagStyle(type)"
+        :style="'min-height: auto; ' + getComplianceTagStyle(type)"
         class="border-0 badge ml-0 mr-5 mb-2 d-inline-flex justify-content-center align-items-center">
         ⋮⋮&nbsp;&nbsp;{{ type }}
     </button>
