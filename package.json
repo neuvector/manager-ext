@@ -20,7 +20,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.6",
     "@rancher/components": "^0.3.0-alpha.1",
-    "@rancher/shell": "3.0.0",
+    "@rancher/shell": "3.0.4",
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "4.14.184",
     "@types/uuid": "^8.3.4",
