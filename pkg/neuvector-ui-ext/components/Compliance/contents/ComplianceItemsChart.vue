@@ -22,6 +22,7 @@ export default  defineComponent({
                 ['Note'],
                 ['Info'],
                 ['Pass'],
+                ['Manual'],
             ],
             datasets: [
                 {
@@ -32,6 +33,7 @@ export default  defineComponent({
                         '#ffb661',
                         '#36A2EB',
                         '#6A8E6D',
+                        '#0D47A1',
                     ],
                     backgroundColor: [
                         '#f22d3a',
@@ -40,6 +42,7 @@ export default  defineComponent({
                         '#ffb661',
                         '#36A2EB',
                         '#6A8E6D',
+                        '#0D47A1',
                     ],
                     data: [
                         props.complianceDist.error,
@@ -48,6 +51,7 @@ export default  defineComponent({
                         props.complianceDist.note,
                         props.complianceDist.info,
                         props.complianceDist.pass,
+                        props.complianceDist.manual,
                     ],
                 },
             ],
