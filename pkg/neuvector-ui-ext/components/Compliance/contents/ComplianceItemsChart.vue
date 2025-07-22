@@ -43,6 +43,7 @@ export default {
                         ['Note'],
                         ['Info'],
                         ['Pass'],
+                        ['Manual'],
                     ],
                     datasets: [
                         {
@@ -53,6 +54,7 @@ export default {
                                 '#ffb661',
                                 '#36A2EB',
                                 '#6A8E6D',
+                                '#0D47A1',
                             ],
                             backgroundColor: [
                                 '#f22d3a',
@@ -61,6 +63,7 @@ export default {
                                 '#ffb661',
                                 '#36A2EB',
                                 '#6A8E6D',
+                                '#0D47A1',
                             ],
                             data: [
                                 this.complianceDist.error,
@@ -69,6 +72,7 @@ export default {
                                 this.complianceDist.note,
                                 this.complianceDist.info,
                                 this.complianceDist.pass,
+                                this.complianceDist.manual,
                             ],
                         },
                     ],

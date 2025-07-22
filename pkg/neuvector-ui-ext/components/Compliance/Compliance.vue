@@ -63,6 +63,7 @@
                     warning: 0,
                     note: 0,
                     pass: 0,
+                    manual: 0,
                     info: 0,
                     platform: 0,
                     image: 0,
@@ -88,6 +89,7 @@
                     warning: 0,
                     note: 0,
                     pass: 0,
+                    manual: 0,
                     info: 0,
                     platform: 0,
                     image: 0,
@@ -125,6 +127,7 @@
                     if (compliance.level === 'NOTE') this.complianceDist.note += 1;
                     if (compliance.level === 'ERROR') this.complianceDist.error += 1;
                     if (compliance.level === 'HIGH') this.complianceDist.high += 1;
+                    if (compliance.level === 'MANUAL') this.complianceDist.manual += 1;
                     if (compliance.platforms.length) this.complianceDist.platform += 1;
                     if (compliance.images.length) this.complianceDist.image += 1;
                     if (compliance.nodes.length) this.complianceDist.node += 1;
