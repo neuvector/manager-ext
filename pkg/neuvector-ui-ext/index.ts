@@ -97,13 +97,13 @@ export default function(plugin: IPlugin) {
     TableColumnLocation.RESOURCE,
     { path: [{ urlPath: 'explorer/node', endsWith: true }] },
     {
-      name:     'some-prop-col',
+      name:     'vulnerabilities',
       labelKey: 'dashboard.VULNERBILITIES',
       getValue: (row: any) => row,
       width: 100,
       formatter: 'NodeVulnerabilitySummary',
-      sort: ['stateSort', 'nameSort'],
-      search: ['stateSort', 'nameSort'],
+      sort: false,
+      search: false,
     }
   );
 }
