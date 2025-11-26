@@ -1,8 +1,8 @@
 <template>
    <span v-if="scoreLevel === t('dashboard.body.panel_title.policy_evaluation.GOOD')">
         <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD1') }}</span>
-        <span class="text-bold text-success">{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD') }}</span>
-        <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD2') }}</span>
+        <span class="text-bold text-success">{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD2') }}</span>
+        <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_GOOD3') }}</span>
    </span>
    <span v-else>
         <span>{{ t('dashboard.heading.guideline.MAIN_SCORE_NOT_GOOD1') }}</span>
