@@ -122,4 +122,8 @@
         width: 100%;
         margin: auto;
     }
+
+    .chart-container :deep(> div) {
+      width: 100%;
+    }
 </style>

@@ -8,7 +8,11 @@
           :height="height"
       />
       <div class="message-content" v-else>
-        <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_VULNERABLE_CONTAINER')"/>
+        <EmptyDataMessage
+            icon="icon-checkmark"
+            color="#8bc34a"
+            :message="parentContext.t('dashboard.body.message.NO_VULNERABLE_CONTAINER')"
+        />
       </div>
   </div>
   
@@ -17,19 +21,14 @@
 <script>
   import { BarChart } from 'vue-chart-3';
   import { Chart, registerables } from 'chart.js';
-  import { ref, defineComponent } from 'vue';
+  import { ref, defineComponent, computed } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
 
   Chart.register(...registerables);
 
   export default defineComponent({
       name: 'BarChart4TopVulnerableContainers',
-      components: { BarChart },
-      data() {
-        return {
-          isEmptyData: false,
-        };
-      },
+      components: { BarChart, EmptyDataMessage },
       props: {
           width: { type: Number, default: 400 },
           height: { type: Number, default: 300 },
@@ -37,6 +36,7 @@
           parentContext: Object,
       },
       setup(props) {
+        let isEmptyData = ref(false);
         let topVulnerableAssetsLabel = new Array(5);
         let topHighVulnerableAssetsData = new Array(5);
         let topMediumVulnerableAssetsData = new Array(5);
@@ -44,9 +44,9 @@
         topHighVulnerableAssetsData.fill(0);
         topMediumVulnerableAssetsData.fill(0);
         if (props.topVulContainers.top5Containers.length === 0) {
-          props.isEmptyData = true;
+          isEmptyData.value = true;
         } else {
-          props.isEmptyData = false;
+          isEmptyData.value = false;
           props.topVulContainers.top5Containers.forEach((asset, index) => {
             topVulnerableAssetsLabel[index] = asset.display_name;
             topHighVulnerableAssetsData[index] = asset.high4Dashboard;
@@ -80,6 +80,7 @@
         });
 
         const chartOptions = ref({
+          responsive: true,
           animation: false,
           indexAxis: 'y',
           scales: {
@@ -106,7 +107,7 @@
           maintainAspectRatio: false
         });
 
-        return { chartData, chartOptions };
+        return { chartData, chartOptions, isEmptyData };
       },
   });
 </script>
@@ -116,6 +117,17 @@
       position: relative;
       width: 100%;
       max-width: 600px;
+      height: 300px;
       margin: auto;
+  }
+
+  .chart-container :deep(> div) {
+      width: 100%;
+  }
+
+  .message-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 </style>

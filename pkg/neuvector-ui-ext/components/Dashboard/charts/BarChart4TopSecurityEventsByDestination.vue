@@ -24,11 +24,6 @@
   export default defineComponent({
       name: 'BarChart4TopSecurityEventsByDestination',
       components: { BarChart },
-      data() {
-        return {
-          isEmptyData: false,
-        };
-      },
       props: {
           width: { type: Number, default: 400 },
           height: { type: Number, default: 300 },
@@ -36,6 +31,7 @@
           parentContext: Object,
       },
       setup(props) {
+        let isEmptyData = ref(false);
         let topSecurityEventsLabels = new Array(5);
         let topSecurityEventsData = new Array(5);
         let barChartColors = new Array(5);
@@ -45,9 +41,9 @@
         barChartColors.fill('rgba(239, 83, 80, 0.3)');
         barChartBorderColors.fill('#ef5350');
         if (props.securityEventTop5ByDestination.length === 0) {
-          props.isEmptyData = true;
+          isEmptyData.value = true;
         } else {
-          props.isEmptyData = false;
+          isEmptyData.value = false;
           props.securityEventTop5ByDestination.forEach((workloadEvents, index) => {
             topSecurityEventsLabels[index] = workloadEvents[0]['destination_workload_name'];
             topSecurityEventsData[index] = workloadEvents.length;
@@ -70,6 +66,7 @@
         });
 
         const chartOptions = ref({
+          responsive: true,
           animation: false,
           indexAxis: 'y',
           scales: {
@@ -96,16 +93,20 @@
           maintainAspectRatio: false
         });
 
-        return { chartData, chartOptions };
+        return { chartData, chartOptions, isEmptyData };
       },
   });
 </script>
 
 <style scoped>
-  .chart-container {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-  }
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.chart-container :deep(> div) {
+  width: 100%;
+}
 </style>

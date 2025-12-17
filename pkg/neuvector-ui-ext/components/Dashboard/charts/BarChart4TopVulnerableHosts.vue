@@ -25,11 +25,6 @@
   export default defineComponent({
       name: 'BarChart4TopVulnerableHosts',
       components: { BarChart },
-      data() {
-        return {
-          isEmptyData: false,
-        };
-      },
       props: {
           width: { type: Number, default: 400 },
           height: { type: Number, default: 300 },
@@ -37,6 +32,7 @@
           parentContext: Object,
       },
       setup(props) {
+        let isEmptyData = ref(false);
         let topVulnerableAssetsLabel = new Array(5);
         let topHighVulnerableAssetsData = new Array(5);
         let topMediumVulnerableAssetsData = new Array(5);
@@ -44,9 +40,9 @@
         topHighVulnerableAssetsData.fill(0);
         topMediumVulnerableAssetsData.fill(0);
         if (props.topVulHosts.top5Nodes.length === 0) {
-          props.isEmptyData = true;
+          isEmptyData.value = true;
         } else {
-          props.isEmptyData = false;
+          isEmptyData.value = false;
           props.topVulHosts.top5Nodes.forEach((asset, index) => {
             topVulnerableAssetsLabel[index] = asset.name;
             topHighVulnerableAssetsData[index] = asset.scan_summary.high;
@@ -80,6 +76,7 @@
         });
 
         const chartOptions = ref({
+          responsive: true,
           animation: false,
           indexAxis: 'y',
           scales: {
@@ -106,7 +103,7 @@
           maintainAspectRatio: false
         });
 
-        return { chartData, chartOptions };
+        return { chartData, chartOptions, isEmptyData };
       },
   });
 </script>
@@ -116,6 +113,11 @@
       position: relative;
       width: 100%;
       max-width: 600px;
+      height: 300px;
       margin: auto;
+  }
+
+  .chart-container :deep(> div) {
+    width: 100%;
   }
 </style>

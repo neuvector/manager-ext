@@ -26,11 +26,6 @@
   export default defineComponent({
       name: 'PieChart4PolicyModeOfPods',
       components: { PieChart },
-      data() {
-        return {
-          isEmptyData: false,
-        };
-      },
       props: {
           width: { type: Number, default: 400 },
           height: { type: Number, default: 300 },
@@ -39,6 +34,7 @@
           parentContext: Object,
       },
       setup(props) {
+        let isEmptyData = ref(false);
         const modes = _.cloneDeep(NV_CONST.MODES).reverse();
         let assetsPolicyModeLabels = new Array(modes.length);
         let assetsPolicyModeData = new Array(modes.length);
@@ -46,9 +42,9 @@
           return props.parentContext.t(`enum.${mode.toUpperCase()}`);
         });
         if (props.groupInfo.protect_groups === 0 && props.groupInfo.monitor_groups && props.groupInfo.discover_groups) {
-          props.isEmptyData = true;
+          isEmptyData.value = true;
         } else {
-          props.isEmptyData = false;
+          isEmptyData.value = false;
           assetsPolicyModeData = [
             props.groupInfo.protect_groups,
             props.groupInfo.monitor_groups,
@@ -70,6 +66,7 @@
         });
 
         const chartOptions = ref({
+          responsive: true,
           animation: false,
           plugins: {
             title: {
@@ -87,7 +84,7 @@
           },
           maintainAspectRatio: false
         });
-        return { chartData, chartOptions };
+        return { chartData, chartOptions, isEmptyData };
       },
   });
 </script>
@@ -97,6 +94,11 @@
       position: relative;
       width: 100%;
       max-width: 600px;
+      height: 300px;
       margin: auto;
+  }
+
+  .chart-container :deep(> div) {
+    width: 100%;
   }
 </style>

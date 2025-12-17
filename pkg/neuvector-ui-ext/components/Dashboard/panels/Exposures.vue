@@ -198,7 +198,7 @@ export default {
 
 <template>
     <div class="get-started" v-if="hierarchicalIngressList && hierarchicalEgressList">
-        <BarChart4Exposures :parentContext="this" :hierarchicalIngressList="hierarchicalIngressList" :hierarchicalEgressList="hierarchicalEgressList"/>
+        <BarChart4Exposures class="exposure-chart" :parentContext="this" :hierarchicalIngressList="hierarchicalIngressList" :hierarchicalEgressList="hierarchicalEgressList"/>
         <Tabbed defaultTab="" class="exposure-grid-group">
             <Tab name="ingress" :label="t('dashboard.body.panel_title.INGRESS')">
                 <ExposureGrid :exposureInfo="hierarchicalIngressList" exposureType="ingress" :rancherTheme="rancherTheme"/>
@@ -212,12 +212,30 @@ export default {
 </template>
 
 <style>
-    .exposure-grid-group {
-        position: relative;
+.exposure-chart {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.exposure-chart :deep(> div) {
+  width: 100%;
+  min-width: 0;
+  flex-grow: 1;
+  position: relative;
+}
+
+
+.exposure-grid-group {
+    position: relative;
+}
+
+.exposure-report-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     }
-    .exposure-report-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-</style>../../../plugins/dashboard-class
+</style>
