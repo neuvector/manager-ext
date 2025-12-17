@@ -81,4 +81,8 @@
       max-width: 600px;
       margin: auto;
   }
+
+  .chart-container :deep(> div) {
+    width: 100%;
+  }
 </style>

@@ -77,6 +77,7 @@
             });
 
             const chartOptions = ref({
+                responsive: true,
                 animation: false,
                 indexAxis: 'y',
                 scales: {
@@ -114,5 +115,9 @@
         width: 100%;
         max-width: 600px;
         margin: auto;
+    }
+
+    .chart-container :deep(> div) {
+      width: 100%;
     }
 </style>
