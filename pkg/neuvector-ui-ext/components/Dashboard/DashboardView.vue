@@ -253,7 +253,7 @@ export default {
         this.isRefreshed = false;
         setTimeout(() => {
           this.isRefreshed = true;
-        }, 5);
+        }, 200);
       }
     }
   }
@@ -357,7 +357,7 @@ export default {
                   instructionId="top-sec-events-source"
                 />
               </div>
-              <BarChart4TopSecurityEventsBySource v-if="notificationInfo" :parentContext="this" :securityEventTop5BySource="notificationInfo.criticalSecurityEvents.top_security_events.source"/>
+              <BarChart4TopSecurityEventsBySource v-if="notificationInfo && isRefreshed" :parentContext="this" :securityEventTop5BySource="notificationInfo.criticalSecurityEvents.top_security_events.source"/>
             </div>
             <div>
               <div>
@@ -366,7 +366,7 @@ export default {
                   instructionId="top-sec-events-destination"
                 />
               </div>
-              <BarChart4TopSecurityEventsByDestination v-if="notificationInfo" :parentContext="this" :securityEventTop5ByDestination="notificationInfo.criticalSecurityEvents.top_security_events.destination"/>
+              <BarChart4TopSecurityEventsByDestination v-if="notificationInfo && isRefreshed" :parentContext="this" :securityEventTop5ByDestination="notificationInfo.criticalSecurityEvents.top_security_events.destination"/>
             </div>
           </div>
         </Tab>
