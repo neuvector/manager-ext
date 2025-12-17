@@ -134,7 +134,6 @@ const vueApp = createApp({});
           sortable: true,
           flex: 1,
           autoHeight: true,
-          sortable: true,
           resizable: true,
           cellClass: ['d-flex', 'align-items-center', 'cell-wrap-text'],
         },

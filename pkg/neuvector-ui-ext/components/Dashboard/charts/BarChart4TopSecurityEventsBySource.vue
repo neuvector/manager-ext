@@ -11,28 +11,20 @@
         <EmptyDataMessage icon="icon-checkmark" color="#8bc34a" :message="t('dashboard.body.message.NO_SEC_EVENTS')"/>
       </div>
   </div>
-  
+
 </template>
 
 <script>
   import { BarChart } from 'vue-chart-3';
   import { Chart, registerables } from 'chart.js';
-  import { ref, defineComponent, getCurrentInstance } from 'vue';
+  import { ref, defineComponent } from 'vue';
   import EmptyDataMessage from '../contents/EmptyDataMessage';
 
   Chart.register(...registerables);
 
   export default defineComponent({
       name: 'BarChart4TopSecurityEventsBySource',
-      components: {
-        BarChart,
-        EmptyDataMessage,
-      },
-      data() {
-        return {
-          isEmptyData: false,
-        };
-      },
+      components: { BarChart },
       props: {
           width: { type: Number, default: 400 },
           height: { type: Number, default: 300 },
@@ -40,7 +32,7 @@
           parentContext: Object,
       },
       setup(props) {
-        const instance = getCurrentInstance();
+        let isEmptyData = ref(false);
         let topSecurityEventsLabels = new Array(5);
         let topSecurityEventsData = new Array(5);
         let barChartColors = new Array(5);
@@ -50,9 +42,9 @@
         barChartColors.fill('rgba(239, 83, 80, 0.3)');
         barChartBorderColors.fill('#ef5350');
         if (props.securityEventTop5BySource.length === 0) {
-          instance.isEmptyData = true;
+          isEmptyData.value = true;
         } else {
-          instance.isEmptyData = false;
+          isEmptyData.value = false;
           props.securityEventTop5BySource.forEach((workloadEvents, index) => {
             topSecurityEventsLabels[index] = workloadEvents[0]['source_workload_name'];
             topSecurityEventsData[index] = workloadEvents.length;
@@ -75,6 +67,7 @@
         });
 
         const chartOptions = ref({
+          responsive: true,
           animation: false,
           indexAxis: 'y',
           scales: {
@@ -101,16 +94,20 @@
           maintainAspectRatio: false
         });
 
-        return { chartData, chartOptions };
+        return { chartData, chartOptions, isEmptyData };
       },
   });
 </script>
 
 <style scoped>
-  .chart-container {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-  }
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.chart-container :deep(> div) {
+  width: 100%;         /* Force it to fill the container width */
+}
 </style>
