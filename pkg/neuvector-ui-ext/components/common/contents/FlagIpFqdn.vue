@@ -18,11 +18,11 @@
 </script>
 
 <template>
-    <a :href="'https://www.whois.com/whois/' + ip" target="_blank" style="display: flex;">
-        <country-flag v-if="countryCode !== '-'" class="mr-2" style="margin-top: -6px; position: relative;" :country='countryCode.toLowerCase()' size='normal' v-tooltip.top="{
+    <a :href="'https://www.whois.com/whois/' + ip" target="_blank" style="display:inline-flex;">
+        <country-flag v-if="countryCode !== '-'" class="mr-2" style="margin-top: -6px; position: relative; margin-right: 1em;" :country='countryCode.toLowerCase()' size='normal' v-tooltip.top="{
             content: isTooltipVisible ? countryName : '',
         }"/>
-        <span style="margin-left: 1em;">
+        <span>
             <span v-if="fqdn">
                 <span  v-tooltip.top="{
                     content: isTooltipVisible ? ip : '',

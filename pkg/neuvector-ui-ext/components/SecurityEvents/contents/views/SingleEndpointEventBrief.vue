@@ -202,3 +202,9 @@
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+    @import '../../../../styles/bootstrap/scss/bootstrap.scss';
+    @import '../../../../styles/security-events.scss';
+    @import '../../../../styles/neuvector.scss';
+</style>
