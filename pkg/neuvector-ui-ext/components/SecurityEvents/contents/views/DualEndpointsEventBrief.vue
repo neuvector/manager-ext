@@ -285,3 +285,8 @@
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+    @import '../../../../styles/security-events.scss';
+    @import '../../../../styles/neuvector.scss';
+</style>
