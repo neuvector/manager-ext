@@ -61,14 +61,14 @@
         @click="openRegulation(type, content, name)"
         :class="getComplianceTagClass(type)"
         :style="getComplianceTagStyle(type)"
-        class="border-0 badge ml-0 mr-5 mb-2 d-inline-flex justify-content-center align-items-center">
+        class="border-0 badge d-inline-flex align-items-center mx-2 my-3">
         ⋮⋮&nbsp;&nbsp;{{ type }}
     </button>
     <span 
         v-else 
         :class="getComplianceTagClass(type)"
         :style="getComplianceTagStyle(type)"
-        class="border-0 badge ml-0 mr-5 mb-2 d-inline-flex justify-content-center align-items-center">
+        class="border-0 badge d-inline-flex align-items-center mx-2 my-3">
         ⋮⋮&nbsp;&nbsp;{{ type }}
     </span>
 </template>

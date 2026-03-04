@@ -38,48 +38,50 @@ export default {
 </script>
 
 <template>
-  <div class="padding-left-0 padding-right-0 risk-section">
-  <div class="risk-section-titles">
-    <div class="text-left title">
-      {{riskFactor.title}}
-    </div>
-    <div class="subtitle">
-    </div>
-  </div>
-  <div class="risk-section-details" v-if="!riskFactor.isFactorError">
-    <div class="pull-left">
-      <div class="secure-rank-wrap">
-        <div class="secure-rank"></div>
-        <div class="empty" :style="riskFactor.subScore"></div>
+  <div class="risk-section">
+    <div class="risk-section-titles">
+      <div class="title">
+        {{riskFactor.title}}
+      </div>
+      <div class="subtitle">
       </div>
     </div>
-    <table class="margin-top-s pull-left">
-      <tr v-for="factor in riskFactor.factors" :key="factor">
-        <td>{{factor.category}}</td>
-        <td style="text-align: left;">
-          {{factor.amount}}
-        </td>
-        <td style="text-align: left;" v-if="factor.comment">
-          (&nbsp;<i class="icon-anchor" ></i>{{factor.type}}:&nbsp;{{factor.comment}}&nbsp;)
-        </td>
-      </tr>
-      <tr class="pl-sm" style="font-size: 10px;" v-if="riskFactor.factorComment">
-        <strong class="text-muted">{{riskFactor.factorComment[0]}}</strong><br/>
-        <strong class="text-muted">{{riskFactor.factorComment[1]}}</strong>
-      </tr>
-    </table>
-  </div>
-  <div v-else class="server-error-sm risk-section-details">
-    <div>
-      <em class="eos-icons text-danger">dangerous</em>
+    <div class="risk-section-details d-flex align-items-center justify-content-center" v-if="!riskFactor.isFactorError">
+      <div class="">
+        <div class="secure-rank-wrap">
+          <div class="secure-rank"></div>
+          <div class="empty" :style="riskFactor.subScore"></div>
+        </div>
+      </div>
+      <table class="">
+        <tr v-for="factor in riskFactor.factors" :key="factor">
+          <td>{{factor.category}}</td>
+          <td style="text-align: left;">
+            {{factor.amount}}
+          </td>
+          <td style="text-align: left;" v-if="factor.comment">
+            (&nbsp;<i class="icon-anchor" ></i>{{factor.type}}:&nbsp;{{factor.comment}}&nbsp;)
+          </td>
+        </tr>
+        <tr class="pl-sm" style="font-size: 10px;" v-if="riskFactor.factorComment">
+          <td colspan="3">
+            <strong class="text-muted">{{riskFactor.factorComment[0]}}</strong><br/>
+            <strong class="text-muted">{{riskFactor.factorComment[1]}}</strong>
+          </td>
+        </tr>
+      </table>
     </div>
-    <div>
-      <span class="text-label">
-        {{riskFactor.factorErrorMessage}}
-      </span>
+    <div v-else class="server-error-sm risk-section-details">
+      <div>
+        <em class="eos-icons text-danger">dangerous</em>
+      </div>
+      <div>
+        <span class="text-label">
+          {{riskFactor.factorErrorMessage}}
+        </span>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <style lang="scss" scoped>

@@ -11,21 +11,23 @@
         :options="myOptions"
       />
       <table style=" margin: -20px auto 0 auto;">
-        <tr class="text-center dashboard-summary-title">
-            <td>{{ t('dashboard.heading.NODES') }}</td>
-            <td>{{ t("dashboard.heading.PODS") }}</td>
-        </tr>
-        <tr class="text-center dashboard-summary-value">
-            <td>{{ scoreInfo.metrics.hosts }}</td>
-            <td>{{ scoreInfo.metrics.workloads.running_pods }}</td>
-        </tr>
+        <tbody>
+          <tr class="text-center dashboard-summary-title">
+              <td>{{ t('dashboard.heading.NODES') }}</td>
+              <td>{{ t("dashboard.heading.PODS") }}</td>
+          </tr>
+          <tr class="text-center dashboard-summary-value">
+              <td>{{ scoreInfo.metrics.hosts }}</td>
+              <td>{{ scoreInfo.metrics.workloads.running_pods }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </template>
   
   <script>
   import VueGauge from "vue-gauge";
-  import { NV_CONST, RANCHER_CONST } from '../../../types/neuvector';
+import { NV_CONST, RANCHER_CONST } from '../../../types/neuvector';
 
   export default {
     components: { VueGauge },
