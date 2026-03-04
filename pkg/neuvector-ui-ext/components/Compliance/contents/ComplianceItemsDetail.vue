@@ -1,11 +1,11 @@
 <script>
-    import Tab from '@shell/components/Tabbed/Tab';
     import Tabbed from '@shell/components/Tabbed';
-    import ImpactTemplateButton from '../../common/buttons/ImpactTemplateButton.vue';
-    import ImpactModal from '../../common/dialogs/ImpactModal.vue';
-    import RegulationItem from '../buttons/RegulationItem.vue';
-    import RegulationModal from '../dialogs/RegulationModal.vue';
-    import { getNodeBriefById, getContainerBriefById } from '../../../plugins/vulnerabilities-class';
+import Tab from '@shell/components/Tabbed/Tab';
+import { getContainerBriefById, getNodeBriefById } from '../../../plugins/vulnerabilities-class';
+import ImpactTemplateButton from '../../common/buttons/ImpactTemplateButton.vue';
+import ImpactModal from '../../common/dialogs/ImpactModal.vue';
+import RegulationItem from '../buttons/RegulationItem.vue';
+import RegulationModal from '../dialogs/RegulationModal.vue';
     
     export default {
         props: {
@@ -131,7 +131,7 @@
             <ImpactModal v-if="showImpactModal" :type="brief.type" :content="brief.content" :isLightTheme="isLightTheme" @close="closeImpact"></ImpactModal>
         </Tab>
         <Tab name="regulations" :label="t('cis.profile.REGULATIONS')" :weight="95">
-            <div style="max-height: 215px; overflow: auto;" v-if="selectedCompliance.tags">
+            <div class="d-flex" style="max-height: 215px; overflow: auto;" v-if="selectedCompliance.tags">
                 <RegulationItem 
                     v-for="(value, key) in selectedCompliance.tags" 
                     :type="key" :content="value" 
