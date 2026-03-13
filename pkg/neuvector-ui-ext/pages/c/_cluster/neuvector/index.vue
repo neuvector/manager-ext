@@ -13,16 +13,11 @@ export default {
     if ( this.$store.getters['cluster/canList'](SERVICE) ) {
       this.allServices = await this.$store.dispatch('cluster/findAll', { type: SERVICE }, { root: true });
     }
-    if ( this.$store.getters['cluster/canList'](SCHEMA) ) {
-      this.allSchemas = await this.$store.dispatch('cluster/findAll', { type: SCHEMA }, { root: true });
-    }
   },
 
   data() {
     return {
       allServices: null,
-      allSchemas: null,
-      index: -1,
       NV_CONST: NV_CONST,
     }
   },
@@ -61,7 +56,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="allSchemas">
+  <div>
     <InstallView v-if="!hasSchema" :ui-service="uiService" />
     <DashboardView v-else :ns="NV_CONST.NV_POD_NAMESPACE" :rancherTheme="rancherTheme"/>
   </div>
