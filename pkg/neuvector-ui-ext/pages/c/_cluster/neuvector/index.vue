@@ -31,10 +31,7 @@ export default {
       return null;
     },
     hasSchema() {
-      if ( this.$store.getters['cluster/canList'](SCHEMA) ) {
-        return this.$store.getters['cluster/schemaFor'](NV_CONST.NV_SCHEMA) || this.allSchemas.filter(schema => schema.id.includes(NV_CONST.PRODUCT)).length > 0;
-      }
-      return false;
+      return this.$store.getters['cluster/schemaFor'](NV_CONST.NV_SCHEMA);
     },
     rancherTheme: function() {
       const decodedCookie = decodeURIComponent(document.cookie);
