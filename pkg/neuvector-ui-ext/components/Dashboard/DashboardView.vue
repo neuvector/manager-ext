@@ -276,7 +276,7 @@ export default {
       </div>
       <div v-if="scoreInfo">
         <div class="get-started" style="margin-bottom: 15px;">
-          <ScoreGauge :rancherTheme="rancherTheme" :scoreInfo="scoreInfo"/>
+          <ScoreGauge :scoreInfo="scoreInfo"/>
           <ScoreFactorCommentSlider v-if="detailsInfo && currentCluster" :rancherTheme="rancherTheme" :token="token" :ns="ns" :score="scoreInfo.security_scores.security_risk_score" :autoScan="detailsInfo.autoScanConfig" :currentClusterId="currentCluster.id" class="m-0"/>
           <!-- <DashboardReportSection /> -->
           <SSOMenu v-if="this.currentCluster" :ns="ns" :ssoLink="ssoLink"/>
