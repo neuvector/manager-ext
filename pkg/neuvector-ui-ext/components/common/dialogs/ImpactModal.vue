@@ -15,9 +15,13 @@
             ImpactModalNodeBrief,
         },
         props: {
-            isLightTheme: Boolean,
             type: String,
             content: Object,
+        },
+        computed: {
+            isLightTheme() {
+                return !document.body.classList.contains('theme-dark');
+            }
         },
         methods: {
             close() {
@@ -34,7 +38,7 @@
 
 <template>
     <div class="modal-backdrop">
-        <div class="modal" :class="isLightTheme ? 'light' : 'dark'">
+        <div class="modal">
             <Card
             :buttonAction="close"
             :buttonText="t('general.CLOSE')"
@@ -42,8 +46,7 @@
             >
                 <template v-slot:title>
                     <h5
-                    class="p-10"
-                    :style="isLightTheme ? 'color: #888' : 'color: #fff'"
+                    class="p-10 modal-title"
                     >
                         <template v-if="type === 'workload'">
                             <EOS_CHECK_BOX_BLANK_FILLED size="base"></EOS_CHECK_BOX_BLANK_FILLED>
@@ -66,4 +69,5 @@
 
 <style lang="scss" scoped>
     @import '../../../styles/neuvector.scss';
+    .modal-title { color: var(--body-text); }
 </style>

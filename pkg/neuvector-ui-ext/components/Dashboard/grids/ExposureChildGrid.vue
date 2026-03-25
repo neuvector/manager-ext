@@ -3,7 +3,7 @@
       <ag-grid-vue
         id="agGrid"
         style="width: 100%; height: 200px"
-        :class="rancherTheme === 'light' ? 'ag-theme-balham' : 'ag-theme-balham-dark'"
+        :class="isLightTheme ? 'ag-theme-balham' : 'ag-theme-balham-dark'"
         :columnDefs="columnDefs"
         :rowData="rowData"
         :gridOptions="gridOptions"
@@ -23,7 +23,9 @@
       props: {
         exposureInfo: Array,
         exposureType: String,
-        rancherTheme: String
+      },
+      computed: {
+        isLightTheme() { return !document.body.classList.contains('theme-dark'); }
       },
       data() {
         return {

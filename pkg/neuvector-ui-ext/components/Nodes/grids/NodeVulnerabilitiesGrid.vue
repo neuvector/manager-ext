@@ -11,7 +11,6 @@
         },
         props: {
             host: Object,
-            isLightTheme: Boolean,
         },
         async fetch(){
             try {
@@ -50,6 +49,11 @@
             vulnerabilities: null,
             rancherHostName: '',
           };
+        },
+        computed: {
+            isLightTheme() {
+                return !document.body.classList.contains('theme-dark');
+            },
         },
     };
 </script>

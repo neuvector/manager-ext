@@ -12,10 +12,14 @@
             RegulationItemGrid
         },
         props: {
-            isLightTheme: Boolean,
             type: String,
             content: Array,
             name: String,
+        },
+        computed: {
+            isLightTheme() {
+                return !document.body.classList.contains('theme-dark');
+            }
         },
         methods: {
             close() {
@@ -37,7 +41,7 @@
 
 <template>
     <div class="modal-backdrop">
-        <div class="modal" :class="isLightTheme ? 'light' : 'dark'">
+        <div class="modal">
             <Card
             :buttonAction="close"
             :buttonText="t('general.CLOSE')"
@@ -46,8 +50,7 @@
                 <template v-slot:title>
                     <div class="d-flex justify-content-between w-100">
                         <h5
-                        class="p-10"
-                        :style="isLightTheme ? 'color: #888' : 'color: #fff'"
+                        class="p-10 modal-title"
                         >
                             {{ type }}
                         </h5>
@@ -61,9 +64,13 @@
                     </div>
                 </template>
                 <template v-slot:body>
-                    <RegulationItemGrid :regulationData="content" :isLightTheme="isLightTheme"></RegulationItemGrid>
+                    <RegulationItemGrid :regulationData="content"></RegulationItemGrid>
                 </template>
             </Card>
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+    .modal-title { color: var(--body-text); }
+</style>

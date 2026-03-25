@@ -1,7 +1,7 @@
 <script>
     import SortableTable from '@shell/components/SortableTable';
     import { capitalize, parseDatetimeStr } from '../../../utils/common';
-    import { RANCHER_CONST } from '../../../types/neuvector';
+    import { Banner } from '@components/Banner';
     import DownloadVulnerabilititesCSV from '../buttons/DownloadVulnerabilititesCSV';
     import VulnerabilityInfoModal from '../../Vulnerabilities/dialogs/VulnerabilityInfoModal';
 
@@ -76,7 +76,6 @@
               },
             ],
             selectedVulnerability: Object,
-            isLightTheme: sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK,
             showInfoModal: false,
           };
         },
@@ -90,6 +89,9 @@
           },
         },
         computed: {
+          isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
+          },
           vulnerbilityCount() {
             return this.vulnerabilities.reduce((cnt, vul) => {
               cnt.high += vul.severity.toLowerCase() === 'high' ? 1 : 0;
@@ -116,7 +118,7 @@
         </div>
       </div>
     </div>
-    <VulnerabilityInfoModal v-if="showInfoModal" :vulnerability="selectedVulnerability" :isLightTheme="isLightTheme" @close="closeInfo"></VulnerabilityInfoModal>
+    <VulnerabilityInfoModal v-if="showInfoModal" :vulnerability="selectedVulnerability" @close="closeInfo"></VulnerabilityInfoModal>
     <SortableTable
       data-testid="nv-vul-sortable-table"
       id="nv-vul-sortable-table"

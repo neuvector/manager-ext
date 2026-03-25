@@ -30,7 +30,6 @@ export default {
         DatePicker,
     },
     props: {
-        isLightTheme: Boolean,
         title: String,
         queryToken: String
     },
@@ -113,6 +112,9 @@ export default {
         }
     },
     computed: {
+        isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
+        },
         isCustomDatePickerDisplay() {
             return this.exportReportCriteria.selectedLastModifyPeriod === LAST_MODIFIED_PERIOD_OPTION.CUSTOM
         },
@@ -156,10 +158,10 @@ export default {
 
 <template>
     <div v-if="isDisplay" class="modal-backdrop">
-        <div class="modal" :class="isLightTheme ? 'light' : 'dark'">
+        <div class="modal">
             <Card :sticky="true">
                 <template v-slot:title>
-                    <h2 class="p-10" :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+                    <h2 class="p-10 modal-title">
                         {{ title }}
                     </h2>
                 </template>
@@ -212,6 +214,7 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../../styles/neuvector.scss';
+    .modal-title { color: var(--body-text); }
 </style>
 <style lang="scss">
     .vs__dropdown-menu {

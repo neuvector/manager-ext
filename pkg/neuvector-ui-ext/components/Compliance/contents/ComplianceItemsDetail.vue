@@ -10,7 +10,9 @@ import RegulationModal from '../dialogs/RegulationModal.vue';
     export default {
         props: {
             selectedCompliance: Object,
-            isLightTheme: Boolean
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         data() {
             return {
@@ -128,7 +130,7 @@ import RegulationModal from '../dialogs/RegulationModal.vue';
                     </div>
                 </template>
             </div>
-            <ImpactModal v-if="showImpactModal" :type="brief.type" :content="brief.content" :isLightTheme="isLightTheme" @close="closeImpact"></ImpactModal>
+            <ImpactModal v-if="showImpactModal" :type="brief.type" :content="brief.content" @close="closeImpact"></ImpactModal>
         </Tab>
         <Tab name="regulations" :label="t('cis.profile.REGULATIONS')" :weight="95">
             <div class="d-flex" style="max-height: 215px; overflow: auto;" v-if="selectedCompliance.tags">
@@ -144,7 +146,6 @@ import RegulationModal from '../dialogs/RegulationModal.vue';
                 :type="regulationBrief.type" 
                 :content="regulationBrief.content" 
                 :name="regulationBrief.name" 
-                :isLightTheme="isLightTheme"
                 @close="closeRegulation"
             ></RegulationModal>
         </Tab>
