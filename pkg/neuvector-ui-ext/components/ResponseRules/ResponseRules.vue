@@ -1,7 +1,7 @@
 <script>
   import Loading from '@shell/components/Loading';
   import { SERVICE } from '@shell/config/types';
-  import { nvVariables, NV_CONST, RANCHER_CONST } from '../../types/neuvector';
+  import { nvVariables, NV_CONST } from '../../types/neuvector';
   import { refreshAuth } from '../../plugins/neuvector-class';
   import { destructConditions } from '../../utils/response-rules';
   import _axios from 'axios';
@@ -53,10 +53,6 @@
       ...mapGetters({
         responseRules: 'neuvector/responseRules',
       }),
-      isLightTheme: function() {
-        nvVariables.isLightTheme = sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK;
-        return nvVariables.isLightTheme;
-      }
     },
     methods: {
       loadData: async function() {
@@ -91,7 +87,7 @@
 
 <template>
   <Loading v-if="$fetchState.pending" />
-  <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+  <div v-else-if="errorRes" class="container">
     <Error :error="errorRes"></Error>
   </div>
   <div v-else>
@@ -106,7 +102,7 @@
       <AddRuleToTopBtn
         v-if="autoCompleteData.conditionOptions"
         :autoCompleteData="autoCompleteData"
-        :webhooks="webhooks" :isLightTheme="isLightTheme"
+        :webhooks="webhooks"
         :source="NV_CONST.NAV_SOURCE.SELF"
         :refreshFn="loadData"
         class="pull-left mx-2">

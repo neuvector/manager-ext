@@ -23,7 +23,6 @@
           DatePicker,
         },
         props: {
-            isLightTheme: Boolean,
             vulQuery: Object,
             domains: Array,
         },
@@ -150,6 +149,9 @@
           };
         },
         computed: {
+          isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
+          },
           filteredImpactOptions() {
             if (this.advFilter.selectedDomains.length === 0) {
               return this.impactOptions;
@@ -198,7 +200,7 @@
           </div>
 
           <div class="adv-filter-title mt-20">
-            <h5 :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+            <h5 class="modal-title">
               {{ t('general.FILTER_MATCH_ALL') }}
             </h5>
           </div>
@@ -426,6 +428,8 @@
   .vs__dropdown-menu {
       z-index: 1000 !important;
   }
+
+  .modal-title { color: var(--body-text); }
 
   .vul-radio-group :deep(.row > *) {
     width: auto;

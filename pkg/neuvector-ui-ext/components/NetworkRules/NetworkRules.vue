@@ -1,7 +1,7 @@
 <script>
 import Loading from '@shell/components/Loading';
 import { SERVICE } from '@shell/config/types';
-import { nvVariables, NV_CONST, NV_MAP, RANCHER_CONST } from '../../types/neuvector';
+import { nvVariables, NV_CONST, NV_MAP } from '../../types/neuvector';
 import { refreshAuth } from '../../plugins/neuvector-class';
 import { getAutoCompleteData } from '../../plugins/network-rule-class';
 import { PATH } from '../../types/path';
@@ -79,10 +79,6 @@ export default {
       networkRules: 'neuvector/networkRules',
       isNetworkRuleListDirty: 'neuvector/isNetworkRuleListDirty',
     }),
-    isLightTheme: function() {
-        nvVariables.isLightTheme = sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK;
-        return nvVariables.isLightTheme;
-    },
     isWriteNetworkRuleAuthorized: function() {
       return getDisplayFlag('write_network_rule', this.$store);
     },
@@ -172,7 +168,7 @@ export default {
 
 <template>
   <Loading v-if="$fetchState.pending" />
-  <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+  <div v-else-if="errorRes" class="container">
     <Error :error="errorRes"></Error>
   </div>
   <div v-else>
@@ -184,7 +180,7 @@ export default {
             </header>
     </div>
     <div>
-      <AddRuleToTopBtn :disabled="!(autoCompleteData && isWriteNetworkRuleAuthorized)" :autoCompleteData="autoCompleteData" :isLightTheme="isLightTheme" :opType="UpdateType.AddToTop" class="pull-left mx-2"></AddRuleToTopBtn>
+      <AddRuleToTopBtn :disabled="!(autoCompleteData && isWriteNetworkRuleAuthorized)" :autoCompleteData="autoCompleteData" :opType="UpdateType.AddToTop" class="pull-left mx-2"></AddRuleToTopBtn>
       <SaveBtn :disabled="!(isNetworkRuleListDirty && isWriteNetworkRuleAuthorized)" class="pull-left mx-2" :reloadFn="getNetworkRules"></SaveBtn>
       <UndoBtn :disabled="!(isNetworkRuleListDirty && isWriteNetworkRuleAuthorized)" class="pull-left mx-2" :reloadFn="getNetworkRules"></UndoBtn>
       <RemoveBtn :disabled="!(isWriteNetworkRuleAuthorized && hasSelectedRules)" class="pull-left mx-2"></RemoveBtn>

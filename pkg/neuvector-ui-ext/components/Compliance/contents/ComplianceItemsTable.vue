@@ -19,7 +19,6 @@
             complianceData: Object,
             availableFilters: Array,
             domains: Array,
-            isLightTheme: Boolean,
         },
         data() {
             return {
@@ -31,7 +30,8 @@
         computed: {
             totalCount() {
                 return this.complianceData.compliances.length;
-            }
+            },
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         methods: {
             initFilter() {
@@ -107,7 +107,6 @@
             </div>
         </div>
         <ComplianceItemsGrid 
-            :isLightTheme="isLightTheme" 
             :filterText="filterText" 
             :advFilter="advFilter"
             :complianceData="complianceData"
@@ -119,7 +118,6 @@
         <AdvancedFilterModal
             ref="advFilter"
             :inputFilter="advFilter" 
-            :isLightTheme="isLightTheme"
             :domains="domains"
             @close="closeAdvFilter"
         ></AdvancedFilterModal>

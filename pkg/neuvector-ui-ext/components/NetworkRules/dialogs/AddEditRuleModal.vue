@@ -16,7 +16,6 @@ export default {
       ToggleSwitch,
     },
     props: {
-        isLightTheme: Boolean,
         autoCompleteData: Object,
         selectedRule: Object,
         selectedIndex: Number,
@@ -31,6 +30,9 @@ export default {
       }
     },
     computed: {
+      isLightTheme() {
+        return !document.body.classList.contains('theme-dark');
+      },
       ...mapGetters({
         newId: 'neuvector/newId',
       }),
@@ -141,7 +143,7 @@ export default {
           </div>
 
           <div class="add-edit-rule-title mt-20">
-            <h5 :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+            <h5 class="modal-title">
               {{ opType === UpdateType.Edit ? t('policy.editPolicy.TITLE') : t('policy.addPolicy.TITLE') }}
             </h5>
           </div>
@@ -260,6 +262,7 @@ export default {
 .vs__dropdown-menu {
     z-index: 1000 !important;
 }
+.modal-title { color: var(--body-text); }
 .nv-labal-input {
   label {
     left: 10px !important;

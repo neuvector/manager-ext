@@ -8,7 +8,9 @@
         },
         props: {
             host: Object,
-            isLightTheme: Boolean,
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         async fetch(){
          

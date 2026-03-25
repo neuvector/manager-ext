@@ -1,6 +1,6 @@
 <script>
     import { Card } from '@components/Card';
-    import { nvVariables, NV_CONST } from '../../../types/neuvector';
+    import { NV_CONST } from '../../../types/neuvector';
     import { RadioButton } from '@components/Form/Radio';
     import { LabeledInput } from '@components/Form/LabeledInput';
     import { updateGridData } from '../../../utils/network-rules';
@@ -17,12 +17,14 @@
         },
         data() {
             return {
-                isLightTheme: nvVariables.isLightTheme,
                 targetId: '',
                 moveType: UpdateType.MoveBefore,
                 UpdateType: UpdateType,
                 selectedNetworkRules: [],
             };
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         methods: {
           close() {
@@ -51,10 +53,10 @@
 
 <template>
     <div class="modal-backdrop">
-        <div class="modal" :class="isLightTheme ? 'light' : 'dark'"  style="position: absolute; z-index: 200; left: calc(100vw / 2 - 100px); min-width: 240px;">
+        <div class="modal" style="position: absolute; z-index: 200; left: calc(100vw / 2 - 100px); min-width: 240px;">
             <Card :buttonAction="close" :buttonText="'Close'" :sticky="true" style="width: 240px;">
                 <template v-slot:title>
-                    <h5 class="p-10" :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+                    <h5 class="p-10 modal-title">
                         {{ t('policy.TIP.MOVE') }}
                     </h5>
                 </template>
@@ -94,3 +96,14 @@
         </div>
     </div>
 </template>
+<style lang="scss" scoped>
+    .modal-backdrop {
+        background-color: var(--overlay-bg);
+    }
+    .modal {
+        background: var(--modal-bg);
+    }
+    .modal-title {
+        color: var(--body-text);
+    }
+</style>

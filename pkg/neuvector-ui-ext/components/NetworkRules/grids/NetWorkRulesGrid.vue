@@ -1,6 +1,6 @@
 <script>
     import ResourceTable from '@shell/components/ResourceTable';
-    import { RANCHER_CONST, NV_CONST } from '../../../types/neuvector';
+    import { NV_CONST } from '../../../types/neuvector';
     import Action from './cells/Action';
     import CfgType from './cells/CfgType';
     import Ports from './cells/Ports';
@@ -94,7 +94,6 @@
                 sort:  'last_modified_timestamp',
               },
             ],
-            isLightTheme: sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK,
             menuOpen: false,
             actionMenuTargetElement:  null,
             actionMenuTargetEvent:    null,
@@ -160,6 +159,9 @@
           },
         },
         computed: {
+          isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
+          },
           menuActions() {
             const menuActions = [];
             menuActions.push({
@@ -250,7 +252,7 @@
 
         <template #col:ports="{row}">
           <td>
-            <Ports :rule="row" :isLightTheme="isLightTheme"></Ports>
+            <Ports :rule="row"></Ports>
           </td>
         </template>
 
@@ -277,7 +279,6 @@
 
     <AddEditRuleModal
       ref="addEditRule"
-      :isLightTheme="isLightTheme"
       :autoCompleteData="autoCompleteData"
       :selectedRule="selectedRule"
       :selectedIndex="selectedIndex"

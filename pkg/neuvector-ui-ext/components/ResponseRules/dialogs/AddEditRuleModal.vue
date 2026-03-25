@@ -17,7 +17,6 @@ export default {
       ToggleSwitch,
     },
     props: {
-        isLightTheme: Boolean,
         startId: Number,
         autoCompleteData: Object,
         webhooks: Array,
@@ -37,6 +36,9 @@ export default {
       }
     },
     computed: {
+        isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
+        },
         getConditionOptions() {
             let name = this.autoCompleteData.conditionOptions[this.rule.event].name ?
                 this.autoCompleteData.conditionOptions[this.rule.event].name : [];
@@ -159,7 +161,7 @@ export default {
           </div>
 
           <div class="add-edit-rule-title mt-20">
-            <h5 :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+            <h5 class="modal-title">
               {{ opType === UpdateType.Edit ? 
                 (isReadOnly ? t('policy.editPolicy.VIEW') : t('policy.editPolicy.TITLE')) :
                 t('policy.addPolicy.TITLE') }}
@@ -286,6 +288,7 @@ export default {
 .vs__dropdown-menu {
     z-index: 1000 !important;
 }
+.modal-title { color: var(--body-text); }
 .nv-labal-input {
   label {
     left: 10px !important;

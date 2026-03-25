@@ -1,5 +1,5 @@
 <script>
-    import { RANCHER_CONST, NV_CONST } from '../../../types/neuvector';
+    import { NV_CONST } from '../../../types/neuvector';
     import IdCellComponent from './agCells/IdCellComponent';
     import FromToCellComponent from './agCells/FromToCellComponent';
     import ApplicationsCellComponent from './agCells/ApplicationsCellComponent';
@@ -54,7 +54,6 @@
             gridOptions: null,
             gridApi: null,
             context: { componentParent: this },
-            isLightTheme: sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK,
             menuOpen: false,
             actionMenuTargetElement:  null,
             actionMenuTargetEvent:    null,
@@ -390,6 +389,11 @@
             }, 500);
           },
         },
+        computed: {
+          isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
+          },
+        },
     };
 </script>
 
@@ -408,7 +412,6 @@
       </ag-grid-vue>
       <AddEditRuleModal
         ref="addEditRule"
-        :isLightTheme="isLightTheme"
         :autoCompleteData="autoCompleteData"
         :selectedRule="selectedRule"
         :selectedIndex="selectedIndex"

@@ -6,8 +6,10 @@
             AdvancedFilterModal
         },
         props: {
-            isLightTheme: Boolean,
             autoCompleteData: Object,
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         data() {
             return {
@@ -33,6 +35,6 @@
         >
             {{ t('general.ADV_FILTER') }}
         </button>
-        <AdvancedFilterModal ref="advFilter" :isLightTheme="isLightTheme" :autoCompleteData="autoCompleteData" @close="closeModal"></AdvancedFilterModal>
+        <AdvancedFilterModal ref="advFilter" :autoCompleteData="autoCompleteData" @close="closeModal"></AdvancedFilterModal>
     </div>
 </template>

@@ -11,7 +11,7 @@
     import ComplianceItemsChart from './contents/ComplianceItemsChart.vue';
     import { getDomains, getContainerBrief, getAvailableFilters, getCompliance } from '../../plugins/compliance-class';
     import { SERVICE } from '@shell/config/types';
-    import { nvVariables, NV_CONST, RANCHER_CONST } from '../../types';
+    import { nvVariables, NV_CONST } from '../../types';
     import { arrayToCsv, setRisks } from '../../utils/common';
     import { refreshAuth } from '../../plugins/neuvector-class'; 
     import { getCsvData, preprocessCompliance } from '../../utils/compliance';
@@ -45,12 +45,6 @@
             await this.loadData();
         },
         props: {
-        },
-        computed: {
-            isLightTheme: function() {
-                nvVariables.isLightTheme = sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK;
-                return nvVariables.isLightTheme;
-            }
         },
         data() {
             return {
@@ -179,7 +173,7 @@
 
 <template>
     <Loading v-if="$fetchState.pending" />
-    <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+    <div v-else-if="errorRes" class="container">
         <Error :error="errorRes"></Error>
     </div>
     <div v-else class="compliance">
@@ -233,7 +227,6 @@
                         <div class="grid-area">
                             <ComplianceItemsTable 
                                 v-if="complianceData" 
-                                :isLightTheme="isLightTheme"
                                 :complianceData="complianceData"
                                 :domains="domains"
                                 :availableFilters="availableFilters"
@@ -250,7 +243,6 @@
                                 <ComplianceItemsDetail
                                     v-else
                                     :selectedCompliance="selectedCompliance"
-                                    :isLightTheme="isLightTheme"
                                 ></ComplianceItemsDetail>
                             </div>
                         </div>

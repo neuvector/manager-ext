@@ -20,7 +20,6 @@
     export default {
         props: {
             regulationData: Array,
-            isLightTheme: Boolean,
         },
         data() {
             return {
@@ -80,7 +79,12 @@
                 },
                 overlayNoRowsTemplate: `<span class="overlay">No rows to show</span>`,
             };
-        }
+        },
+        computed: {
+            isLightTheme() {
+                return !document.body.classList.contains('theme-dark');
+            },
+        },
     };
 </script>
 

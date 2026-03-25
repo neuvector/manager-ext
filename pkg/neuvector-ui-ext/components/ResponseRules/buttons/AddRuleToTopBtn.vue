@@ -9,8 +9,10 @@
             autoCompleteData: Object,
             webhooks: Array,
             source: String,
-            isLightTheme: Boolean,
             refreshFn: Function,
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         data() {
             return {
@@ -40,7 +42,6 @@
         </a>
         <AddEditRuleModal 
             ref="addEditRule"
-            :isLightTheme="isLightTheme"
             :autoCompleteData="autoCompleteData"
             :webhooks="webhooks"
             :source="source"

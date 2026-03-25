@@ -11,7 +11,6 @@
         },
         props: {
             workload: Object,
-            isLightTheme: Boolean,
         },
         async fetch(){
             try {
@@ -53,6 +52,11 @@
             vulnerabilities: null,
             rancherWorkloadName: '',
           };
+        },
+        computed: {
+            isLightTheme() {
+                return !document.body.classList.contains('theme-dark');
+            },
         },
     };
 </script>

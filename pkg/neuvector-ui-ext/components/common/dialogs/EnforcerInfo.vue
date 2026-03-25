@@ -1,7 +1,6 @@
 <script>
     import { Card } from '@components/Card';
-    import { nvVariables } from '../../../types/neuvector';
-    import dayjs from 'dayjs';
+import dayjs from 'dayjs';
     export default {
         components: {
             Card
@@ -11,9 +10,11 @@
         },
         data() {
             return {
-                isLightTheme: nvVariables.isLightTheme,
                 dayjs: dayjs
             };
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         methods: {
           close() {
@@ -25,10 +26,10 @@
 
 <template>
     <div class="modal-backdrop">
-        <div class="modal" :class="isLightTheme ? 'light' : 'dark'"  style="position: absolute; z-index: 200; left: calc(100vw / 2 - 400px)">
+        <div class="modal" style="position: absolute; z-index: 200; left: calc(100vw / 2 - 400px)">
             <Card :buttonAction="close" :buttonText="'Close'" :sticky="true">
                 <template v-slot:title>
-                    <h5 class="p-10" :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+                    <h5 class="p-10 modal-title">
                         {{ enforcer.display_name }}
                     </h5>
                 </template>
@@ -103,12 +104,13 @@
 
 <style lang="scss" scoped>
     @import '../../../styles/neuvector.scss';
-
-    .modal-backdrop ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
+    .modal-backdrop {
+        background-color: var(--overlay-bg);
+    }
+    .modal {
+        background: var(--modal-bg);
+    }
+    .modal-title {
+        color: var(--body-text);
     }
 </style>

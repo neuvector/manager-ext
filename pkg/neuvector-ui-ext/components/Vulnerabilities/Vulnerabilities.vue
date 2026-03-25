@@ -12,7 +12,7 @@
     import AdvancedFilterModal from './dialogs/AdvancedFilterModal.vue';
     import { getDomains, postVulnerabilityQuery } from '../../plugins/vulnerabilities-class';
     import { SERVICE } from '@shell/config/types';
-    import { nvVariables, NV_CONST, RANCHER_CONST } from '../../types';
+    import { nvVariables, NV_CONST } from '../../types';
     import { refreshAuth } from '../../plugins/neuvector-class'; 
     import { initVulQuery } from '../../utils/vulnerabilities';
     import FileExportModal from './dialogs/FileExportModal.vue';
@@ -58,12 +58,6 @@
             }
         },
         props: {
-        },
-        computed: {
-            isLightTheme: function() {
-                nvVariables.isLightTheme = sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK;
-                return nvVariables.isLightTheme;
-            }
         },
         data() {
             return {
@@ -132,7 +126,7 @@
 
 <template>
     <Loading v-if="$fetchState.pending" />
-    <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+    <div v-else-if="errorRes" class="container">
         <Error :error="errorRes"></Error>
     </div>
     <div v-else class="vulnerabilities">
@@ -199,7 +193,6 @@
                         <div class="grid-area">
                             <VulnerabilityItemsTable 
                                 v-if="vulQueryData && vulQuery"
-                                :isLightTheme="isLightTheme" 
                                 :vulQueryData="vulQueryData" 
                                 :vulQuery="vulQuery" 
                                 @refresh="triggerRefresh" 
@@ -215,7 +208,6 @@
                                 <VulnerabilityItemsDetail 
                                     v-else
                                     :selectedVul="selectedVul" 
-                                    :isLightTheme="isLightTheme" 
                                 ></VulnerabilityItemsDetail>
                             </div>
                         </div>
@@ -225,14 +217,12 @@
         </div>
         <AdvancedFilterModal 
             ref="advFilter" 
-            :isLightTheme="isLightTheme" 
             :vulQuery="vulQuery" 
             :domains="domains" 
             @close="closeAdvFilter"
         ></AdvancedFilterModal>
         <FileExportModal
             ref="fileExport"
-            :isLightTheme="isLightTheme"
             :title="'Export Vulnerabilities Report'"
             :queryToken="vulQueryData?.query_token"
         > 

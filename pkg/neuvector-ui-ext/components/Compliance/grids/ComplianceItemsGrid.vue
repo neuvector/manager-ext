@@ -30,7 +30,6 @@
             complianceData: Object,
             advFilter: Object,
             filterText: String,
-            isLightTheme: Boolean,
         },
         data() {
             return {
@@ -151,6 +150,9 @@
             };
         },
         computed: {
+            isLightTheme() {
+                return !document.body.classList.contains('theme-dark');
+            },
             isAdvFilterOn() {
                 return (
                     this.advFilter.scoredType !== 'all' ||

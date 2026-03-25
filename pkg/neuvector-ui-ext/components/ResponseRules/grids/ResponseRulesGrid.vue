@@ -1,6 +1,6 @@
 <script>
     import ResourceTable from '@shell/components/ResourceTable';
-    import { RANCHER_CONST, NV_CONST } from '../../../types/neuvector';
+    import { NV_CONST } from '../../../types/neuvector';
     import ActionMenu from '@shell/components/ActionMenu';
     import AddEditRuleModal from '../dialogs/AddEditRuleModal';
     import { UpdateType } from '../../../types/network-rules';
@@ -83,7 +83,6 @@
                 sort:  'cfg_type',
               },
             ],
-            isLightTheme: sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK,
             menuOpen: false,
             actionMenuTargetElement:  null,
             actionMenuTargetEvent:    null,
@@ -176,6 +175,9 @@
           }
         },
         computed: {
+          isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
+          },
           menuActions() {
             let selectedResponseRule = this.responseRules[this.selectedIndex];
             const menuActions = [];
@@ -300,7 +302,6 @@
     />
     <AddEditRuleModal 
       ref="addEditRule"
-      :isLightTheme="isLightTheme"
       :autoCompleteData="autoCompleteData"
       :startId="selectedRuleId"
       :isReadOnly="isReadOnly"

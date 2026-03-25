@@ -2,26 +2,24 @@
   <carousel :items-to-show="1">
     <slide style="display: block;">
       <h5><strong>{{ instructionList[0].title }}</strong></h5>
-      <p :style="rancherTheme === 'light' ? 'color: #888' : 'color: #fff' + ' text-align: left;'">
+      <p class="slide-content">
         <ScoreInstruction :score="score" />
       </p>
     </slide>
 
-
     <slide style="display: block">
       <h5><strong>{{ instructionList[1].title }}</strong></h5>
-      <p :style="rancherTheme === 'light' ? 'color: #888' : 'color: #fff' + ' text-align: left;'">{{ instructionList[1].content }}</p>
+      <p class="slide-content">{{ instructionList[1].content }}</p>
     </slide>
 
     <slide style="display: block">
       <h5><strong>{{ instructionList[2].title }}</strong></h5>
-      <p :style="rancherTheme === 'light' ? 'color: #888' : 'color: #fff' + ' text-align: left;'">{{ instructionList[2].content }}</p>
+      <p class="slide-content">{{ instructionList[2].content }}</p>
     </slide>
-
 
     <slide style="display: block">
       <h5><strong>{{ instructionList[3].title }}</strong></h5>
-      <p :style="rancherTheme === 'light' ? 'color: #888' : 'color: #fff' + ' text-align: left;'">
+      <p class="slide-content">
         <VulnerabilitiesInstruction :token="token" :ns="ns" :autoScan="autoScan" :currentClusterId="currentClusterId"/>
       </p>
     </slide>
@@ -80,7 +78,6 @@ export default {
     }
   },
   props: {
-    rancherTheme: String,
     ns: String,
     token: String,
     score: Number,
@@ -89,3 +86,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.slide-content {
+  color: var(--text-secondary);
+  text-align: left;
+}
+</style>

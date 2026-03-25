@@ -7,8 +7,10 @@
         },
         props: {
             autoCompleteData: Object,
-            isLightTheme: Boolean,
             disabled: Boolean,
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         data() {
             return {
@@ -39,7 +41,6 @@
         </button>
         <AddEditRuleModal 
             ref="addEditRule"
-            :isLightTheme="isLightTheme"
             :autoCompleteData="autoCompleteData"
             :opType="UpdateType.AddToTop"
             @close="closeModal">

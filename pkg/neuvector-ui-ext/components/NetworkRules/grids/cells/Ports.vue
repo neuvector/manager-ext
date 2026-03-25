@@ -6,7 +6,6 @@
         },
         props: {
             rule: Object,
-            isLightTheme: Boolean,
         },
         methods: {
             showAllPorts() {
@@ -17,6 +16,7 @@
             },
         },
         computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); },
             getPorts() {
                 let ports = '';
                 if (this.rule && this.rule.id > -1) {
@@ -61,7 +61,7 @@
     <div>
         <span v-if="getPorts.hasViewAll" style="word-wrap: break-word;" :class="getPorts.className" @click="showAllPorts(rule.id, rule.ports, $event)">{{ getPorts.text }}</span>
         <span v-else style="word-wrap: break-word;" :class="getPorts.className">{{ getPorts.text }}</span>
-        <ViewAllPortsModal v-if="showAllPortsModal" :isLightTheme="isLightTheme" @close="closeAllPorts" :ports="rule.ports"></ViewAllPortsModal>
+        <ViewAllPortsModal v-if="showAllPortsModal" @close="closeAllPorts" :ports="rule.ports"></ViewAllPortsModal>
     </div>
 </template>
 

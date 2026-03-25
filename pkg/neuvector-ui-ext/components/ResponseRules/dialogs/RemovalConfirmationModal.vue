@@ -1,7 +1,6 @@
 <script>
     import { Card } from '@components/Card';
     import Checkbox from '@components/Form/Checkbox/Checkbox';
-    import { nvVariables } from '../../../types/neuvector';
 
     export default {
         components: {
@@ -15,9 +14,11 @@
         },
         data() {
             return {
-                isLightTheme: nvVariables.isLightTheme,
                 unquarantine: false,
             };
+        },
+        computed: {
+            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         methods: {
           close() {
@@ -29,10 +30,10 @@
 
 <template>
     <div class="modal-backdrop">
-        <div class="modal" :class="isLightTheme ? 'light' : 'dark'"  style="position: absolute; z-index: 200; left: calc(100vw / 2 - 400px)">
+        <div class="modal" style="position: absolute; z-index: 200; left: calc(100vw / 2 - 400px)">
             <Card :buttonAction="close" :buttonText="'Close'" :sticky="true">
                 <template v-slot:title>
-                    <h5 class="p-10" :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+                    <h5 class="p-10 modal-title">
                         {{ t('general.CONFIRMATION') }}
                     </h5>
                 </template>
@@ -59,3 +60,14 @@
         </div>
     </div>
 </template>
+<style lang="scss" scoped>
+    .modal-backdrop {
+        background-color: var(--overlay-bg);
+    }
+    .modal {
+        background: var(--modal-bg);
+    }
+    .modal-title {
+        color: var(--body-text);
+    }
+</style>

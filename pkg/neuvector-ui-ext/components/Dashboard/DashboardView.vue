@@ -102,7 +102,6 @@ export default {
 
   props: {
     ns: String,
-    rancherTheme: String
   },
 
   computed: {
@@ -262,7 +261,7 @@ export default {
 
 <template>
   <Loading v-if="$fetchState.pending" />
-  <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+  <div v-else-if="errorRes" class="container">
     <Error :error="errorRes"></Error>
   </div>
   <div v-else class="dashboard">
@@ -277,7 +276,7 @@ export default {
       <div v-if="scoreInfo">
         <div class="get-started" style="margin-bottom: 15px;">
           <ScoreGauge :scoreInfo="scoreInfo"/>
-          <ScoreFactorCommentSlider v-if="detailsInfo && currentCluster" :rancherTheme="rancherTheme" :token="token" :ns="ns" :score="scoreInfo.security_scores.security_risk_score" :autoScan="detailsInfo.autoScanConfig" :currentClusterId="currentCluster.id" class="m-0"/>
+          <ScoreFactorCommentSlider v-if="detailsInfo && currentCluster" :token="token" :ns="ns" :score="scoreInfo.security_scores.security_risk_score" :autoScan="detailsInfo.autoScanConfig" :currentClusterId="currentCluster.id" class="m-0"/>
           <!-- <DashboardReportSection /> -->
           <SSOMenu v-if="this.currentCluster" :ns="ns" :ssoLink="ssoLink"/>
         </div>
@@ -305,7 +304,7 @@ export default {
             />
           </div>
           <div v-if="scoreInfo">
-            <Exposures v-if="currentCluster" :currentClusterId="currentCluster.id" :ingress="scoreInfo.ingress.filter(ingress => ingress.policy_action !== 'open')" :egress="scoreInfo.egress.filter(egress => egress.policy_action !== 'open')" :token="token" :ns="ns" :rancherTheme="rancherTheme"/>
+            <Exposures v-if="currentCluster" :currentClusterId="currentCluster.id" :ingress="scoreInfo.ingress.filter(ingress => ingress.policy_action !== 'open')" :egress="scoreInfo.egress.filter(egress => egress.policy_action !== 'open')" :token="token" :ns="ns" />
           </div>
         </Tab>
         <Tab :weight="0" name="4-top-vulnerable-assets" :label="t('dashboard.body.panel_title.TOP_VULNERABLE_ASSETS')">

@@ -1,15 +1,15 @@
 <template>
   <div class="modal-backdrop">
-    <div class="modal" :class="rancherTheme">
+    <div class="modal">
       <Card :buttonAction="close" :buttonText="'Close'" :sticky="true">
         <template v-slot:title>
-          <h5 class="p-10" :style="rancherTheme === 'light' ? 'color: #888' : 'color: #fff'">
+          <h5 class="p-10 modal-title">
             {{ selectedRow.service }}
           </h5>
         </template>
         <template v-slot:body>
           <div class="p-10">
-            <ExposureChildGrid :exposureInfo="selectedRow.entries" exposureType="ingress" :rancherTheme="rancherTheme"/>
+            <ExposureChildGrid :exposureInfo="selectedRow.entries" exposureType="ingress" />
           </div>
           <!-- {{ selectedRow.children }} -->
         </template>
@@ -31,7 +31,6 @@
     },
     props: {
       selectedRow: Object,
-      rancherTheme: String
     },
     methods: {
       close() {
@@ -61,17 +60,14 @@
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-
-    &.light {
-      background: #FFFFFF;
-    }
-
-    &.dark {
-      background: #1b1c21;
-    }
+    background: var(--body-bg);
 
     & .card-container {
       margin: 0;
     }
+  }
+
+  .modal-title {
+    color: var(--body-text);
   }
 </style>

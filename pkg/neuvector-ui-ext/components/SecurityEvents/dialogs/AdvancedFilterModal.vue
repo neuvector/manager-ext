@@ -11,7 +11,6 @@
           LabeledInput
         },
         props: {
-            isLightTheme: Boolean,
             autoCompleteData: Object,
             mode: { type: String, default: 'edit' }
         },
@@ -69,6 +68,11 @@
             loadFilters(filterParam);
             filterSecEvents();
             this.showSlideIn = false;
+          }
+        },
+        computed: {
+          isLightTheme() {
+            return !document.body.classList.contains('theme-dark');
           }
         },
         data() {
@@ -136,7 +140,7 @@
           </div>
 
           <div class="adv-filter-title mt-20">
-            <h5 :style="isLightTheme ? 'color: #888' : 'color: #fff'">
+            <h5 class="modal-title">
               {{ t('general.FILTER_MATCH_ALL') }}
             </h5>
           </div>
@@ -279,6 +283,7 @@
     .vs__dropdown-menu {
         z-index: 1000 !important;
     }
+    .modal-title { color: var(--body-text); }
     .nv-labal-input {
       label {
         left: 10px !important;

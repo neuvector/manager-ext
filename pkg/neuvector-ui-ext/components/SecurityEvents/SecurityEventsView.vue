@@ -1,29 +1,28 @@
 <script>
-    import QuickFilter from './quickFilter/QuickFilter';
-    import AdvancedFilter from './buttons/AdvancedFilter.vue';
-    import { getSecEvents } from '../../plugins/security-events-class';
-    import { combineSecurityEvents, secEventVar } from '../../utils/security-events';
     import { SERVICE } from '@shell/config/types';
-    import { nvVariables, NV_CONST, RANCHER_CONST } from '../../types/neuvector';
-    import { refreshAuth } from '../../plugins/neuvector-class'; 
-    import TimeSparklingChart from './timeSlider/TimeSparklingChart';
-    import TimeSlider from './timeSlider/TimeSlider';
-    import { prepareContext4TwoWayInfinityScroll, filterSecEvents } from '../../utils/security-events';
-    import { vTooltip } from 'floating-vue';
+import { vTooltip } from 'floating-vue';
+import { refreshAuth } from '../../plugins/neuvector-class';
+import { getSecEvents } from '../../plugins/security-events-class';
+import { NV_CONST, nvVariables } from '../../types/neuvector';
+import { combineSecurityEvents, filterSecEvents, prepareContext4TwoWayInfinityScroll, secEventVar } from '../../utils/security-events';
+import AdvancedFilter from './buttons/AdvancedFilter.vue';
+import QuickFilter from './quickFilter/QuickFilter';
+import TimeSlider from './timeSlider/TimeSlider';
+import TimeSparklingChart from './timeSlider/TimeSparklingChart';
     // import { library } from '@fortawesome/fontawesome';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     // import { faSomeIcon } from '@fortawesome/fontawesome-free-regular'; 
-    import BriefInfo from './contents/BriefInfo';
-    import Details from './contents/Details';
-    import Packet from './dialogs/Packet';
-    import NodeInfo from '../common/dialogs/NodeInfo';
-    import PodInfo from '../common/dialogs/PodInfo';
-    import EnforcerInfo from '../common/dialogs/EnforcerInfo';
-    import DownloadCsv from  './buttons/DownloadCsv';
-    import Refresh from '../common/buttons/Refresh';
     import Loading from '@shell/components/Loading';
-    import Error from '../common/error/Error';
-    import TwoWayInfinityScroll from '../../directives/TwoWayInfinityScroll';
+import TwoWayInfinityScroll from '../../directives/TwoWayInfinityScroll';
+import Refresh from '../common/buttons/Refresh';
+import EnforcerInfo from '../common/dialogs/EnforcerInfo';
+import NodeInfo from '../common/dialogs/NodeInfo';
+import PodInfo from '../common/dialogs/PodInfo';
+import Error from '../common/error/Error';
+import DownloadCsv from './buttons/DownloadCsv';
+import BriefInfo from './contents/BriefInfo';
+import Details from './contents/Details';
+import Packet from './dialogs/Packet';
 
     // library.add(faSomeIcon);
 
@@ -127,8 +126,7 @@
         },
         computed: {
             isLightTheme: function() {
-                nvVariables.isLightTheme = sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK;
-                return nvVariables.isLightTheme;
+                return !document.body.classList.contains('theme-dark');
             },
             packetModalVisible: function() {
                 return nvVariables.showPacketModal.value;
@@ -164,7 +162,7 @@
 
 <template>
     <Loading v-if="$fetchState.pending" />
-    <div v-else-if="errorRes" :rancherTheme="rancherTheme" class="container">
+    <div v-else-if="errorRes" class="container">
         <Error :error="errorRes"></Error>
     </div>
     <div v-else class="screen-area">
@@ -183,7 +181,6 @@
                     </div>
                     <div v-if="processedSecEvents.cachedSecurityEvents && processedSecEvents.cachedSecurityEvents.length > 0" class="pull-right" style="margin-right: 10px;">
                         <AdvancedFilter 
-                            :isLightTheme="isLightTheme"
                             :autoCompleteData="processedSecEvents.autoCompleteData" 
                         />
                     </div>

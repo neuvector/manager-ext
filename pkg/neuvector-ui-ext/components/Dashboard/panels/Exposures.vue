@@ -178,7 +178,6 @@ export default {
         ns: String,
         ingress: Array,
         egress: Array,
-        rancherTheme: String,
         currentClusterId: String
     },
 
@@ -201,10 +200,10 @@ export default {
         <BarChart4Exposures class="exposure-chart" :parentContext="this" :hierarchicalIngressList="hierarchicalIngressList" :hierarchicalEgressList="hierarchicalEgressList"/>
         <Tabbed defaultTab="" class="exposure-grid-group">
             <Tab name="ingress" :label="t('dashboard.body.panel_title.INGRESS')">
-                <ExposureGrid :exposureInfo="hierarchicalIngressList" exposureType="ingress" :rancherTheme="rancherTheme"/>
+                <ExposureGrid :exposureInfo="hierarchicalIngressList" exposureType="ingress" />
             </Tab>
             <Tab name="egress" :label="t('dashboard.body.panel_title.EGRESS')">
-                <ExposureGrid :exposureInfo="hierarchicalEgressList" exposureType="egress" :rancherTheme="rancherTheme"/>
+                <ExposureGrid :exposureInfo="hierarchicalEgressList" exposureType="egress" />
             </Tab>
             <ExposureReport class="exposure-report-btn" :ingress="ingress" :egress="egress"/>
         </Tabbed>
