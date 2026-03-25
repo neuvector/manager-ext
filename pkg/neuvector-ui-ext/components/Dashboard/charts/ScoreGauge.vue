@@ -27,13 +27,12 @@
   
   <script>
   import VueGauge from "vue-gauge";
-import { NV_CONST, RANCHER_CONST } from '../../../types/neuvector';
+  import { NV_CONST } from '../../../types/neuvector';
 
   export default {
     components: { VueGauge },
     props: {
       scoreInfo: Object,
-      rancherTheme: String
     },
     computed: {
       scoreLevel: function() {
@@ -67,7 +66,7 @@ import { NV_CONST, RANCHER_CONST } from '../../../types/neuvector';
         myOptions: {
           chartWidth: 150,
           needleValue: this.scoreInfo.security_scores.security_risk_score,
-          needleColor: this.rancherTheme === RANCHER_CONST.THEME.LIGHT ? 'black' : 'white',
+          needleColor: 'transparent',
           arcDelimiters: [20, 50],
           arcColors: ["rgb(61,204,91)", "rgb(239,214,19)", "rgb(255,84,84)"],
           rangeLabel: ["", ""],
@@ -80,8 +79,12 @@ import { NV_CONST, RANCHER_CONST } from '../../../types/neuvector';
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
+    :deep(.vue-gauge-item svg path[stroke-width="2"]) {
+        fill: var(--body-text) !important;
+        stroke: var(--body-text) !important;
+    }
     .vue-gauge-item > svg > text {
-        color: white;
+        color: var(--body-text);
     }
     .dashboard-summary-title {
         line-height: 16px;
@@ -89,14 +92,14 @@ import { NV_CONST, RANCHER_CONST } from '../../../types/neuvector';
             float: left;
             height: 16px;
             width: 50px;
-            color: #7e8da2;
+            color: var(--text-secondary);
             line-height: 16px;
         }
         td:first-child {
-            border-right: #7e8da2 1px solid;
+            border-right: var(--text-secondary) 1px solid;
         }
         td:last-child {
-            border-left: #7e8da2 1px solid;
+            border-left: var(--text-secondary) 1px solid;
         }
     }
     .dashboard-summary-value {
@@ -106,17 +109,17 @@ import { NV_CONST, RANCHER_CONST } from '../../../types/neuvector';
             height: 16px;
             background-color: transparent;
             -webkit-print-color-adjust: exact;
-            color: #fff;
+            color: var(--body-text);
             width: 50px;
             line-height: 16px;
         }
         td:first-child {
-            border-right: #fff 1px solid;
+            border-right: var(--body-text) 1px solid;
             border-bottom-left-radius: 2px;
             border-top-left-radius: 2px;
         }
         td:last-child {
-            border-left: #fff 1px solid;
+            border-left: var(--body-text) 1px solid;
             border-bottom-right-radius: 2px;
             border-top-right-radius: 2px;
         }                   
