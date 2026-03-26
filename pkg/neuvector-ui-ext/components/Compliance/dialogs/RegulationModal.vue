@@ -17,9 +17,6 @@
             name: String,
         },
         computed: {
-            isLightTheme() {
-                return !document.body.classList.contains('theme-dark');
-            }
         },
         methods: {
             close() {

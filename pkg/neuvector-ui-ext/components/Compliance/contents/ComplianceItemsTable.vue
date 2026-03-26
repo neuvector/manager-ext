@@ -31,7 +31,6 @@
             totalCount() {
                 return this.complianceData.compliances.length;
             },
-            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         methods: {
             initFilter() {

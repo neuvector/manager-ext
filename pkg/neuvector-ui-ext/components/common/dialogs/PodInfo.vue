@@ -28,7 +28,6 @@ import { shortenString } from '../../../utils/common';
             };
         },
         computed: {
-            isLightTheme() { return !document.body.classList.contains('theme-dark'); },
             isScanStarted4Pod: function() {
                 return false;
             }

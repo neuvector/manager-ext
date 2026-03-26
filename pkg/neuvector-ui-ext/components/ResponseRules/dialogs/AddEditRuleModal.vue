@@ -36,9 +36,6 @@ export default {
       }
     },
     computed: {
-        isLightTheme() {
-            return !document.body.classList.contains('theme-dark');
-        },
         getConditionOptions() {
             let name = this.autoCompleteData.conditionOptions[this.rule.event].name ?
                 this.autoCompleteData.conditionOptions[this.rule.event].name : [];

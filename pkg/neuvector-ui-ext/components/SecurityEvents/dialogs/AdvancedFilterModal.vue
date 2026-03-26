@@ -71,9 +71,6 @@
           }
         },
         computed: {
-          isLightTheme() {
-            return !document.body.classList.contains('theme-dark');
-          }
         },
         data() {
           return {

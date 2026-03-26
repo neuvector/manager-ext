@@ -16,7 +16,6 @@
             },
         },
         computed: {
-            isLightTheme() { return !document.body.classList.contains('theme-dark'); },
             getPorts() {
                 let ports = '';
                 if (this.rule && this.rule.id > -1) {

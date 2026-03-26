@@ -5,7 +5,6 @@
             ViewAllPortsModal,
         },
         computed: {
-            isLightTheme() { return !document.body.classList.contains('theme-dark'); },
             getPorts() {
                 let ports = '';
                 if (this.params.node.data && this.params.node.data.id > -1) {

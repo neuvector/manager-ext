@@ -90,9 +90,6 @@
           },
         },
         computed: {
-          isLightTheme() {
-            return !document.body.classList.contains('theme-dark');
-          },
           vulnerbilityCount() {
             return this.vulnerabilities.reduce((cnt, vul) => {
               cnt.high += vul.severity.toLowerCase() === 'high' ? 1 : 0;

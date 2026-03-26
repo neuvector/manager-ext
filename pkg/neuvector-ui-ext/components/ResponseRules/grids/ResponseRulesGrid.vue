@@ -175,9 +175,6 @@
           }
         },
         computed: {
-          isLightTheme() {
-            return !document.body.classList.contains('theme-dark');
-          },
           menuActions() {
             let selectedResponseRule = this.responseRules[this.selectedIndex];
             const menuActions = [];

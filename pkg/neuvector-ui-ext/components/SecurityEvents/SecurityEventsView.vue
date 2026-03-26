@@ -20,6 +20,7 @@ import NodeInfo from '../common/dialogs/NodeInfo';
 import PodInfo from '../common/dialogs/PodInfo';
 import Error from '../common/error/Error';
 import DownloadCsv from './buttons/DownloadCsv';
+import agGridTheme from '../../mixins/agGridTheme';
 import BriefInfo from './contents/BriefInfo';
 import Details from './contents/Details';
 import Packet from './dialogs/Packet';
@@ -27,6 +28,7 @@ import Packet from './dialogs/Packet';
     // library.add(faSomeIcon);
 
     export default {
+        mixins: [agGridTheme],
         components: {
             QuickFilter,
             TimeSparklingChart,
@@ -125,9 +127,6 @@ import Packet from './dialogs/Packet';
             }
         },
         computed: {
-            isLightTheme: function() {
-                return !document.body.classList.contains('theme-dark');
-            },
             packetModalVisible: function() {
                 return nvVariables.showPacketModal.value;
             },
