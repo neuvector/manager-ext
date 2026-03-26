@@ -1,5 +1,5 @@
 <template>
-    <div class="chart-container">
+    <div class="chart-container" ref="chartWrap">
         <LineChart
             :chartData="chartData"
             :options="chartOptions"
@@ -113,6 +113,13 @@
 
             return { chartData, chartOptions };
         },
+        mounted() {
+            const canvas = this.$refs.chartWrap?.querySelector('canvas');
+            if (canvas) {
+                canvas.style.height = '70px';
+                canvas.style.maxHeight = '70px';
+            }
+        },
     });
 </script>
 
@@ -125,5 +132,11 @@
 
     .chart-container :deep(> div) {
       width: 100%;
+    }
+
+    .chart-container :deep(canvas) {
+      width: 100% !important;
+      height: 70px !important;
+      max-height: 70px !important;
     }
 </style>

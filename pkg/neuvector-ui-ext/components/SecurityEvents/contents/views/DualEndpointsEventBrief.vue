@@ -30,7 +30,7 @@
             showPacket: async function(threatId, event) {
                 try {
                     let packetRes = await getPackets(threatId);
-                    nvVariables.packet.value = packetRes.threat.packet;
+                    nvVariables.packet.value = packetRes.data.threat.packet;
                     nvVariables.showPacketModal.value = true;
                 } catch(error) {
                     console.error(error);

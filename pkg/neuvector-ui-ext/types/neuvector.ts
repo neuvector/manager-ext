@@ -1,3 +1,5 @@
+import { ref } from 'vue';
+
 export const NEUVECTOR_PRODUCT_NAME = "neuvector";
 
 export interface FilterOptions {
@@ -853,32 +855,14 @@ export const nvVariables = {
     advFilter: null,
   },
   isLightTheme: true,
-  showPacketModal: {
-    value: false
-  },
-  packet: {
-    value: ''
-  },
-  showHostInfoModal: {
-    value: false
-  },
-  host: {
-    value: {} as any
-  },
-  showWorkloadInfoModal: {
-    value: false
-  },
-  workload: {
-    value: {} as any
-  },
-  showEnforcerInfoModal: {
-    value: false
-  },
-  enforcer: {
-    value: {} as any
-  },
-  showAdvFilterModal: {
-    value: false
-  },
+  showPacketModal: ref(false),
+  packet: ref(''),
+  showHostInfoModal: ref(false),
+  host: ref({} as any),
+  showWorkloadInfoModal: ref(false),
+  workload: ref({} as any),
+  showEnforcerInfoModal: ref(false),
+  enforcer: ref({} as any),
+  showAdvFilterModal: ref(false),
   vulnerabilityAdvFilter: null,
 };
