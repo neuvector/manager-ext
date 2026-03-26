@@ -112,9 +112,6 @@ export default {
         }
     },
     computed: {
-        isLightTheme() {
-            return !document.body.classList.contains('theme-dark');
-        },
         isCustomDatePickerDisplay() {
             return this.exportReportCriteria.selectedLastModifyPeriod === LAST_MODIFIED_PERIOD_OPTION.CUSTOM
         },

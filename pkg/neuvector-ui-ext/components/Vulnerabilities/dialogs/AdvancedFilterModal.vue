@@ -149,9 +149,6 @@
           };
         },
         computed: {
-          isLightTheme() {
-            return !document.body.classList.contains('theme-dark');
-          },
           filteredImpactOptions() {
             if (this.advFilter.selectedDomains.length === 0) {
               return this.impactOptions;

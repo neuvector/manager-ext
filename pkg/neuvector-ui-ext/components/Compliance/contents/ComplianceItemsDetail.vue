@@ -12,7 +12,6 @@ import RegulationModal from '../dialogs/RegulationModal.vue';
             selectedCompliance: Object,
         },
         computed: {
-            isLightTheme() { return !document.body.classList.contains('theme-dark'); }
         },
         data() {
             return {
