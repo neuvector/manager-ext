@@ -159,8 +159,7 @@ import DownloadPacket from '../buttons/DownloadPacket';
         font-size: 12px;
         line-height: 20px;
     }
-</style>
-<style lang="scss" scoped>
+    
     .modal-backdrop {
         background-color: var(--overlay-bg);
     }

@@ -16,16 +16,17 @@
     import "ag-grid-community/styles/ag-grid.css";
     import "ag-grid-community/styles/ag-theme-balham.min.css";
     import { AgGridVue } from "ag-grid-vue3";
+    import agGridTheme from "../../../mixins/agGridTheme";
     import ExposureChildHostCellComponent from "./components/ExposureChildHostCellComponent";
     import { NV_MAP } from "../../../types/neuvector";
 
     export default {
+      mixins: [agGridTheme],
       props: {
         exposureInfo: Array,
         exposureType: String,
       },
       computed: {
-        isLightTheme() { return !document.body.classList.contains('theme-dark'); }
       },
       data() {
         return {

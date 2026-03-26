@@ -16,6 +16,7 @@
     import 'ag-grid-community/styles/ag-grid.css';
     import 'ag-grid-community/styles/ag-theme-balham.min.css';
     import { AgGridVue } from 'ag-grid-vue3';
+    import agGridTheme from '../../../mixins/agGridTheme';
     import { arrayToCsv } from '../../../utils/common';
     import { complianceImpactComparator, getCsvData } from '../../../utils/compliance';
     import ComplianceCategoryCellComponent from './components/ComplianceCategoryCellComponent.vue';
@@ -26,6 +27,7 @@
     import dayjs from 'dayjs';
 
     export default {
+        mixins: [agGridTheme],
         props: {
             complianceData: Object,
             advFilter: Object,
@@ -150,9 +152,6 @@
             };
         },
         computed: {
-            isLightTheme() {
-                return !document.body.classList.contains('theme-dark');
-            },
             isAdvFilterOn() {
                 return (
                     this.advFilter.scoredType !== 'all' ||
