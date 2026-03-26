@@ -345,4 +345,15 @@
 
 <style lang="scss" scoped>
     @import '../../../styles/neuvector.scss';
+
+    .modal-backdrop ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .text-white {
+        color: #fff !important;
+    }
 </style>

@@ -115,3 +115,47 @@
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+    @import '../../../styles/neuvector.scss';
+
+    .packetContent {
+        max-width: 1160px;
+        max-height: 340px;
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+
+    .view {
+        width: 320px;
+        float: left;
+        margin-left: 20px;
+    }
+    .view span {
+        float: left;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-size: 11px;
+        cursor: pointer;
+    }
+    .view span:hover,
+    .view span.current {
+        background: lightblue;
+    }
+    .view-char {
+        width: 160px;
+    }
+    .view-char span {
+        width: 10px;
+    }
+    .view-offset {
+        width: 50px;
+    }
+    .view-offset b {
+        float: left;
+        font-size: 12px;
+        line-height: 20px;
+    }
+</style>

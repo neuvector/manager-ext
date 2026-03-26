@@ -66,15 +66,6 @@
                     autoCompleteData: null,
                 },
                 securityEventsDataCtx: null,
-                showPacketModal: null,
-                packet: null,
-                showHostInfoModal: null,
-                host: null,
-                showWorkloadInfoModal: null,
-                workload: null,
-                showEnforcerInfoModal: null,
-                enforcer: null,
-                showAdvFilterModal: null,
                 errorRes: null,
             };
         },
@@ -93,15 +84,6 @@
                     this.securityEventsDataCtx = secEventVar.dateSliderCtx.value;
                     prepareContext4TwoWayInfinityScroll(this.securityEventsDataCtx);
                     console.log('this.securityEventsDataCtx', this.securityEventsDataCtx)
-                    this.showPacketModal = nvVariables.showPacketModal;
-                    this.packet = nvVariables.packet;
-                    this.showHostInfoModal = nvVariables.showHostInfoModal;
-                    this.host = nvVariables.host;
-                    this.showWorkloadInfoModal = nvVariables.showWorkloadInfoModal;
-                    this.workload = nvVariables.workload;
-                    this.showEnforcerInfoModal = nvVariables.showEnforcerInfoModal;
-                    this.enforcer = nvVariables.enforcer;
-                    this.showAdvFilterModal = nvVariables.showAdvFilterModal;
                     filterSecEvents();
                 } catch(error) {
                     console.error(error);
@@ -128,25 +110,49 @@
                 return e[0].scrollWidth <= e[0].clientWidth;
             },
             closePacketModal: function() {
-                this.showPacketModal.value = false;
+                nvVariables.showPacketModal.value = false;
             },
             closeHostInfoModal: function() {
-                this.showHostInfoModal.value = false;
+                nvVariables.showHostInfoModal.value = false;
             },
             closeWorkloadInfoModal: function() {
-                this.showWorkloadInfoModal.value = false;
+                nvVariables.showWorkloadInfoModal.value = false;
             },
             closeEnforcerInfoModal: function() {
-                this.showEnforcerInfoModal.value = false;
+                nvVariables.showEnforcerInfoModal.value = false;
             },
             closeAdvFilterModal: function() {
-                this.showAdvFilterModal.value = false;
+                nvVariables.showAdvFilterModal.value = false;
             }
         },
         computed: {
             isLightTheme: function() {
                 nvVariables.isLightTheme = sessionStorage.getItem(RANCHER_CONST.R_THEME) !== RANCHER_CONST.THEME.DARK;
                 return nvVariables.isLightTheme;
+            },
+            packetModalVisible: function() {
+                return nvVariables.showPacketModal.value;
+            },
+            packetData: function() {
+                return nvVariables.packet.value;
+            },
+            hostInfoModalVisible: function() {
+                return nvVariables.showHostInfoModal.value;
+            },
+            hostData: function() {
+                return nvVariables.host.value;
+            },
+            workloadInfoModalVisible: function() {
+                return nvVariables.showWorkloadInfoModal.value;
+            },
+            workloadData: function() {
+                return nvVariables.workload.value;
+            },
+            enforcerInfoModalVisible: function() {
+                return nvVariables.showEnforcerInfoModal.value;
+            },
+            enforcerData: function() {
+                return nvVariables.enforcer.value;
             }
         },
         directives: {
@@ -195,6 +201,7 @@
                 <TimeSparklingChart
                     v-if="processedSecEvents.cachedSecurityEvents"
                     :securityEventsList="processedSecEvents.cachedSecurityEvents"
+                    :height="70"
                 />
                 <TimeSlider
                     :securityEventsList="processedSecEvents.cachedSecurityEvents"
@@ -251,10 +258,10 @@
                     </div>
                 </li>
             </ul>
-            <Packet v-if="showPacketModal && showPacketModal.value" :packet="packet.value" @close="closePacketModal"></Packet>
-            <NodeInfo v-if="showHostInfoModal && showHostInfoModal.value" :host="host.value" @close="closeHostInfoModal"></NodeInfo>
-            <PodInfo v-if="showWorkloadInfoModal && showWorkloadInfoModal.value" :workload="workload.value" @close="closeWorkloadInfoModal"></PodInfo>
-            <EnforcerInfo v-if="showEnforcerInfoModal && showEnforcerInfoModal.value" :enforcer="enforcer.value" @close="closeEnforcerInfoModal"></EnforcerInfo>
+            <Packet v-if="packetModalVisible" :packet="packetData" @close="closePacketModal"></Packet>
+            <NodeInfo v-if="hostInfoModalVisible" :host="hostData" @close="closeHostInfoModal"></NodeInfo>
+            <PodInfo v-if="workloadInfoModalVisible" :workload="workloadData" @close="closeWorkloadInfoModal"></PodInfo>
+            <EnforcerInfo v-if="enforcerInfoModalVisible" :enforcer="enforcerData" @close="closeEnforcerInfoModal"></EnforcerInfo>
         </div>
         <div v-else class="text-center mt-5">
             {{ t('general.NO_ROWS') }}
