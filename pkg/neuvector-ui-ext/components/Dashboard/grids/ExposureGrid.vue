@@ -20,17 +20,18 @@ const vueApp = createApp({});
   import "ag-grid-community/styles/ag-grid.css";
   import "ag-grid-community/styles/ag-theme-balham.min.css";
   import { AgGridVue } from "ag-grid-vue3";
+  import agGridTheme from "../../../mixins/agGridTheme";
   import { NV_MAP } from '../../../types/neuvector';
   // import ExposedServicePodGridServicePodCellComponent from './components/ExposedServicePodGridServicePodCellComponent';
   
   export default {
+    mixins: [agGridTheme],
     name: "App",
     props: {
       exposureInfo: Array,
       exposureType: String,
     },
     computed: {
-      isLightTheme() { return !document.body.classList.contains('theme-dark'); }
     },
     data() {
       return {

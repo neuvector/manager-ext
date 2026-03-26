@@ -17,8 +17,10 @@
     import 'ag-grid-community/styles/ag-grid.css';
     import 'ag-grid-community/styles/ag-theme-balham.min.css';
     import { AgGridVue } from 'ag-grid-vue3';
+    import agGridTheme from '../../../mixins/agGridTheme';
 
     export default {
+        mixins: [agGridTheme],
         components: {
           AgGridVue,
           IdCellComponent,
@@ -390,9 +392,6 @@
           },
         },
         computed: {
-          isLightTheme() {
-            return !document.body.classList.contains('theme-dark');
-          },
         },
     };
 </script>

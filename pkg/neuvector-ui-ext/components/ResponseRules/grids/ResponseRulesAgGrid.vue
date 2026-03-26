@@ -5,6 +5,7 @@
     import 'ag-grid-community/styles/ag-grid.css';
     import 'ag-grid-community/styles/ag-theme-balham.min.css';
     import { AgGridVue } from 'ag-grid-vue3';
+    import agGridTheme from '../../../mixins/agGridTheme';
     import ActionsCellComponent from './agCells/ActionsCellComponent';
     import CategoryCellComponent from './agCells/CategoryCellComponent';
     import CfgTypeCellComponent from './agCells/CfgTypeCellComponent';
@@ -15,6 +16,7 @@
     import { toggleEnablement, deleteRule } from '../../../utils/response-rules';
 
     export default {
+        mixins: [agGridTheme],
         components: {
           AgGridVue,
           Confirmation,
@@ -270,9 +272,6 @@
           },
         },
         computed: {
-            isLightTheme() {
-                return !document.body.classList.contains('theme-dark');
-            },
         }
     };
 </script>
