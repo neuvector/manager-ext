@@ -3,7 +3,7 @@ Manager UI extension for Rancher
 
 ## Dev build
 1. Run yarn under root folder
-2. Run API=<web server IP>:<web server port> yarn dev
+2. Run API=\<web server IP\>:\<web server port\> yarn dev
 
 ## Git actions
 Git actions build should be run as release build.
