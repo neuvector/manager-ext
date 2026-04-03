@@ -64,7 +64,7 @@
                     node: 0,
                     container: 0,
                 },
-                complianceData: Object,
+                complianceData: null,
                 domains: Array,
                 availableFilters: null,
                 errorRes: null,
@@ -145,7 +145,9 @@
                     let services = new Set();
                     item.workloads.forEach(workload => {
                         let workloadDetails = this.workloadMap.get(workload.id);
-                        services.add(workloadDetails.service);
+                        if (workloadDetails) {
+                            services.add(workloadDetails.service);
+                        }
                     });
                     item.services = Array.from(services);
                     return item;
