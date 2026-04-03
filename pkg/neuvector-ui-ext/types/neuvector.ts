@@ -845,7 +845,7 @@ export const NV_MAP = {
 
 export const nvVariables = {
   currentCluster: '',
-  ns: NV_CONST.NV_SCHEMA,
+  ns: NV_CONST.NV_POD_NAMESPACE,
   authToken: '',
   user: {} as any,
   isRemote: false,

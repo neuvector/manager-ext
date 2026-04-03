@@ -71,7 +71,7 @@
                 vulQuery: initVulQuery(),
                 pieChartActive: false,
                 selectedVul: null,
-                vulQueryData: Object,
+                vulQueryData: null,
                 domains: Array,
                 errorRes: null,
             };
