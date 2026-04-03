@@ -250,13 +250,15 @@ export function preprocessCompliance(complianceData: any) {
   complianceData.compliances.forEach((compliance: any) => {
     let domains = new Set();
     compliance.nodes = compliance.nodes.map((nodeId: any) => {
+      if (!complianceData.nodes?.[nodeId]?.[0]) return null;
       complianceData.nodes[nodeId][0].id = nodeId;
       complianceData.nodes[nodeId][0].domains?.forEach((domain: any) => {
         domains.add(domain);
       });
       return complianceData.nodes[nodeId][0];
-    });
+    }).filter((item: any) => item !== null);
     compliance.workloads = compliance.workloads.map((workloadId: any) => {
+      if (!complianceData.workloads?.[workloadId]?.[0]) return null;
       complianceData.workloads[workloadId][0].id = workloadId;
       complianceData.workloads[workloadId][0].domains?.forEach(
         (domain: any) => {
@@ -264,8 +266,9 @@ export function preprocessCompliance(complianceData: any) {
         }
       );
       return complianceData.workloads[workloadId][0];
-    });
+    }).filter((item: any) => item !== null);
     compliance.platforms = compliance.platforms.map((platformId: any) => {
+      if (!complianceData.platforms?.[platformId]?.[0]) return null;
       complianceData.platforms[platformId][0].id = platformId;
       complianceData.platforms[platformId][0].domains?.forEach(
         (domain: any) => {
@@ -273,14 +276,15 @@ export function preprocessCompliance(complianceData: any) {
         }
       );
       return complianceData.platforms[platformId][0];
-    });
+    }).filter((item: any) => item !== null);
     compliance.images = compliance.images.map((imageId: any) => {
+      if (!complianceData.images?.[imageId]?.[0]) return null;
       complianceData.images[imageId][0].id = imageId;
       complianceData.images[imageId][0].domains?.forEach((domain: any) => {
         domains.add(domain);
       });
       return complianceData.images[imageId][0];
-    });
+    }).filter((item: any) => item !== null);
     compliance.domains = [...domains];
     compliance.images.sort(sortByDisplayName);
     compliance.workloads.sort(sortByDisplayName);
