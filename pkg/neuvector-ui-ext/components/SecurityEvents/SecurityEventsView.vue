@@ -1,5 +1,5 @@
 <script>
-    import { SERVICE } from '@shell/config/types';
+
 import { vTooltip } from 'floating-vue';
 import { refreshAuth } from '../../plugins/neuvector-class';
 import { getSecEvents } from '../../plugins/security-events-class';
@@ -47,12 +47,6 @@ import Packet from './dialogs/Packet';
             Error,
         },
         async fetch() {
-            if ( this.$store.getters['cluster/canList'](SERVICE) ) {
-                this.allServices = await this.$store.dispatch('cluster/findAll', { type: SERVICE }, { root: true });
-                if ( Array.isArray(this.allServices) && this.allServices.length ) {
-                    nvVariables.ns = this.allServices.find(svc => svc?.id?.includes(NV_CONST.NV_SERVICE)).metadata.namespace
-                }
-            }
             this.currentCluster = this.$store.getters['currentCluster'];
             nvVariables.currentCluster = this.currentCluster.id;
             await this.loadData();

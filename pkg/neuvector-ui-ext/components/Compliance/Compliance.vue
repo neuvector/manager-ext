@@ -10,7 +10,7 @@
     import ComplianceItemsDetail from './contents/ComplianceItemsDetail.vue';
     import ComplianceItemsChart from './contents/ComplianceItemsChart.vue';
     import { getDomains, getContainerBrief, getAvailableFilters, getCompliance } from '../../plugins/compliance-class';
-    import { SERVICE } from '@shell/config/types';
+
     import { nvVariables, NV_CONST } from '../../types';
     import { arrayToCsv, setRisks } from '../../utils/common';
     import { refreshAuth } from '../../plugins/neuvector-class'; 
@@ -34,12 +34,6 @@
             Error
         },
         async fetch() {
-            if ( this.$store.getters['cluster/canList'](SERVICE) ) {
-                this.allServices = await this.$store.dispatch('cluster/findAll', { type: SERVICE }, { root: true });
-                if ( Array.isArray(this.allServices) && this.allServices.length ) {
-                    nvVariables.ns = this.allServices.find(svc => svc?.id?.includes(NV_CONST.NV_SERVICE)).metadata.namespace
-                }
-            }
             this.currentCluster = this.$store.getters['currentCluster'];
             nvVariables.currentCluster = this.currentCluster.id;
             await this.loadData();

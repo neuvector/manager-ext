@@ -1,6 +1,6 @@
 <script>
 import Loading from '@shell/components/Loading';
-import { SERVICE } from '@shell/config/types';
+
 import { nvVariables, NV_CONST, NV_MAP } from '../../types/neuvector';
 import { refreshAuth } from '../../plugins/neuvector-class';
 import { getAutoCompleteData } from '../../plugins/network-rule-class';
@@ -45,12 +45,6 @@ export default {
   },
 
   async fetch() {
-    if ( this.$store.getters['cluster/canList'](SERVICE) ) {
-        this.allServices = await this.$store.dispatch('cluster/findAll', { type: SERVICE }, { root: true });
-        if ( Array.isArray(this.allServices) && this.allServices.length ) {
-            nvVariables.ns = this.allServices.find(svc => svc?.id?.includes(NV_CONST.NV_SERVICE)).metadata.namespace
-        }
-    }
     this.currentCluster = this.$store.getters['currentCluster'];
     nvVariables.currentCluster = this.currentCluster.id;
     await this.loadData();
