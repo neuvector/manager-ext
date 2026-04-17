@@ -20,7 +20,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.6",
     "@rancher/components": "^0.3.0-alpha.1",
-    "@rancher/shell": "3.0.10",
+    "@rancher/shell": "3.0.11",
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "4.14.184",
     "@types/uuid": "^8.3.4",
@@ -35,7 +35,7 @@
     "file-saver": "^2.0.5",
     "floating-vue": "^5.2.2",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "moment": "^2.30.1",
     "multi-range-slider-vue": "^1.1.4",
     "pako": "^2.1.0",
@@ -52,6 +52,7 @@
     "@babel/preset-env": "^7.24.7"
   },
   "resolutions": {
-    "@types/node": "~24.1.0"
+    "@types/node": "~24.1.0",
+    "lodash": "^4.18.1"
   }
 }
