@@ -103,6 +103,7 @@
             ],
             severityOptions: [
               { label: this.t('setting.ALL'), value: 'all' },
+              { label: this.t('enum.CRITICAL'), value: 'critical' },
               { label: this.t('enum.HIGH'), value: 'high' },
               { label: this.t('enum.MEDIUM'), value: 'medium' },
               { label: this.t('enum.LOW'), value: 'low' },

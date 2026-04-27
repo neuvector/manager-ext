@@ -140,6 +140,11 @@ import { capitalize, getSSOUrl, parseDatetimeStr } from '../../../utils/common';
                                 </span>
                                 <div class="d-inline">
                                     <span
+                                        v-if="host.scan_summary?.critical"
+                                        class="badge badge-critical mr-sm">
+                                        {{ host.scan_summary.critical }}
+                                    </span>
+                                    <span
                                         v-if="host.scan_summary?.high"
                                         class="badge badge-danger mr-sm">
                                         {{ host.scan_summary.high }}
@@ -151,13 +156,14 @@ import { capitalize, getSSOUrl, parseDatetimeStr } from '../../../utils/common';
                                         {{ host.scan_summary.low }}
                                     </span>
                                     <a
-                                        v-if="host.scan_summary?.high || host.scan_summary?.medium"
+                                        v-if="host.scan_summary?.critical || host.scan_summary?.high || host.scan_summary?.medium"
                                         style="display: table-cell; font-size: 11px; line-height: 15px">
                                         <em class="icon-external-link" target="_blank" @click="goToNvNodes()"></em>
                                     </a>
                                     <label
                                         v-if="
                                         host.scan_summary?.scanned_at &&
+                                        host.scan_summary?.critical === 0 &&
                                         host.scan_summary?.high === 0 &&
                                         host.scan_summary?.medium === 0
                                         "

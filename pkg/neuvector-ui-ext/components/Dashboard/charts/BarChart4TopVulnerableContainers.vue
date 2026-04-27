@@ -41,9 +41,11 @@
       setup(props) {
         let isEmptyData = ref(false);
         let topVulnerableAssetsLabel = new Array(5);
+        let topCriticalVulnerableAssetsData = new Array(5);
         let topHighVulnerableAssetsData = new Array(5);
         let topMediumVulnerableAssetsData = new Array(5);
         topVulnerableAssetsLabel.fill('');
+        topCriticalVulnerableAssetsData.fill(0);
         topHighVulnerableAssetsData.fill(0);
         topMediumVulnerableAssetsData.fill(0);
         if (props.topVulContainers.top5Containers.length === 0) {
@@ -52,6 +54,7 @@
           isEmptyData.value = false;
           props.topVulContainers.top5Containers.forEach((asset, index) => {
             topVulnerableAssetsLabel[index] = asset.display_name;
+            topCriticalVulnerableAssetsData[index] = asset.critical4Dashboard;
             topHighVulnerableAssetsData[index] = asset.high4Dashboard;
             topMediumVulnerableAssetsData[index] = asset.medium4Dashboard;
           });
@@ -59,6 +62,16 @@
         const chartData = ref({
           labels: topVulnerableAssetsLabel,
           datasets: [
+            {
+              data: topCriticalVulnerableAssetsData,
+              label: props.parentContext.t('enum.CRITICAL'),
+              backgroundColor: 'rgba(233, 30, 99, 0.3)',
+              borderColor: '#e91e63',
+              hoverBackgroundColor: 'rgba(233, 30, 99, 0.3)',
+              hoverBorderColor: '#e91e63',
+              barThickness: 8,
+              borderWidth: 2,
+            },
             {
               data: topHighVulnerableAssetsData,
               label: props.parentContext.t('enum.HIGH'),

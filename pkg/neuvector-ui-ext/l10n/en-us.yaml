@@ -1407,6 +1407,7 @@ scan:
     IMAGE: Image
     STATUS: Scan Status
     RESULT: Result
+    CRITICAL: Critical
     HIGH: High
     MEDIUM: Medium
     SEVERITY: Severity
@@ -1866,6 +1867,8 @@ audit:
     VERSION: Version
     HIGH_VUL_CNT: High
     MEDIUM_VUL_CNT: Medium
+    CRITICAL_VUL_CNT: Critical
+    CRITICAL_VUL: Critical Vulnerabilities
     HIGH_VUL: High Vulnerabilities
     MEDIUM_VUL: Medium Vulnerabilities
     CVE_DB_VERSION: CVE DB Version
@@ -2910,9 +2913,13 @@ admissionControl:
     BASE_IMAGE: Base Image
     CVE_NAMES: CVE names
     CVE_SEVERITY: CVE severity
-    CVE_HIGH_COUNT: Count of high severity CVE
-    CVE_HIGH_WITH_FIX_COUNT: Count of high severity CVE with fix
+    CVE_HIGH_COUNT: Count of critical and high severity CVE
+    CVE_HIGH_WITH_FIX_COUNT: Count of critical and high severity CVE with fix
     CVE_MEDIUM_COUNT: Count of medium severity CVE
+    CVE_CRITICAL_COUNT: Count of critical severity CVE
+    CVE_CRITICAL_WITH_FIX_COUNT: Count of critical severity CVE with fix
+    CVE_HIGH_COUNT_NO_CRITICAL: Count of high severity CVE
+    CVE_HIGH_WITH_FIX_COUNT_NO_CRITICAL: Count of high severity CVE with fix
     CVE_SCORE: CVE score
     IMAGE_SCANNED: Image scanned
     IMAGE_SIGNED: Image signed
@@ -2985,6 +2992,7 @@ admissionControl:
     HIGH: high
     MEDIUM: medium
     LOW: low
+    CRITICAL: critical
     NONE: none
     DAYS: days
     CORE: Core(s)
