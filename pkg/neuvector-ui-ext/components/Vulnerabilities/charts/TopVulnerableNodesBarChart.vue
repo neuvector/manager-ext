@@ -27,15 +27,18 @@
         },
         setup(props) {
             let topVulnerableAssetsLabel = new Array(5);
+            let topCriticalVulnerableAssetsData = new Array(5);
             let topHighVulnerableAssetsData = new Array(5);
             let topMediumVulnerableAssetsData = new Array(5);
             let topLowVulnerableAssetsData = new Array(5);
             topVulnerableAssetsLabel.fill('');
+            topCriticalVulnerableAssetsData.fill(0);
             topHighVulnerableAssetsData.fill(0);
             topMediumVulnerableAssetsData.fill(0);
             topLowVulnerableAssetsData.fill(0);
             props.topVulHosts.forEach((asset, index) => {
                 topVulnerableAssetsLabel[index] = asset.display_name;
+                topCriticalVulnerableAssetsData[index] = asset.critical;
                 topHighVulnerableAssetsData[index] = asset.high;
                 topMediumVulnerableAssetsData[index] = asset.medium;
                 topLowVulnerableAssetsData[index] = asset.low;
@@ -43,6 +46,16 @@
             const chartData = ref({
                 labels: topVulnerableAssetsLabel,
                 datasets: [
+                {
+                    data: topCriticalVulnerableAssetsData,
+                    label: props.parentContext.t('enum.CRITICAL'),
+                    backgroundColor: 'rgba(233, 30, 99, 0.3)',
+                    borderColor: '#e91e63',
+                    hoverBackgroundColor: 'rgba(233, 30, 99, 0.3)',
+                    hoverBorderColor: '#e91e63',
+                    barThickness: 8,
+                    borderWidth: 2,
+                },
                 {
                     data: topHighVulnerableAssetsData,
                     label: props.parentContext.t('enum.HIGH'),

@@ -234,6 +234,11 @@ import { shortenString } from '../../../utils/common';
                                     </span>
                                     <div class="pod-item-value d-inline">
                                         <span
+                                            v-if="workload.scan_summary.critical"
+                                            class="badge badge-critical mr-sm">
+                                            {{ workload.scan_summary.critical }}
+                                        </span>
+                                        <span
                                             v-if="workload.scan_summary.high"
                                             class="badge badge-danger mr-sm">
                                             {{ workload.scan_summary.high }}
@@ -242,7 +247,7 @@ import { shortenString } from '../../../utils/common';
                                             {{ workload.scan_summary.medium }}
                                         </span>
                                         <a
-                                            v-if="workload.scan_summary.high || workload.scan_summary.medium"
+                                            v-if="workload.scan_summary.critical || workload.scan_summary.high || workload.scan_summary.medium"
                                             style="display: table-cell; font-size: 11px; line-height: 15px">
                                             <em class="fa fa-external-link ml-lg"></em>
                                         </a>
@@ -250,6 +255,7 @@ import { shortenString } from '../../../utils/common';
                                         <span
                                             v-if="
                                             workload.scan_summary.scanned_at &&
+                                            workload.scan_summary.critical === 0 &&
                                             workload.scan_summary.high === 0 &&
                                             workload.scan_summary.medium === 0
                                             "
