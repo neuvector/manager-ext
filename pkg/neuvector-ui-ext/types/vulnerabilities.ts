@@ -14,12 +14,14 @@ export interface VulnerabilitiesQuerySummary {
 export interface VulnerabilitiesQuerySummaryTopAsset {
   index: number;
   display_name: string;
+  critical: number;
   high: number;
   medium: number;
   low: number;
 }
 
 export interface VulnerabilitiesQuerySummaryDistribution {
+  critical: number;
   high: number;
   medium: number;
   low: number;

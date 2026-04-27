@@ -36,6 +36,7 @@ export default {
                 Direction: direction,
                 Service: exposure.service,
                 Pod: exposure.pod_name,
+                'Critical Vuls': exposure.critical,
                 'High Vuls': exposure.high,
                 'Medium Vuls': exposure.medium,
                 'Policy Mode': exposure.policy_mode,

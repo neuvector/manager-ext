@@ -209,6 +209,10 @@ export default {
                             {{ t('group.gridHeader.VULNERABILITIES') }}:
                         </span>
                         <div class="pod-item-value d-inline">
+                            <span v-if="workload.scan_summary.critical"
+                                class="badge badge-critical mr-sm">
+                                {{ workload.scan_summary.critical }}
+                            </span>
                             <span v-if="workload.scan_summary.high"
                                 class="badge badge-danger mr-sm">
                                 {{ workload.scan_summary.high }}
@@ -216,11 +220,12 @@ export default {
                             <span v-if="workload.scan_summary.medium" class="badge badge-warning">
                                 {{ workload.scan_summary.medium }}
                             </span>
-                            <a v-if="workload.scan_summary.high || workload.scan_summary.medium"
+                            <a v-if="workload.scan_summary.critical || workload.scan_summary.high || workload.scan_summary.medium"
                                 style="display: table-cell; font-size: 11px; line-height: 15px">
                                 <em class="fa fa-external-link ml-lg"></em>
                             </a>
                             <span v-if="workload.scan_summary.scanned_at &&
+                                    workload.scan_summary.critical === 0 &&
                                     workload.scan_summary.high === 0 &&
                                     workload.scan_summary.medium === 0"
                                 class="badge badge-success">

@@ -78,15 +78,16 @@ const vueApp = createApp({});
           cellRenderer: params => {
             if (params && params.data) {
               return (
-                `<span class="nv-badge nv-badge-danger">${params.data.high}</span>
+                `<span class="nv-badge nv-badge-critical">${params.data.critical}</span>
+                <span class="nv-badge nv-badge-danger">${params.data.high}</span>
                 <span class="nv-badge nv-badge-warning">${params.data.medium}</span>`
               );
             }
             return '';
           },
-          width: 110,
-          maxWidth: 110,
-          minWidth: 110,
+          width: 130,
+          maxWidth: 130,
+          minWidth: 130,
           sortable: false,
         },
         {
@@ -185,6 +186,10 @@ const vueApp = createApp({});
     line-height: 1.5;
     margin-left: 8px;
     padding: 4px 8px;
+  }
+  .nv-badge-critical {
+    background-color: #E91E63;
+    color: #fff;
   }
   .nv-badge-danger {
     background-color: #c5161f;

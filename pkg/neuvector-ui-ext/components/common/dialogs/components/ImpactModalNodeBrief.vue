@@ -128,6 +128,10 @@ export default {
                         {{ t('group.gridHeader.VULNERABILITIES') }}:
                     </span>
                     <div class="d-inline">
+                        <span v-if="host.scan_summary?.critical"
+                            class="badge badge-critical mr-sm">
+                            {{ host.scan_summary.critical }}
+                        </span>
                         <span v-if="host.scan_summary?.high"
                             class="badge badge-danger mr-sm">
                             {{ host.scan_summary.high }}
@@ -138,12 +142,13 @@ export default {
                         <span v-if="host.scan_summary?.low" class="badge badge-success">
                             {{ host.scan_summary.low }}
                         </span>
-                        <a v-if="host.scan_summary?.high || host.scan_summary?.medium"
+                        <a v-if="host.scan_summary?.critical || host.scan_summary?.high || host.scan_summary?.medium"
                             @click="goToNvHosts()"
                             style="display: table-cell; font-size: 11px; line-height: 15px; cursor: pointer;">
                             <EOS_LAUNCH_FILLED size="base" color="#3D98D3"></EOS_LAUNCH_FILLED>
                         </a>
                         <label v-if="host.scan_summary?.scanned_at &&
+                                host.scan_summary?.critical === 0 &&
                                 host.scan_summary?.high === 0 &&
                                 host.scan_summary?.medium === 0"
                             class="label label-success-tran">

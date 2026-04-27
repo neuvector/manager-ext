@@ -29,7 +29,7 @@ export function getPattern(event: string, store: Store<any>) {
     let conditionOptions = store.getters['neuvector/responseRuleConditionOptions'];
     conditionOptions[event].types.forEach((type: string) => {
         if (type !== 'level' && type !== 'name') {
-            if (type === 'cve-high' || type === 'item') {
+            if (type === 'cve-critical' || type === 'cve-high' || type === 'item') {
                 pattern.push(`^${type}:[0-9]+[\.][0-9]+$|^${type}:[0-9]+$`);
             } else {
                 pattern.push(`^${type}:.+$`);
