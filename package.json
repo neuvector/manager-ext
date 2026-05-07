@@ -20,13 +20,13 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.6",
     "@rancher/components": "^0.3.0-alpha.1",
-    "@rancher/shell": "3.0.11",
+    "@rancher/shell": "3.0.12-rc.2",
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "4.14.184",
     "@types/uuid": "^8.3.4",
     "ag-grid-community": "^31.0.1",
     "ag-grid-vue3": "^32.3.0",
-    "axios": "github:axios/axios#7108c8877f9dc05f7aba8beb2b9e522537f9a9a7",
+    "axios": "1.15.0",
     "chart.js": "3.8.0",
     "core-js": "3.25.3",
     "css-loader": "6.7.3",
@@ -53,6 +53,7 @@
   },
   "resolutions": {
     "@types/node": "~24.1.0",
-    "lodash": "^4.18.1"
+    "lodash": "^4.18.1",
+    "axios": "1.15.0"
   }
 }
