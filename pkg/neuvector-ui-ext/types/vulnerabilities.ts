@@ -1,5 +1,5 @@
 export interface VulnerabilitiesQueryData {
-  query_token: string;
+  query_id: string;
   summary: VulnerabilitiesQuerySummary;
   total_matched_records: number;
   total_records: number;

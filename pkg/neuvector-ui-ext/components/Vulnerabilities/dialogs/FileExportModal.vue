@@ -31,7 +31,7 @@ export default {
     },
     props: {
         title: String,
-        queryToken: String
+        queryId: String
     },
     methods: {
         show() {
@@ -61,7 +61,7 @@ export default {
         },
         async exportAssetsFile() {
             try {
-                const data = (await patchAssetsViewData(this.queryToken, this.getLastModifiedDate())).data
+                const data = (await patchAssetsViewData(this.queryId, this.getLastModifiedDate())).data
                 downloadAssetsViewCsv(data);
             } catch (e) {
                 console.error(e);
@@ -70,7 +70,7 @@ export default {
         async exportVulnerabilitiesFile() {
             try {
                 let params = {
-                    token: this.queryToken,
+                    token: this.queryId,
                     start: 0,
                     row: -1,
                     lastmtime: this.getLastModifiedDate(),

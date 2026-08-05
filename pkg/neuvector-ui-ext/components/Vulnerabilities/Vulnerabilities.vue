@@ -218,7 +218,7 @@
         <FileExportModal
             ref="fileExport"
             :title="'Export Vulnerabilities Report'"
-            :queryToken="vulQueryData?.query_token"
+            :queryId="vulQueryData?.query_id"
         > 
         </FileExportModal>
     </div>

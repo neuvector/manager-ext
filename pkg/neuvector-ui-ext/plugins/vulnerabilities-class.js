@@ -53,12 +53,12 @@ export async function getDomains() {
     })
 }
 
-export async function patchAssetsViewData(queryToken, lastModifiedTime) {
+export async function patchAssetsViewData(queryId, lastModifiedTime) {
     return axios.patch(
         getSSOUrl(PATH.ASSETS_VULS_URL),
         { last_modified_timestamp: lastModifiedTime },
         {
-            params: { queryToken: queryToken }
+            params: { queryId: queryId }
         }
     )
 }
