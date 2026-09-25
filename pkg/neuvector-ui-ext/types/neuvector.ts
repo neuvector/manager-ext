@@ -866,3 +866,9 @@ export const nvVariables = {
   showAdvFilterModal: ref(false),
   vulnerabilityAdvFilter: null,
 };
+
+export const NEUVECTOR_RESOURCE = {
+  VULNERABILITY_PROFILE: 'neuvector.com.nvvulnerabilityprofile',
+  COMPLIANCE_PROFILE: 'neuvector.com.nvcomplianceprofile',
+  SECURITY_RULE: 'neuvector.com.nvsecurityrule',
+};
