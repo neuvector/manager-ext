@@ -17,7 +17,7 @@
 <template>
     <div>
         <hr style="margin: 5px auto;"/>
-        <div class="row message-box-wrap">
+        <div class="message-box-wrap">
             <div class="full-width-panel">
                 <div :class="'label text-bold ' + secEvent.details.message.cssColor">{{ t('nodes.gridHeader.MESSAGE') }}</div>
                 <div class="full-width-center message-box">

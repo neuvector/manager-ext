@@ -508,7 +508,7 @@
       left: -5px;
     }
     .radio:checked ~ .sec-event-content:after {
-      border-right-color: var(--nav-bg);
+      border-right-color: var(--nv-secondary-rgb);
     }
     .radio:checked ~ .sec-event-content {
       max-height: 400px;
@@ -517,7 +517,7 @@
       transform: translateX(20px);
       transition: transform 0.1s linear;
       // background-color: rgba(213, 219, 152, .1);
-      background-color: var(--nav-bg);
+      background-color: var(--nv-secondary-rgb);
     }
     .radio:checked ~ .sec-event-content div {
       max-height: 400px;
@@ -748,6 +748,7 @@
     z-index: 105;
     color: #9aaabc;
     padding: 2px 5px;
+    background: transparent;
   }
   
   .sec-adv-filter {

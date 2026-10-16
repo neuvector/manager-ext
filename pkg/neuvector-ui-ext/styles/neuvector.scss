@@ -1,5 +1,12 @@
 @import './common/color.scss';
 @import './bootstrap/scss/bootstrap.scss';
+
+:global(:root) {
+  --nv-danger-rgb: #dc3545;
+  --nv-secondary-rgb: #6c757d;
+  --nv-warning-rgb: #ffc107;
+}
+
 .auto-hide {
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
@@ -195,4 +202,28 @@
 .hand,
 .link {
   cursor: pointer;
+}
+
+.fixed-header-actions {
+  width: 100%;
+  background: transparent;
+  display: grid;
+  grid-template-columns: [bulk] auto [middle] min-content [search] minmax(min-content, 200px);
+  grid-column-gap: 10px;
+  padding: 0 0 20px 0;
+}
+
+.fixed-header-actions .bulk {
+  grid-area: bulk;
+}
+
+.fixed-header-actions .middle {
+  grid-area: middle;
+  white-space: nowrap;
+}
+
+.fixed-header-actions .search {
+  grid-area: search;
+  text-align: right;
+  justify-content: flex-end;
 }

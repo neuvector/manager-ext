@@ -27,9 +27,9 @@
                     content: secEvent.name,
                 }"
                 ref="ttSecEventName">
-                <EOS_BUG_REPORT_FILLED v-if="secEvent.type.name === NV_CONST.SEC_EVENT.TYPE.THREAT" size="base"/>
-                <EOS_DO_NOT_DISTURB_FILLED v-if="secEvent.type.name === NV_CONST.SEC_EVENT.TYPE.VIOLATION" size="base"/>
-                <EOS_WARNING_FILLED v-if="secEvent.type.name === NV_CONST.SEC_EVENT.TYPE.INCIDENT" size="base"/>
+                <EOS_BUG_REPORT_FILLED v-if="secEvent.type.name === NV_CONST.SEC_EVENT.TYPE.THREAT" color="var(--nv-danger-rgb)" size="base"/>
+                <EOS_DO_NOT_DISTURB_FILLED v-if="secEvent.type.name === NV_CONST.SEC_EVENT.TYPE.VIOLATION" color="var(--nv-secondary-rgb)" size="base"/>
+                <EOS_WARNING_FILLED v-if="secEvent.type.name === NV_CONST.SEC_EVENT.TYPE.INCIDENT" color="var(--nv-warning-rgb)" size="base"/>
                 <span
                     :class="'pull-left mt-1 '+ secEvent.type.cssColor"
                     aria-hidden="true">

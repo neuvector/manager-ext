@@ -108,7 +108,11 @@
           suppressDragLeaveHidesColumns: true,
           rowData: null,
           animateRows: true,
-          rowSelection: { type: 'single' },
+          rowSelection: {
+            mode: 'singleRow',
+            checkboxes: false,
+            enableClickSelection: true,
+          },
           icons: {
             sortAscending: '<em class="fa fa-sort-alpha-down"></em>',
             sortDescending: '<em class="fa fa-sort-alpha-up"></em>',

@@ -124,6 +124,7 @@
 </template>
 
 <style lang="scss" scoped>
+@import '../../../styles/neuvector.scss';
 .flex {
     display: flex;
     &.center {

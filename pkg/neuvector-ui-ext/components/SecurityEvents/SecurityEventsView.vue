@@ -240,7 +240,7 @@ import Packet from './dialogs/Packet';
                     <div class="sec-event-content">
                         <button
                             id="detail-close"
-                            class="btn-link pull-right sec-fixed-close"
+                            class="pull-right sec-fixed-close"
                             @click="closeDetails('sec-' + index)">
                             <em class="icon-close"></em>
                         </button>

@@ -23,25 +23,25 @@ export default {
         <span
             v-if="params.node.data.images && params.node.data.images.length > 0"
             class="impact-col p-0">
-            <EOS_SYSTEM_IMAGE_FILLED size="base" class="size-base"></EOS_SYSTEM_IMAGE_FILLED>
+            <EOS_SYSTEM_IMAGE_FILLED size="base" color="var(--body-text)" class="size-base"></EOS_SYSTEM_IMAGE_FILLED>
             {{ params.node.data.images.length }}
         </span>
         <span
             v-if="params.node.data.workloads && params.node.data.workloads.length > 0"
             class="impact-col p-0">
-            <EOS_CHECK_BOX_BLANK_FILLED size="base" class="size-base"></EOS_CHECK_BOX_BLANK_FILLED>
+            <EOS_CHECK_BOX_BLANK_FILLED size="base" color="var(--body-text)" class="size-base"></EOS_CHECK_BOX_BLANK_FILLED>
             {{ params.node.data.workloads.length }}
         </span>
         <span
             v-if="params.node.data.nodes && params.node.data.nodes.length > 0"
             class="impact-col p-0">
-            <EOS_STORAGE_FILLED size="base" class="size-base"></EOS_STORAGE_FILLED>
+            <EOS_STORAGE_FILLED size="base" color="var(--body-text)" class="size-base"></EOS_STORAGE_FILLED>
             {{ params.node.data.nodes.length }}
         </span>
         <span
             v-if="params.node.data.platforms && params.node.data.platforms.length > 0"
             class="impact-col p-0">
-            <EOS_APARTMENT_FILLED size="base" class="size-base"></EOS_APARTMENT_FILLED>
+            <EOS_APARTMENT_FILLED size="base" color="var(--body-text)" class="size-base"></EOS_APARTMENT_FILLED>
             {{ params.node.data.platforms.length }}
         </span>
     </div>
@@ -60,5 +60,6 @@ export default {
 
 .size-base {
   min-width: 14px;
+  margin-right: 4px;
 }
 </style>

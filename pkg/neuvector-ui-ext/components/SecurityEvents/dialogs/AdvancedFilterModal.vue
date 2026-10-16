@@ -145,8 +145,8 @@
       </div>
       <div class="nv-modal">
         <div class="row mt-2">
-            <div class="text-bold">{{ t('securityEvent.SEVERITY') }}</div>
-            <div class="mt-2">
+            <div class="col-3 text-bold">{{ t('securityEvent.SEVERITY') }}</div>
+            <div class="col-9 ms-2">
               <Checkbox v-model:value="filters.severity.error" :label="t('enum.ERROR')" @update:value="update"/>
               <Checkbox v-model:value="filters.severity.critical" :label="t('enum.CRITICAL')" @update:value="update"/>
               <Checkbox v-model:value="filters.severity.warning" :label="t('enum.WARNING')" @update:value="update"/>
@@ -154,15 +154,15 @@
             </div>
           </div>
           <div class="row mt-2">
-            <div class="text-bold">{{ t('securityEvent.LOCATION') }}</div>
-            <div class="mt-2">
+            <div class="col-3 text-bold">{{ t('securityEvent.LOCATION') }}</div>
+            <div class="col-9 ms-2">
               <Checkbox v-model:value="filters.location.host" :label="t('securityEvent.label.HOST')" @update:value="update"/>
               <Checkbox v-model:value="filters.location.container" :label="t('securityEvent.label.CONTAINER')" @update:value="update"/>
             </div>
           </div>
           <div class="row mt-2">
-            <div class="text-bold">{{ t('event.gridHeader.CATEGORY') }}</div>
-            <div class="mt-2">
+            <div class="col-3 text-bold">{{ t('event.gridHeader.CATEGORY') }}</div>
+            <div class="col-9 ms-2">
               <Checkbox v-model:value="filters.category.network" :label="t('securityEvent.label.NETWORK')" @update:value="update"/>
               <Checkbox v-model:value="filters.category.package" :label="t('securityEvent.label.PACKAGE')" @update:value="update"/>
               <Checkbox v-model:value="filters.category.file" :label="t('securityEvent.label.FILE')" @update:value="update"/>
