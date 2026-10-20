@@ -13,7 +13,7 @@ export default {
 
 <template>
     <div style="height: 200px; display: table; margin-bottom: 20px;">
-      <div style="display: table-cell; vertical-align: middle;">
+      <div style="display: table-cell; vertical-align: middle; text-align: center;">
         <i :class="icon" :style="'font-size: 40px;' + 'color:' + color"></i>
         <div :style="{'color': color}">{{ message }}</div>
       </div>

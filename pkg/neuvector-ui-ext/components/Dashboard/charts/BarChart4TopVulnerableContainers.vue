@@ -128,7 +128,8 @@
   });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../../styles/neuvector.scss';
   .chart-container {
       position: relative;
       width: 100%;
@@ -141,9 +142,4 @@
       width: 100%;
   }
 
-  .message-content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
 </style>
